@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="incoming_area"
+  DTS:DTSID="{755539EE-D62D-41DE-BD47-6CEF7BFD47BC}"
+  DTS:CreationName="OLEDB">
+  <DTS:PropertyExpression
+    DTS:Name="ServerName">@[$Project::DWH_ServerName]</DTS:PropertyExpression>
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectRetryCount="1"
+      DTS:ConnectRetryInterval="5"
+      DTS:ConnectionString="Data Source=UKRO-S-DWH04;Initial Catalog=incoming_area;Provider=SQLOLEDB.1;Integrated Security=SSPI;Application Name=SSIS-{755539EE-D62D-41DE-BD47-6CEF7BFD47BC}incoming_area;" />
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

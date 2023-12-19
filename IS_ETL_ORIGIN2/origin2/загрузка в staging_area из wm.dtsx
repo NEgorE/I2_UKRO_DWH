@@ -1,0 +1,2498 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/21/2022 8:20:19 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="UKRO-S-DWH20"
+  DTS:CreatorName="REGOP\ebileeva"
+  DTS:DTSID="{D1BF5E62-90FC-40E7-99A8-06B93B0F9041}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:FailParentOnFailure="True"
+  DTS:LastModifiedProductVersion="16.0.5223.0"
+  DTS:LocaleID="1049"
+  DTS:ObjectName="загрузка в staging_area из wm"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="1"
+  DTS:SuppressConfigurationWarnings="True"
+  DTS:VersionBuild="534"
+  DTS:VersionGUID="{9E576C3F-103B-45E8-9655-503B5EF39AD4}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="3"
+      DTS:DTSID="{BA3A17CF-7DE1-4372-822C-E9FA5566168B}"
+      DTS:ObjectName="dwh_load_queue_id">
+      <DTS:Property
+        DTS:DataType="3"
+        DTS:Name="ParameterValue">569837</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="3"
+      DTS:DTSID="{48D96759-DA26-4C14-A6EE-0D20AA726A48}"
+      DTS:ObjectName="dwh_thread_number">
+      <DTS:Property
+        DTS:DataType="3"
+        DTS:Name="ParameterValue">111</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{0D356888-36D4-47A2-A90C-02590A002A0B}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="dwh_attempt_number">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{3ABC4841-A78A-4724-912C-FC9D433E9A02}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="dwh_error_message">
+      <DTS:VariableValue
+        DTS:DataType="8">The expression for variable "dwh_layer_target_table" failed evaluation. There was an error in the expression.</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{B611D6CA-7B6D-44C5-9C46-CB9A1B6ADC8F}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="dwh_execution_from_datetime">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{4C804275-D9DD-4A40-AF60-CC63E2AE7344}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="dwh_execution_param_id">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C4407700-659B-4283-AA40-E8CDC0F0F9AB}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="dwh_instance_url">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A6531C53-7BE9-4D97-A811-4EDD9D000DCA}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="dwh_layer_execution_from_datetime">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{79939EB4-2B06-4465-9B36-471702EF7561}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="dwh_layer_execution_to_datetime">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{DF410988-70F0-4AA9-825C-C63E7780E92E}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="dwh_queue_execution_log_id">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{871975CF-4051-4E04-8FD7-31F1D97B2CAB}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="dwh_queue_param_json">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{D3A1FEAE-20E7-42C3-9CF8-003947C26B2B}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="dwh_report_name">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{8CD507A5-1806-46BF-9291-4C59EA3532DA}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="dwh_request_id">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{7E9301E5-9EEB-40E1-A417-3A2FE7337709}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="dwh_retrieval_retry_interval_seconds">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{640641D2-5D38-44DF-9E6F-39CF4117CEB1}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="dwh_retry_count">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{7141E602-EB3F-42F1-A944-85AFBC39358B}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="dwh_retry_timeout_seconds">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{553D8CE0-95B6-47BE-ADD7-B78AFF28453C}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="dwh_row_count">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{1B078277-1606-484E-B30F-310476F9F4E7}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="dwh_status">
+      <DTS:VariableValue
+        DTS:DataType="8">success</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:LoggingOptions
+    DTS:FilterKind="0"
+    DTS:LoggingMode="2">
+    <DTS:Property
+      DTS:DataType="8"
+      DTS:Name="EventFilter">1,7,OnError</DTS:Property>
+    <DTS:Property
+      DTS:EventName="OnError"
+      DTS:Name="ColumnFilter">
+      <DTS:Property
+        DTS:Name="Computer">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="Operator">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceName">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="ExecutionID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="MessageText">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="DataBytes">-1</DTS:Property>
+    </DTS:Property>
+    <DTS:Property
+      DTS:EventName="OnWarning"
+      DTS:Name="ColumnFilter">
+      <DTS:Property
+        DTS:Name="Computer">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="Operator">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceName">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="ExecutionID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="MessageText">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="DataBytes">-1</DTS:Property>
+    </DTS:Property>
+  </DTS:LoggingOptions>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Задача &quot;Выполнение SQL&quot; начало обработки задания в таблице очереди"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{aae9cd75-0c14-4bb9-9dfa-3d9b9ff33cfb}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Задача &quot;Выполнение SQL&quot; начало обработки задания в таблице очереди"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{F395067F-5FFA-4AAB-A7A5-77D1978E5CFA}"
+          SQLTask:SqlStatementSource="exec service_area.p_queue_line_begin ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="$Package::dwh_load_queue_id"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Задача &quot;Выполнение SQL&quot; обновление информации о завершении в таблице очереди - failure"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{4f1e0ede-07a6-498b-b1cd-301f267471de}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Задача &quot;Выполнение SQL&quot; обновление информации о завершении в таблице очереди - failure"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{F395067F-5FFA-4AAB-A7A5-77D1978E5CFA}"
+          SQLTask:SqlStatementSource="exec service_area.p_queue_line_finish ?,?, 'failure'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="$Package::dwh_load_queue_id"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="User::dwh_execution_param_id"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Задача &quot;Выполнение SQL&quot; обновление информации о завершении в таблице очереди - success"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{b9ea379d-068d-4b94-acbf-8017df2566bd}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Задача &quot;Выполнение SQL&quot; обновление информации о завершении в таблице очереди - success"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{F395067F-5FFA-4AAB-A7A5-77D1978E5CFA}"
+          SQLTask:SqlStatementSource="exec service_area.p_queue_line_finish ?,?, 'success'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="$Package::dwh_load_queue_id"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="User::dwh_execution_param_id"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Задача &quot;Выполнение SQL&quot; обновление информациии о начале в таблице очереди"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{d90bddb5-9002-4410-9297-acee1a8a98d3}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Задача &quot;Выполнение SQL&quot; обновление информациии о начале в таблице очереди"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{F395067F-5FFA-4AAB-A7A5-77D1978E5CFA}"
+          SQLTask:SqlStatementSource="exec service_area.p_wm_queue_get_param ?, ? output, ? output, ? output, ? output, ? output, ? output, ? output, ? output, ? output" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="$Package::dwh_load_queue_id"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="User::dwh_report_name"
+            SQLTask:ParameterDirection="Output"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="2"
+            SQLTask:DtsVariableName="User::dwh_queue_param_json"
+            SQLTask:ParameterDirection="Output"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="3"
+            SQLTask:DtsVariableName="User::dwh_retry_count"
+            SQLTask:ParameterDirection="Output"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="4"
+            SQLTask:DtsVariableName="User::dwh_retry_timeout_seconds"
+            SQLTask:ParameterDirection="Output"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="5"
+            SQLTask:DtsVariableName="User::dwh_retrieval_retry_interval_seconds"
+            SQLTask:ParameterDirection="Output"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="6"
+            SQLTask:DtsVariableName="User::dwh_instance_url"
+            SQLTask:ParameterDirection="Output"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="7"
+            SQLTask:DtsVariableName="User::dwh_execution_param_id"
+            SQLTask:ParameterDirection="Output"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="8"
+            SQLTask:DtsVariableName="User::dwh_request_id"
+            SQLTask:ParameterDirection="Output"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="9"
+            SQLTask:DtsVariableName="User::dwh_attempt_number"
+            SQLTask:ParameterDirection="Output"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Контейнер последовательности загрузка staging_area"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{2cfbc87b-48b9-4c8e-a843-9cbcbce8ac07}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:FailParentOnFailure="True"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Контейнер последовательности загрузка staging_area">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности convert csv"
+          DTS:CreationName="STOCK:SEQUENCE"
+          DTS:Description="Sequence Container"
+          DTS:DTSID="{6d082371-80cf-4f13-999b-509169de25e7}"
+          DTS:ExecutableType="STOCK:SEQUENCE"
+          DTS:FailParentOnFailure="True"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Контейнер последовательности convert csv">
+          <DTS:Variables />
+          <DTS:LoggingOptions
+            DTS:FilterKind="0"
+            DTS:LoggingMode="2" />
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности convert csv\Задания выражения генерируем  актуальную дату - dwh_execution_from_datetime"
+              DTS:CreationName="Microsoft.ExpressionTask"
+              DTS:Description="Expression Task"
+              DTS:DTSID="{7bf1c563-273f-4783-a1c5-49721e899207}"
+              DTS:ExecutableType="Microsoft.ExpressionTask"
+              DTS:FailParentOnFailure="True"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Задания выражения генерируем  актуальную дату - dwh_execution_from_datetime"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:LoggingOptions
+                DTS:FilterKind="0"
+                DTS:LoggingMode="2" />
+              <DTS:ObjectData>
+                <ExpressionTask
+                  Expression="@[User::dwh_layer_execution_from_datetime] =  &#xA;  (DT_WSTR, 4)YEAR(getdate()) + &quot;-&quot; + &#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)MONTH(getdate()), 2) + &quot;-&quot; + &#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)DAY(getdate()), 2) + &quot; &quot; +&#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)DATEPART(&quot;Hour&quot;, getdate()), 2) + &quot;:&quot; + &#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)DATEPART(&quot;Minute&quot;, getdate()), 2) + &quot;:&quot; + &#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)DATEPART(&quot;Second&quot;, getdate()), 2) +&quot;.&quot; + Right(&quot;000&quot; + (DT_WSTR,3) datepart(&quot;Ms&quot;, getdate()),3)" />
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности convert csv\Задания выражения генерируем  актуальную дату - dwh_execution_to_datetime"
+              DTS:CreationName="Microsoft.ExpressionTask"
+              DTS:Description="Expression Task"
+              DTS:DTSID="{8eb92dca-6043-426f-9036-40e4f5b0accf}"
+              DTS:ExecutableType="Microsoft.ExpressionTask"
+              DTS:FailParentOnFailure="True"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Задания выражения генерируем  актуальную дату - dwh_execution_to_datetime"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:LoggingOptions
+                DTS:FilterKind="0"
+                DTS:LoggingMode="2" />
+              <DTS:ObjectData>
+                <ExpressionTask
+                  Expression="@[User::dwh_layer_execution_to_datetime] =  &#xA;  (DT_WSTR, 4)YEAR(getdate()) + &quot;-&quot; + &#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)MONTH(getdate()), 2) + &quot;-&quot; + &#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)DAY(getdate()), 2) + &quot; &quot; +&#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)DATEPART(&quot;Hour&quot;, getdate()), 2) + &quot;:&quot; + &#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)DATEPART(&quot;Minute&quot;, getdate()), 2) + &quot;:&quot; + &#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)DATEPART(&quot;Second&quot;, getdate()), 2) +&quot;.&quot; + Right(&quot;000&quot; + (DT_WSTR,3) datepart(&quot;Ms&quot;, getdate()),3)" />
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности convert csv\Задача &quot;Выполнение SQL&quot; scd2 загрузка из incoming_area в staging_area *"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{58bb7c91-7240-4551-8223-b9b1102f05b9}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:FailParentOnFailure="True"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Задача &quot;Выполнение SQL&quot; scd2 загрузка из incoming_area в staging_area *"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:LoggingOptions
+                DTS:FilterKind="0"
+                DTS:LoggingMode="2" />
+              <DTS:EventHandlers>
+                <DTS:EventHandler
+                  DTS:refId="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности convert csv\Задача &quot;Выполнение SQL&quot; scd2 загрузка из incoming_area в staging_area *.EventHandlers[OnError]"
+                  DTS:CreationName="OnError"
+                  DTS:DTSID="{6651121B-E7E7-4F04-93FC-F5B5EDA31FCF}"
+                  DTS:EventID="0"
+                  DTS:EventName="OnError"
+                  DTS:LocaleID="-1">
+                  <DTS:Variables>
+                    <DTS:Variable
+                      DTS:CreationName=""
+                      DTS:Description="The propagate property of the event"
+                      DTS:DTSID="{D059D14C-E951-4505-9917-C3B9B023CD73}"
+                      DTS:IncludeInDebugDump="6789"
+                      DTS:Namespace="System"
+                      DTS:ObjectName="Propagate">
+                      <DTS:VariableValue
+                        DTS:DataType="11">-1</DTS:VariableValue>
+                    </DTS:Variable>
+                  </DTS:Variables>
+                  <DTS:Executables>
+                    <DTS:Executable
+                      DTS:refId="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности convert csv\Задача &quot;Выполнение SQL&quot; scd2 загрузка из incoming_area в staging_area *.EventHandlers[OnError]\Задания выражения генерируем  актуальную дату - dwh_execution_to_datetime"
+                      DTS:CreationName="Microsoft.ExpressionTask"
+                      DTS:Description="Expression Task"
+                      DTS:DTSID="{58604325-3b2f-4810-a3a2-2d1ce90d9e63}"
+                      DTS:ExecutableType="Microsoft.ExpressionTask"
+                      DTS:FailParentOnFailure="True"
+                      DTS:LocaleID="-1"
+                      DTS:ObjectName="Задания выражения генерируем  актуальную дату - dwh_execution_to_datetime">
+                      <DTS:Variables />
+                      <DTS:LoggingOptions
+                        DTS:FilterKind="0"
+                        DTS:LoggingMode="2" />
+                      <DTS:ObjectData>
+                        <ExpressionTask
+                          Expression="@[User::dwh_layer_execution_to_datetime] =  &#xA;  (DT_WSTR, 4)YEAR(getdate()) + &quot;-&quot; + &#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)MONTH(getdate()), 2) + &quot;-&quot; + &#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)DAY(getdate()), 2) + &quot; &quot; +&#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)DATEPART(&quot;Hour&quot;, getdate()), 2) + &quot;:&quot; + &#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)DATEPART(&quot;Minute&quot;, getdate()), 2) + &quot;:&quot; + &#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)DATEPART(&quot;Second&quot;, getdate()), 2) +&quot;.&quot; + Right(&quot;000&quot; + (DT_WSTR,3) datepart(&quot;Ms&quot;, getdate()),3)" />
+                      </DTS:ObjectData>
+                    </DTS:Executable>
+                    <DTS:Executable
+                      DTS:refId="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности convert csv\Задача &quot;Выполнение SQL&quot; scd2 загрузка из incoming_area в staging_area *.EventHandlers[OnError]\Задача &quot;Выполнение SQL&quot; окончание лога scd2 - failure"
+                      DTS:CreationName="Microsoft.ExecuteSQLTask"
+                      DTS:Description="Execute SQL Task"
+                      DTS:DTSID="{0a9c9048-8c36-4296-95f5-027e572987a5}"
+                      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+                      DTS:FailParentOnFailure="True"
+                      DTS:LocaleID="-1"
+                      DTS:ObjectName="Задача &quot;Выполнение SQL&quot; окончание лога scd2 - failure">
+                      <DTS:Variables />
+                      <DTS:LoggingOptions
+                        DTS:FilterKind="0"
+                        DTS:LoggingMode="2" />
+                      <DTS:ObjectData>
+                        <SQLTask:SqlTaskData
+                          SQLTask:Connection="{F395067F-5FFA-4AAB-A7A5-77D1978E5CFA}"
+                          SQLTask:SqlStatementSource="exec service_area.p_queue_exectuion_log_finish&#xA; ?, 'staging_area', ?,  'failure', ?, ?, ?&#xA;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                          <SQLTask:ParameterBinding
+                            SQLTask:ParameterName="0"
+                            SQLTask:DtsVariableName="$Package::dwh_load_queue_id"
+                            SQLTask:ParameterDirection="Input"
+                            SQLTask:DataType="3"
+                            SQLTask:ParameterSize="-1" />
+                          <SQLTask:ParameterBinding
+                            SQLTask:ParameterName="1"
+                            SQLTask:DtsVariableName="User::dwh_layer_execution_to_datetime"
+                            SQLTask:ParameterDirection="Input"
+                            SQLTask:DataType="130"
+                            SQLTask:ParameterSize="-1" />
+                          <SQLTask:ParameterBinding
+                            SQLTask:ParameterName="2"
+                            SQLTask:DtsVariableName="User::dwh_queue_execution_log_id"
+                            SQLTask:ParameterDirection="Input"
+                            SQLTask:DataType="3"
+                            SQLTask:ParameterSize="-1" />
+                          <SQLTask:ParameterBinding
+                            SQLTask:ParameterName="3"
+                            SQLTask:DtsVariableName="System::ErrorDescription"
+                            SQLTask:ParameterDirection="Input"
+                            SQLTask:DataType="130"
+                            SQLTask:ParameterSize="-1" />
+                          <SQLTask:ParameterBinding
+                            SQLTask:ParameterName="4"
+                            SQLTask:DtsVariableName="User::dwh_row_count"
+                            SQLTask:ParameterDirection="Input"
+                            SQLTask:DataType="3"
+                            SQLTask:ParameterSize="-1" />
+                        </SQLTask:SqlTaskData>
+                      </DTS:ObjectData>
+                    </DTS:Executable>
+                  </DTS:Executables>
+                  <DTS:PrecedenceConstraints>
+                    <DTS:PrecedenceConstraint
+                      DTS:refId="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности convert csv\Задача &quot;Выполнение SQL&quot; scd2 загрузка из incoming_area в staging_area *.EventHandlers[OnError].PrecedenceConstraints[Constraint]"
+                      DTS:CreationName=""
+                      DTS:DTSID="{07336A88-ABD7-4530-9B63-EDF7E122B84E}"
+                      DTS:From="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности convert csv\Задача &quot;Выполнение SQL&quot; scd2 загрузка из incoming_area в staging_area *.EventHandlers[OnError]\Задания выражения генерируем  актуальную дату - dwh_execution_to_datetime"
+                      DTS:LogicalAnd="True"
+                      DTS:ObjectName="Constraint"
+                      DTS:To="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности convert csv\Задача &quot;Выполнение SQL&quot; scd2 загрузка из incoming_area в staging_area *.EventHandlers[OnError]\Задача &quot;Выполнение SQL&quot; окончание лога scd2 - failure" />
+                  </DTS:PrecedenceConstraints>
+                </DTS:EventHandler>
+              </DTS:EventHandlers>
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{F2F45D1A-B4F2-4BEB-9C17-313DF7A41CA2}"
+                  SQLTask:SqlStatementSource="exec converting_area.p_wm_converting_area_load ?,  ? output" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="0"
+                    SQLTask:DtsVariableName="$Package::dwh_load_queue_id"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="1"
+                    SQLTask:DtsVariableName="User::dwh_row_count"
+                    SQLTask:ParameterDirection="Output"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности convert csv\Задача &quot;Выполнение SQL&quot; начало лога scd2"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{fec49d09-766a-49b2-a651-5abec35efc65}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:FailParentOnFailure="True"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Задача &quot;Выполнение SQL&quot; начало лога scd2"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:LoggingOptions
+                DTS:FilterKind="0"
+                DTS:LoggingMode="2" />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{F395067F-5FFA-4AAB-A7A5-77D1978E5CFA}"
+                  SQLTask:SqlStatementSource="exec service_area.p_queue_exectuion_log_begin &#xA;? , ?, 'converting_area', ?&#xA;, ?, ?,  ?, ?&#xA;, ? output&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="0"
+                    SQLTask:DtsVariableName="$Package::dwh_load_queue_id"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="1"
+                    SQLTask:DtsVariableName="User::dwh_execution_param_id"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="2"
+                    SQLTask:DtsVariableName="User::dwh_layer_execution_from_datetime"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="130"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="3"
+                    SQLTask:DtsVariableName="$Package::dwh_thread_number"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="4"
+                    SQLTask:DtsVariableName="System::ExecutionInstanceGUID"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="72"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="5"
+                    SQLTask:DtsVariableName="System::ServerExecutionID"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="6"
+                    SQLTask:DtsVariableName="User::dwh_queue_execution_log_id"
+                    SQLTask:ParameterDirection="Output"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="7"
+                    SQLTask:DtsVariableName="User::dwh_queue_execution_log_id"
+                    SQLTask:ParameterDirection="Output"
+                    SQLTask:DataType="130"
+                    SQLTask:ParameterSize="-1" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности convert csv\Задача &quot;Выполнение SQL&quot; окончание лога scd2"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{99e44350-4ce4-433c-95e2-b16cf356b09b}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:FailParentOnFailure="True"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Задача &quot;Выполнение SQL&quot; окончание лога scd2"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:LoggingOptions
+                DTS:FilterKind="0"
+                DTS:LoggingMode="2" />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{F395067F-5FFA-4AAB-A7A5-77D1978E5CFA}"
+                  SQLTask:SqlStatementSource="exec service_area.p_queue_exectuion_log_finish&#xA; ?, 'converting_area', ?,  'success', ?, null, ?&#xA;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="0"
+                    SQLTask:DtsVariableName="$Package::dwh_load_queue_id"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="1"
+                    SQLTask:DtsVariableName="User::dwh_layer_execution_to_datetime"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="130"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="2"
+                    SQLTask:DtsVariableName="User::dwh_queue_execution_log_id"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="3"
+                    SQLTask:DtsVariableName="User::dwh_row_count"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+          <DTS:PrecedenceConstraints>
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности convert csv.PrecedenceConstraints[Constraint]"
+              DTS:CreationName=""
+              DTS:DTSID="{1CD6C5C3-4408-4748-B35A-F673367C96CD}"
+              DTS:From="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности convert csv\Задания выражения генерируем  актуальную дату - dwh_execution_from_datetime"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint"
+              DTS:To="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности convert csv\Задача &quot;Выполнение SQL&quot; начало лога scd2" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности convert csv.PrecedenceConstraints[Constraint 1]"
+              DTS:CreationName=""
+              DTS:DTSID="{9C9561DC-6387-4E85-9AAD-457D9B1BA98B}"
+              DTS:From="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности convert csv\Задача &quot;Выполнение SQL&quot; начало лога scd2"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 1"
+              DTS:To="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности convert csv\Задача &quot;Выполнение SQL&quot; scd2 загрузка из incoming_area в staging_area *" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности convert csv.PrecedenceConstraints[Constraint 2]"
+              DTS:CreationName=""
+              DTS:DTSID="{3ABB37ED-34D2-4EAE-9C1E-167E2E05BB45}"
+              DTS:From="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности convert csv\Задача &quot;Выполнение SQL&quot; scd2 загрузка из incoming_area в staging_area *"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 2"
+              DTS:To="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности convert csv\Задания выражения генерируем  актуальную дату - dwh_execution_to_datetime" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности convert csv.PrecedenceConstraints[Constraint 3]"
+              DTS:CreationName=""
+              DTS:DTSID="{0569DC9D-DE6F-46A4-8D33-446ED92BD760}"
+              DTS:From="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности convert csv\Задания выражения генерируем  актуальную дату - dwh_execution_to_datetime"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 3"
+              DTS:To="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности convert csv\Задача &quot;Выполнение SQL&quot; окончание лога scd2" />
+          </DTS:PrecedenceConstraints>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности parsing csv"
+          DTS:CreationName="STOCK:SEQUENCE"
+          DTS:Description="Sequence Container"
+          DTS:DTSID="{5b9742a2-921b-4a3e-928d-d700acdc022d}"
+          DTS:ExecutableType="STOCK:SEQUENCE"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Контейнер последовательности parsing csv">
+          <DTS:Variables />
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности parsing csv\Задания выражения генерируем  актуальную дату - dwh_execution_from_datetime"
+              DTS:CreationName="Microsoft.ExpressionTask"
+              DTS:Description="Expression Task"
+              DTS:DTSID="{9f086587-1ebd-475f-97bb-fa1b5daeee5d}"
+              DTS:ExecutableType="Microsoft.ExpressionTask"
+              DTS:FailParentOnFailure="True"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Задания выражения генерируем  актуальную дату - dwh_execution_from_datetime"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:LoggingOptions
+                DTS:FilterKind="0"
+                DTS:LoggingMode="2" />
+              <DTS:ObjectData>
+                <ExpressionTask
+                  Expression="@[User::dwh_layer_execution_from_datetime] =  &#xA;  (DT_WSTR, 4)YEAR(getdate()) + &quot;-&quot; + &#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)MONTH(getdate()), 2) + &quot;-&quot; + &#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)DAY(getdate()), 2) + &quot; &quot; +&#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)DATEPART(&quot;Hour&quot;, getdate()), 2) + &quot;:&quot; + &#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)DATEPART(&quot;Minute&quot;, getdate()), 2) + &quot;:&quot; + &#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)DATEPART(&quot;Second&quot;, getdate()), 2) +&quot;.&quot; + Right(&quot;000&quot; + (DT_WSTR,3) datepart(&quot;Ms&quot;, getdate()),3)" />
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности parsing csv\Задания выражения генерируем  актуальную дату - dwh_execution_to_datetime"
+              DTS:CreationName="Microsoft.ExpressionTask"
+              DTS:Description="Expression Task"
+              DTS:DTSID="{891dd2e0-f912-49ce-929b-0458cadf88b2}"
+              DTS:ExecutableType="Microsoft.ExpressionTask"
+              DTS:FailParentOnFailure="True"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Задания выражения генерируем  актуальную дату - dwh_execution_to_datetime"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:LoggingOptions
+                DTS:FilterKind="0"
+                DTS:LoggingMode="2" />
+              <DTS:ObjectData>
+                <ExpressionTask
+                  Expression="@[User::dwh_layer_execution_to_datetime] =  &#xA;  (DT_WSTR, 4)YEAR(getdate()) + &quot;-&quot; + &#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)MONTH(getdate()), 2) + &quot;-&quot; + &#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)DAY(getdate()), 2) + &quot; &quot; +&#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)DATEPART(&quot;Hour&quot;, getdate()), 2) + &quot;:&quot; + &#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)DATEPART(&quot;Minute&quot;, getdate()), 2) + &quot;:&quot; + &#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)DATEPART(&quot;Second&quot;, getdate()), 2) +&quot;.&quot; + Right(&quot;000&quot; + (DT_WSTR,3) datepart(&quot;Ms&quot;, getdate()),3)" />
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности parsing csv\Задача &quot;Выполнение SQL&quot; parsing csv в staging_area"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{9fbf889d-fa6c-4895-81ea-d2d4b6a18995}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:FailParentOnFailure="True"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Задача &quot;Выполнение SQL&quot; parsing csv в staging_area"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:LoggingOptions
+                DTS:FilterKind="0"
+                DTS:LoggingMode="2" />
+              <DTS:EventHandlers>
+                <DTS:EventHandler
+                  DTS:refId="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности parsing csv\Задача &quot;Выполнение SQL&quot; parsing csv в staging_area.EventHandlers[OnError]"
+                  DTS:CreationName="OnError"
+                  DTS:DTSID="{72F4B42C-3FB7-4E33-86F9-0F0F706162E5}"
+                  DTS:EventID="-367895424"
+                  DTS:EventName="OnError"
+                  DTS:LocaleID="-1">
+                  <DTS:Variables>
+                    <DTS:Variable
+                      DTS:CreationName=""
+                      DTS:Description="The propagate property of the event"
+                      DTS:DTSID="{18916A20-03E2-422A-9A54-F80A650ED816}"
+                      DTS:IncludeInDebugDump="6789"
+                      DTS:Namespace="System"
+                      DTS:ObjectName="Propagate">
+                      <DTS:VariableValue
+                        DTS:DataType="11">-1</DTS:VariableValue>
+                    </DTS:Variable>
+                  </DTS:Variables>
+                  <DTS:Executables>
+                    <DTS:Executable
+                      DTS:refId="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности parsing csv\Задача &quot;Выполнение SQL&quot; parsing csv в staging_area.EventHandlers[OnError]\Задания выражения генерируем  актуальную дату - dwh_execution_to_datetime"
+                      DTS:CreationName="Microsoft.ExpressionTask"
+                      DTS:Description="Expression Task"
+                      DTS:DTSID="{59a21529-5b67-450f-976e-706edee27cbe}"
+                      DTS:ExecutableType="Microsoft.ExpressionTask"
+                      DTS:FailParentOnFailure="True"
+                      DTS:LocaleID="-1"
+                      DTS:ObjectName="Задания выражения генерируем  актуальную дату - dwh_execution_to_datetime">
+                      <DTS:Variables />
+                      <DTS:LoggingOptions
+                        DTS:FilterKind="0"
+                        DTS:LoggingMode="2" />
+                      <DTS:ObjectData>
+                        <ExpressionTask
+                          Expression="@[User::dwh_layer_execution_to_datetime] =  &#xA;  (DT_WSTR, 4)YEAR(getdate()) + &quot;-&quot; + &#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)MONTH(getdate()), 2) + &quot;-&quot; + &#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)DAY(getdate()), 2) + &quot; &quot; +&#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)DATEPART(&quot;Hour&quot;, getdate()), 2) + &quot;:&quot; + &#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)DATEPART(&quot;Minute&quot;, getdate()), 2) + &quot;:&quot; + &#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)DATEPART(&quot;Second&quot;, getdate()), 2) +&quot;.&quot; + Right(&quot;000&quot; + (DT_WSTR,3) datepart(&quot;Ms&quot;, getdate()),3)" />
+                      </DTS:ObjectData>
+                    </DTS:Executable>
+                    <DTS:Executable
+                      DTS:refId="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности parsing csv\Задача &quot;Выполнение SQL&quot; parsing csv в staging_area.EventHandlers[OnError]\Задача &quot;Выполнение SQL&quot; окончание лога парсинг csv - failure"
+                      DTS:CreationName="Microsoft.ExecuteSQLTask"
+                      DTS:Description="Execute SQL Task"
+                      DTS:DTSID="{c918f67a-7c8e-4a34-9e08-55aa18fca3ab}"
+                      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+                      DTS:FailParentOnFailure="True"
+                      DTS:LocaleID="-1"
+                      DTS:ObjectName="Задача &quot;Выполнение SQL&quot; окончание лога парсинг csv - failure">
+                      <DTS:Variables />
+                      <DTS:LoggingOptions
+                        DTS:FilterKind="0"
+                        DTS:LoggingMode="2" />
+                      <DTS:ObjectData>
+                        <SQLTask:SqlTaskData
+                          SQLTask:Connection="{F395067F-5FFA-4AAB-A7A5-77D1978E5CFA}"
+                          SQLTask:SqlStatementSource="exec service_area.p_queue_exectuion_log_finish&#xA; ?, 'parsing_report', ?,  'failure', ?,?, ?&#xA;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                          <SQLTask:ParameterBinding
+                            SQLTask:ParameterName="0"
+                            SQLTask:DtsVariableName="$Package::dwh_load_queue_id"
+                            SQLTask:ParameterDirection="Input"
+                            SQLTask:DataType="3"
+                            SQLTask:ParameterSize="-1" />
+                          <SQLTask:ParameterBinding
+                            SQLTask:ParameterName="1"
+                            SQLTask:DtsVariableName="User::dwh_layer_execution_to_datetime"
+                            SQLTask:ParameterDirection="Input"
+                            SQLTask:DataType="130"
+                            SQLTask:ParameterSize="-1" />
+                          <SQLTask:ParameterBinding
+                            SQLTask:ParameterName="2"
+                            SQLTask:DtsVariableName="User::dwh_queue_execution_log_id"
+                            SQLTask:ParameterDirection="Input"
+                            SQLTask:DataType="3"
+                            SQLTask:ParameterSize="-1" />
+                          <SQLTask:ParameterBinding
+                            SQLTask:ParameterName="3"
+                            SQLTask:DtsVariableName="System::ErrorDescription"
+                            SQLTask:ParameterDirection="Input"
+                            SQLTask:DataType="130"
+                            SQLTask:ParameterSize="-1" />
+                          <SQLTask:ParameterBinding
+                            SQLTask:ParameterName="4"
+                            SQLTask:DtsVariableName="User::dwh_row_count"
+                            SQLTask:ParameterDirection="Input"
+                            SQLTask:DataType="3"
+                            SQLTask:ParameterSize="-1" />
+                        </SQLTask:SqlTaskData>
+                      </DTS:ObjectData>
+                    </DTS:Executable>
+                  </DTS:Executables>
+                  <DTS:PrecedenceConstraints>
+                    <DTS:PrecedenceConstraint
+                      DTS:refId="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности parsing csv\Задача &quot;Выполнение SQL&quot; parsing csv в staging_area.EventHandlers[OnError].PrecedenceConstraints[Constraint]"
+                      DTS:CreationName=""
+                      DTS:DTSID="{001EDD92-E485-4D71-8075-6870EEA980C7}"
+                      DTS:From="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности parsing csv\Задача &quot;Выполнение SQL&quot; parsing csv в staging_area.EventHandlers[OnError]\Задания выражения генерируем  актуальную дату - dwh_execution_to_datetime"
+                      DTS:LogicalAnd="True"
+                      DTS:ObjectName="Constraint"
+                      DTS:To="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности parsing csv\Задача &quot;Выполнение SQL&quot; parsing csv в staging_area.EventHandlers[OnError]\Задача &quot;Выполнение SQL&quot; окончание лога парсинг csv - failure" />
+                  </DTS:PrecedenceConstraints>
+                </DTS:EventHandler>
+              </DTS:EventHandlers>
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{F2F45D1A-B4F2-4BEB-9C17-313DF7A41CA2}"
+                  SQLTask:SqlStatementSource="exec parsing_area.p_wm_parse_csv ?, ? output" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="0"
+                    SQLTask:DtsVariableName="$Package::dwh_load_queue_id"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="1"
+                    SQLTask:DtsVariableName="User::dwh_row_count"
+                    SQLTask:ParameterDirection="Output"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности parsing csv\Задача &quot;Выполнение SQL&quot; начало лога parsing csv"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{34bd16f5-fcc6-40e2-8822-a3bedc22b7ab}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:FailParentOnFailure="True"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Задача &quot;Выполнение SQL&quot; начало лога parsing csv"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:LoggingOptions
+                DTS:FilterKind="0"
+                DTS:LoggingMode="2" />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{F395067F-5FFA-4AAB-A7A5-77D1978E5CFA}"
+                  SQLTask:SqlStatementSource="exec service_area.p_queue_exectuion_log_begin &#xA;? , ?, 'parsing_report', ?&#xA;, ?, ?, ?, ?&#xA;, ? output&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="0"
+                    SQLTask:DtsVariableName="$Package::dwh_load_queue_id"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="1"
+                    SQLTask:DtsVariableName="User::dwh_execution_param_id"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="2"
+                    SQLTask:DtsVariableName="User::dwh_layer_execution_from_datetime"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="130"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="3"
+                    SQLTask:DtsVariableName="$Package::dwh_thread_number"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="4"
+                    SQLTask:DtsVariableName="System::ExecutionInstanceGUID"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="72"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="5"
+                    SQLTask:DtsVariableName="System::ServerExecutionID"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="6"
+                    SQLTask:DtsVariableName="User::dwh_report_name"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="130"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="7"
+                    SQLTask:DtsVariableName="User::dwh_queue_execution_log_id"
+                    SQLTask:ParameterDirection="Output"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности parsing csv\Задача &quot;Выполнение SQL&quot; окончание лога parsing csv"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{456f03d1-23b2-47f8-8468-0f651f5db833}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:FailParentOnFailure="True"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Задача &quot;Выполнение SQL&quot; окончание лога parsing csv"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:LoggingOptions
+                DTS:FilterKind="0"
+                DTS:LoggingMode="2" />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{F395067F-5FFA-4AAB-A7A5-77D1978E5CFA}"
+                  SQLTask:SqlStatementSource="exec service_area.p_queue_exectuion_log_finish&#xA; ?, 'parsing_report', ?,  'success', ?, null, ?&#xA;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="0"
+                    SQLTask:DtsVariableName="$Package::dwh_load_queue_id"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="1"
+                    SQLTask:DtsVariableName="User::dwh_layer_execution_to_datetime"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="130"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="2"
+                    SQLTask:DtsVariableName="User::dwh_queue_execution_log_id"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="3"
+                    SQLTask:DtsVariableName="User::dwh_row_count"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+          <DTS:PrecedenceConstraints>
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности parsing csv.PrecedenceConstraints[Constraint]"
+              DTS:CreationName=""
+              DTS:DTSID="{C70E48E5-DE38-4C9B-A37A-BF1694441AD5}"
+              DTS:From="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности parsing csv\Задания выражения генерируем  актуальную дату - dwh_execution_from_datetime"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint"
+              DTS:To="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности parsing csv\Задача &quot;Выполнение SQL&quot; начало лога parsing csv" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности parsing csv.PrecedenceConstraints[Constraint 1]"
+              DTS:CreationName=""
+              DTS:DTSID="{7BD1417C-2FAA-4E46-A15D-877C9CAB5EE7}"
+              DTS:From="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности parsing csv\Задания выражения генерируем  актуальную дату - dwh_execution_to_datetime"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 1"
+              DTS:To="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности parsing csv\Задача &quot;Выполнение SQL&quot; окончание лога parsing csv" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности parsing csv.PrecedenceConstraints[Constraint 2]"
+              DTS:CreationName=""
+              DTS:DTSID="{19019C66-C174-4E75-9194-437B2062AABF}"
+              DTS:From="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности parsing csv\Задача &quot;Выполнение SQL&quot; начало лога parsing csv"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 2"
+              DTS:To="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности parsing csv\Задача &quot;Выполнение SQL&quot; parsing csv в staging_area" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности parsing csv.PrecedenceConstraints[Constraint 3]"
+              DTS:CreationName=""
+              DTS:DTSID="{9B754877-14F7-431F-A8D0-34D42819C72A}"
+              DTS:From="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности parsing csv\Задача &quot;Выполнение SQL&quot; parsing csv в staging_area"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 3"
+              DTS:To="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности parsing csv\Задания выражения генерируем  актуальную дату - dwh_execution_to_datetime" />
+          </DTS:PrecedenceConstraints>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности scd2"
+          DTS:CreationName="STOCK:SEQUENCE"
+          DTS:Description="Sequence Container"
+          DTS:DTSID="{56ff156c-e86a-4768-86ca-61857724eaaa}"
+          DTS:ExecutableType="STOCK:SEQUENCE"
+          DTS:FailParentOnFailure="True"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Контейнер последовательности scd2">
+          <DTS:Variables />
+          <DTS:LoggingOptions
+            DTS:FilterKind="0"
+            DTS:LoggingMode="2" />
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности scd2\Задания выражения генерируем  актуальную дату - dwh_execution_from_datetime"
+              DTS:CreationName="Microsoft.ExpressionTask"
+              DTS:Description="Expression Task"
+              DTS:DTSID="{8bbf7b5a-f90f-4213-87fe-dd33007fd3ab}"
+              DTS:ExecutableType="Microsoft.ExpressionTask"
+              DTS:FailParentOnFailure="True"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Задания выражения генерируем  актуальную дату - dwh_execution_from_datetime"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:LoggingOptions
+                DTS:FilterKind="0"
+                DTS:LoggingMode="2" />
+              <DTS:ObjectData>
+                <ExpressionTask
+                  Expression="@[User::dwh_layer_execution_from_datetime] =  &#xA;  (DT_WSTR, 4)YEAR(getdate()) + &quot;-&quot; + &#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)MONTH(getdate()), 2) + &quot;-&quot; + &#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)DAY(getdate()), 2) + &quot; &quot; +&#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)DATEPART(&quot;Hour&quot;, getdate()), 2) + &quot;:&quot; + &#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)DATEPART(&quot;Minute&quot;, getdate()), 2) + &quot;:&quot; + &#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)DATEPART(&quot;Second&quot;, getdate()), 2) +&quot;.&quot; + Right(&quot;000&quot; + (DT_WSTR,3) datepart(&quot;Ms&quot;, getdate()),3)" />
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности scd2\Задания выражения генерируем  актуальную дату - dwh_execution_to_datetime"
+              DTS:CreationName="Microsoft.ExpressionTask"
+              DTS:Description="Expression Task"
+              DTS:DTSID="{04fbcdad-3798-40bb-97f9-81157f239b10}"
+              DTS:ExecutableType="Microsoft.ExpressionTask"
+              DTS:FailParentOnFailure="True"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Задания выражения генерируем  актуальную дату - dwh_execution_to_datetime"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:LoggingOptions
+                DTS:FilterKind="0"
+                DTS:LoggingMode="2" />
+              <DTS:ObjectData>
+                <ExpressionTask
+                  Expression="@[User::dwh_layer_execution_to_datetime] =  &#xA;  (DT_WSTR, 4)YEAR(getdate()) + &quot;-&quot; + &#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)MONTH(getdate()), 2) + &quot;-&quot; + &#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)DAY(getdate()), 2) + &quot; &quot; +&#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)DATEPART(&quot;Hour&quot;, getdate()), 2) + &quot;:&quot; + &#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)DATEPART(&quot;Minute&quot;, getdate()), 2) + &quot;:&quot; + &#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)DATEPART(&quot;Second&quot;, getdate()), 2) +&quot;.&quot; + Right(&quot;000&quot; + (DT_WSTR,3) datepart(&quot;Ms&quot;, getdate()),3)" />
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности scd2\Задача &quot;Выполнение SQL&quot; scd2 загрузка из incoming_area в staging_area *"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{8d78936d-09e6-4e17-a8d1-ee4b9a824c38}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:FailParentOnFailure="True"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Задача &quot;Выполнение SQL&quot; scd2 загрузка из incoming_area в staging_area *"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:LoggingOptions
+                DTS:FilterKind="0"
+                DTS:LoggingMode="2" />
+              <DTS:EventHandlers>
+                <DTS:EventHandler
+                  DTS:refId="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности scd2\Задача &quot;Выполнение SQL&quot; scd2 загрузка из incoming_area в staging_area *.EventHandlers[OnError]"
+                  DTS:CreationName="OnError"
+                  DTS:DTSID="{ee2d755e-29f7-4cc0-a9ce-c46203e80a9f}"
+                  DTS:EventID="0"
+                  DTS:EventName="OnError"
+                  DTS:LocaleID="-1">
+                  <DTS:Variables>
+                    <DTS:Variable
+                      DTS:CreationName=""
+                      DTS:Description="The propagate property of the event"
+                      DTS:DTSID="{29dc2f3b-e288-4aac-ac74-c9e720b1c0ba}"
+                      DTS:IncludeInDebugDump="6789"
+                      DTS:Namespace="System"
+                      DTS:ObjectName="Propagate">
+                      <DTS:VariableValue
+                        DTS:DataType="11">-1</DTS:VariableValue>
+                    </DTS:Variable>
+                  </DTS:Variables>
+                  <DTS:Executables>
+                    <DTS:Executable
+                      DTS:refId="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности scd2\Задача &quot;Выполнение SQL&quot; scd2 загрузка из incoming_area в staging_area *.EventHandlers[OnError]\Задания выражения генерируем  актуальную дату - dwh_execution_to_datetime"
+                      DTS:CreationName="Microsoft.ExpressionTask"
+                      DTS:Description="Expression Task"
+                      DTS:DTSID="{64257d93-caf1-4bfe-b927-56999cf2c70c}"
+                      DTS:ExecutableType="Microsoft.ExpressionTask"
+                      DTS:FailParentOnFailure="True"
+                      DTS:LocaleID="-1"
+                      DTS:ObjectName="Задания выражения генерируем  актуальную дату - dwh_execution_to_datetime">
+                      <DTS:Variables />
+                      <DTS:LoggingOptions
+                        DTS:FilterKind="0"
+                        DTS:LoggingMode="2" />
+                      <DTS:ObjectData>
+                        <ExpressionTask
+                          Expression="@[User::dwh_layer_execution_to_datetime] =  &#xA;  (DT_WSTR, 4)YEAR(getdate()) + &quot;-&quot; + &#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)MONTH(getdate()), 2) + &quot;-&quot; + &#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)DAY(getdate()), 2) + &quot; &quot; +&#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)DATEPART(&quot;Hour&quot;, getdate()), 2) + &quot;:&quot; + &#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)DATEPART(&quot;Minute&quot;, getdate()), 2) + &quot;:&quot; + &#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)DATEPART(&quot;Second&quot;, getdate()), 2) +&quot;.&quot; + Right(&quot;000&quot; + (DT_WSTR,3) datepart(&quot;Ms&quot;, getdate()),3)" />
+                      </DTS:ObjectData>
+                    </DTS:Executable>
+                    <DTS:Executable
+                      DTS:refId="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности scd2\Задача &quot;Выполнение SQL&quot; scd2 загрузка из incoming_area в staging_area *.EventHandlers[OnError]\Задача &quot;Выполнение SQL&quot; окончание лога scd2 - failure"
+                      DTS:CreationName="Microsoft.ExecuteSQLTask"
+                      DTS:Description="Execute SQL Task"
+                      DTS:DTSID="{71eb7b97-7f8e-4f7e-8a2c-9b6bfd525997}"
+                      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+                      DTS:FailParentOnFailure="True"
+                      DTS:LocaleID="-1"
+                      DTS:ObjectName="Задача &quot;Выполнение SQL&quot; окончание лога scd2 - failure">
+                      <DTS:Variables />
+                      <DTS:LoggingOptions
+                        DTS:FilterKind="0"
+                        DTS:LoggingMode="2" />
+                      <DTS:ObjectData>
+                        <SQLTask:SqlTaskData
+                          SQLTask:Connection="{F395067F-5FFA-4AAB-A7A5-77D1978E5CFA}"
+                          SQLTask:SqlStatementSource="exec service_area.p_queue_exectuion_log_finish&#xA; ?, 'staging_area', ?,  'failure', ?, ?, ?&#xA;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                          <SQLTask:ParameterBinding
+                            SQLTask:ParameterName="0"
+                            SQLTask:DtsVariableName="$Package::dwh_load_queue_id"
+                            SQLTask:ParameterDirection="Input"
+                            SQLTask:DataType="3"
+                            SQLTask:ParameterSize="-1" />
+                          <SQLTask:ParameterBinding
+                            SQLTask:ParameterName="1"
+                            SQLTask:DtsVariableName="User::dwh_layer_execution_to_datetime"
+                            SQLTask:ParameterDirection="Input"
+                            SQLTask:DataType="130"
+                            SQLTask:ParameterSize="-1" />
+                          <SQLTask:ParameterBinding
+                            SQLTask:ParameterName="2"
+                            SQLTask:DtsVariableName="User::dwh_queue_execution_log_id"
+                            SQLTask:ParameterDirection="Input"
+                            SQLTask:DataType="3"
+                            SQLTask:ParameterSize="-1" />
+                          <SQLTask:ParameterBinding
+                            SQLTask:ParameterName="3"
+                            SQLTask:DtsVariableName="System::ErrorDescription"
+                            SQLTask:ParameterDirection="Input"
+                            SQLTask:DataType="130"
+                            SQLTask:ParameterSize="-1" />
+                          <SQLTask:ParameterBinding
+                            SQLTask:ParameterName="4"
+                            SQLTask:DtsVariableName="User::dwh_row_count"
+                            SQLTask:ParameterDirection="Input"
+                            SQLTask:DataType="3"
+                            SQLTask:ParameterSize="-1" />
+                        </SQLTask:SqlTaskData>
+                      </DTS:ObjectData>
+                    </DTS:Executable>
+                  </DTS:Executables>
+                  <DTS:PrecedenceConstraints>
+                    <DTS:PrecedenceConstraint
+                      DTS:refId="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности scd2\Задача &quot;Выполнение SQL&quot; scd2 загрузка из incoming_area в staging_area *.EventHandlers[OnError].PrecedenceConstraints[Constraint]"
+                      DTS:CreationName=""
+                      DTS:DTSID="{e14fc4c2-8267-43c4-8a9d-bff3e2eb8fb2}"
+                      DTS:From="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности scd2\Задача &quot;Выполнение SQL&quot; scd2 загрузка из incoming_area в staging_area *.EventHandlers[OnError]\Задания выражения генерируем  актуальную дату - dwh_execution_to_datetime"
+                      DTS:LogicalAnd="True"
+                      DTS:ObjectName="Constraint"
+                      DTS:To="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности scd2\Задача &quot;Выполнение SQL&quot; scd2 загрузка из incoming_area в staging_area *.EventHandlers[OnError]\Задача &quot;Выполнение SQL&quot; окончание лога scd2 - failure" />
+                  </DTS:PrecedenceConstraints>
+                </DTS:EventHandler>
+              </DTS:EventHandlers>
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{F2F45D1A-B4F2-4BEB-9C17-313DF7A41CA2}"
+                  SQLTask:SqlStatementSource="exec staging_area.p_staging_area_load_scd2 ?,  ? output" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="0"
+                    SQLTask:DtsVariableName="$Package::dwh_load_queue_id"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="1"
+                    SQLTask:DtsVariableName="User::dwh_row_count"
+                    SQLTask:ParameterDirection="Output"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности scd2\Задача &quot;Выполнение SQL&quot; начало лога scd2"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{06f0c136-78b3-4bdf-8210-33845520456e}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:FailParentOnFailure="True"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Задача &quot;Выполнение SQL&quot; начало лога scd2"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:LoggingOptions
+                DTS:FilterKind="0"
+                DTS:LoggingMode="2" />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{F395067F-5FFA-4AAB-A7A5-77D1978E5CFA}"
+                  SQLTask:SqlStatementSource="exec service_area.p_queue_exectuion_log_begin &#xA;? , ?, 'staging_area', ?&#xA;, ?, ?,  ?, ?&#xA;, ? output&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="0"
+                    SQLTask:DtsVariableName="$Package::dwh_load_queue_id"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="1"
+                    SQLTask:DtsVariableName="User::dwh_execution_param_id"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="2"
+                    SQLTask:DtsVariableName="User::dwh_layer_execution_from_datetime"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="130"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="3"
+                    SQLTask:DtsVariableName="$Package::dwh_thread_number"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="4"
+                    SQLTask:DtsVariableName="System::ExecutionInstanceGUID"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="72"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="5"
+                    SQLTask:DtsVariableName="System::ServerExecutionID"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="6"
+                    SQLTask:DtsVariableName="User::dwh_queue_execution_log_id"
+                    SQLTask:ParameterDirection="Output"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="7"
+                    SQLTask:DtsVariableName="User::dwh_queue_execution_log_id"
+                    SQLTask:ParameterDirection="Output"
+                    SQLTask:DataType="130"
+                    SQLTask:ParameterSize="-1" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности scd2\Задача &quot;Выполнение SQL&quot; окончание лога scd2"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{8933e81e-ee2d-4f42-92f3-e342dfa21cf3}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:FailParentOnFailure="True"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Задача &quot;Выполнение SQL&quot; окончание лога scd2"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:LoggingOptions
+                DTS:FilterKind="0"
+                DTS:LoggingMode="2" />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{F395067F-5FFA-4AAB-A7A5-77D1978E5CFA}"
+                  SQLTask:SqlStatementSource="exec service_area.p_queue_exectuion_log_finish&#xA; ?, 'staging_area', ?,  'success', ?, null, ?&#xA;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="0"
+                    SQLTask:DtsVariableName="$Package::dwh_load_queue_id"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="1"
+                    SQLTask:DtsVariableName="User::dwh_layer_execution_to_datetime"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="130"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="2"
+                    SQLTask:DtsVariableName="User::dwh_queue_execution_log_id"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="3"
+                    SQLTask:DtsVariableName="User::dwh_row_count"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+          <DTS:PrecedenceConstraints>
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности scd2.PrecedenceConstraints[Constraint]"
+              DTS:CreationName=""
+              DTS:DTSID="{c517e837-8453-4b45-90d4-8b4a66bbdca3}"
+              DTS:From="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности scd2\Задания выражения генерируем  актуальную дату - dwh_execution_from_datetime"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint"
+              DTS:To="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности scd2\Задача &quot;Выполнение SQL&quot; начало лога scd2" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности scd2.PrecedenceConstraints[Constraint 1]"
+              DTS:CreationName=""
+              DTS:DTSID="{c65142f3-7ec0-4362-adba-cd5318ad4480}"
+              DTS:From="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности scd2\Задача &quot;Выполнение SQL&quot; начало лога scd2"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 1"
+              DTS:To="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности scd2\Задача &quot;Выполнение SQL&quot; scd2 загрузка из incoming_area в staging_area *" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности scd2.PrecedenceConstraints[Constraint 2]"
+              DTS:CreationName=""
+              DTS:DTSID="{7ff4a9a1-ba22-4f90-8261-9b60009a3021}"
+              DTS:From="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности scd2\Задача &quot;Выполнение SQL&quot; scd2 загрузка из incoming_area в staging_area *"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 2"
+              DTS:To="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности scd2\Задания выражения генерируем  актуальную дату - dwh_execution_to_datetime" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности scd2.PrecedenceConstraints[Constraint 3]"
+              DTS:CreationName=""
+              DTS:DTSID="{933630c6-a372-4252-a6b1-110d7dd66a3e}"
+              DTS:From="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности scd2\Задания выражения генерируем  актуальную дату - dwh_execution_to_datetime"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 3"
+              DTS:To="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности scd2\Задача &quot;Выполнение SQL&quot; окончание лога scd2" />
+          </DTS:PrecedenceConstraints>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Контейнер последовательности загрузка staging_area.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{8F4C4ABB-8C07-43D1-82A6-7FC97168AE5A}"
+          DTS:From="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности parsing csv"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности convert csv" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Контейнер последовательности загрузка staging_area.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{71F3FA25-1A78-47C0-87E9-41F3F0CCDACF}"
+          DTS:From="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности convert csv"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности scd2" />
+      </DTS:PrecedenceConstraints>
+      <DTS:EventHandlers>
+        <DTS:EventHandler
+          DTS:refId="Package\Контейнер последовательности загрузка staging_area.EventHandlers[OnTaskFailed]"
+          DTS:CreationName="OnTaskFailed"
+          DTS:DTSID="{890BF322-A9BE-4F3D-8BDF-51B89F804EBF}"
+          DTS:EventID="0"
+          DTS:EventName="OnTaskFailed"
+          DTS:LocaleID="-1">
+          <DTS:Variables>
+            <DTS:Variable
+              DTS:CreationName=""
+              DTS:Description="The propagate property of the event"
+              DTS:DTSID="{48B21CC8-C87C-45B3-9BEA-5F98B8C551A7}"
+              DTS:IncludeInDebugDump="6789"
+              DTS:Namespace="System"
+              DTS:ObjectName="Propagate">
+              <DTS:VariableValue
+                DTS:DataType="11">-1</DTS:VariableValue>
+            </DTS:Variable>
+          </DTS:Variables>
+          <DTS:Executables />
+        </DTS:EventHandler>
+      </DTS:EventHandlers>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{DAE1B70C-CA51-44F2-A8DC-102931EE9C98}"
+      DTS:From="Package\Задача &quot;Выполнение SQL&quot; начало обработки задания в таблице очереди"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Задача &quot;Выполнение SQL&quot; обновление информациии о начале в таблице очереди" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{2C7BFB2E-34AC-4963-BDAC-FD9844CB72FD}"
+      DTS:From="Package\Контейнер последовательности загрузка staging_area"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Задача &quot;Выполнение SQL&quot; обновление информации о завершении в таблице очереди - success" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{35DE881E-6968-469A-A4A9-E4F46D041C57}"
+      DTS:From="Package\Задача &quot;Выполнение SQL&quot; начало обработки задания в таблице очереди"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Задача &quot;Выполнение SQL&quot; обновление информации о завершении в таблице очереди - failure"
+      DTS:Value="1" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{BA9C59A8-1A91-4672-BD93-425874B6494F}"
+      DTS:From="Package\Контейнер последовательности загрузка staging_area"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Задача &quot;Выполнение SQL&quot; обновление информации о завершении в таблице очереди - failure"
+      DTS:Value="1" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{405B39D7-CDC0-41F0-AFAA-CAAEA083F70B}"
+      DTS:From="Package\Задача &quot;Выполнение SQL&quot; обновление информациии о начале в таблице очереди"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Контейнер последовательности загрузка staging_area" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{131FF87C-5C60-4046-BAAD-361190D67893}"
+      DTS:From="Package\Задача &quot;Выполнение SQL&quot; обновление информациии о начале в таблице очереди"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\Задача &quot;Выполнение SQL&quot; обновление информации о завершении в таблице очереди - failure"
+      DTS:Value="1" />
+  </DTS:PrecedenceConstraints>
+  <DTS:EventHandlers>
+    <DTS:EventHandler
+      DTS:refId="Package.EventHandlers[OnError]"
+      DTS:CreationName="OnError"
+      DTS:DTSID="{9A4F859B-A964-461B-97D2-0EDF7F66D91E}"
+      DTS:EventID="0"
+      DTS:EventName="OnError"
+      DTS:LocaleID="-1">
+      <DTS:Variables>
+        <DTS:Variable
+          DTS:CreationName=""
+          DTS:Description="The propagate property of the event"
+          DTS:DTSID="{971F4300-5B46-4EFC-8D70-B6EFFEE19E64}"
+          DTS:IncludeInDebugDump="6789"
+          DTS:Namespace="System"
+          DTS:ObjectName="Propagate">
+          <DTS:VariableValue
+            DTS:DataType="11">-1</DTS:VariableValue>
+        </DTS:Variable>
+      </DTS:Variables>
+      <DTS:Executables />
+    </DTS:EventHandler>
+  </DTS:EventHandlers>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="64" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="484,42"
+          Id="Package\Задача &quot;Выполнение SQL&quot; начало обработки задания в таблице очереди"
+          TopLeft="15.166666666667,151.97619047619" />
+        <NodeLayout
+          Size="564,42"
+          Id="Package\Задача &quot;Выполнение SQL&quot; обновление информации о завершении в таблице очереди - failure"
+          TopLeft="53.916666666667,726.72619047619" />
+        <NodeLayout
+          Size="574,42"
+          Id="Package\Задача &quot;Выполнение SQL&quot; обновление информации о завершении в таблице очереди - success"
+          TopLeft="207.5,1112.5" />
+        <NodeLayout
+          Size="504,42"
+          Id="Package\Задача &quot;Выполнение SQL&quot; обновление информациии о начале в таблице очереди"
+          TopLeft="276.416666666667,255.47619047619" />
+        <NodeLayout
+          Size="498,42"
+          Id="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности convert csv\Задания выражения генерируем  актуальную дату - dwh_execution_from_datetime"
+          TopLeft="17.4285714285716,37.357142857143" />
+        <NodeLayout
+          Size="486,42"
+          Id="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности convert csv\Задания выражения генерируем  актуальную дату - dwh_execution_to_datetime"
+          TopLeft="53.8333333333337,404" />
+        <NodeLayout
+          Size="446,42"
+          Id="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности convert csv\Задача &quot;Выполнение SQL&quot; scd2 загрузка из incoming_area в staging_area *"
+          TopLeft="35.6785714285716,266.607142857143" />
+        <NodeLayout
+          Size="296,42"
+          Id="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности convert csv\Задача &quot;Выполнение SQL&quot; начало лога scd2"
+          TopLeft="97.511904761905,143.333333333333" />
+        <NodeLayout
+          Size="326,42"
+          Id="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности convert csv\Задача &quot;Выполнение SQL&quot; окончание лога scd2"
+          TopLeft="145.119047619048,496.857142857143" />
+        <EdgeLayout
+          Id="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности convert csv.PrecedenceConstraints[Constraint]"
+          TopLeft="266.428571428572,79.357142857143">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-20.9166666666666,63.97619047619"
+              Start="0,0"
+              End="-20.9166666666666,56.47619047619">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27.988095238095" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,27.988095238095"
+                    Point2="0,31.988095238095"
+                    Point3="-4,31.988095238095" />
+                  <mssgle:LineSegment
+                    End="-16.9166666666666,31.988095238095" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-16.9166666666666,31.988095238095"
+                    Point2="-20.9166666666666,31.988095238095"
+                    Point3="-20.9166666666666,35.988095238095" />
+                  <mssgle:LineSegment
+                    End="-20.9166666666666,56.47619047619" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности convert csv.PrecedenceConstraints[Constraint 1]"
+          TopLeft="245.511904761905,185.333333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="13.1666666666666,81.27380952381"
+              Start="0,0"
+              End="13.1666666666666,73.77380952381">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.636904761905" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,36.636904761905"
+                    Point2="0,40.636904761905"
+                    Point3="4,40.636904761905" />
+                  <mssgle:LineSegment
+                    End="9.16666666666663,40.636904761905" />
+                  <mssgle:CubicBezierSegment
+                    Point1="9.16666666666663,40.636904761905"
+                    Point2="13.1666666666666,40.636904761905"
+                    Point3="13.1666666666666,44.636904761905" />
+                  <mssgle:LineSegment
+                    End="13.1666666666666,73.77380952381" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности convert csv.PrecedenceConstraints[Constraint 2]"
+          TopLeft="258.678571428572,308.607142857143">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="38.1547619047621,95.3928571428573"
+              Start="0,0"
+              End="38.1547619047621,87.8928571428573">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,43.6964285714287" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,43.6964285714287"
+                    Point2="0,47.6964285714287"
+                    Point3="4,47.6964285714287" />
+                  <mssgle:LineSegment
+                    End="34.1547619047621,47.6964285714287" />
+                  <mssgle:CubicBezierSegment
+                    Point1="34.1547619047621,47.6964285714287"
+                    Point2="38.1547619047621,47.6964285714287"
+                    Point3="38.1547619047621,51.6964285714287" />
+                  <mssgle:LineSegment
+                    End="38.1547619047621,87.8928571428573" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности convert csv.PrecedenceConstraints[Constraint 3]"
+          TopLeft="296.833333333334,446">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="11.285714285714,50.8571428571423"
+              Start="0,0"
+              End="11.285714285714,43.3571428571423">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.4285714285712" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,21.4285714285712"
+                    Point2="0,25.4285714285712"
+                    Point3="4,25.4285714285712" />
+                  <mssgle:LineSegment
+                    End="7.28571428571399,25.4285714285712" />
+                  <mssgle:CubicBezierSegment
+                    Point1="7.28571428571399,25.4285714285712"
+                    Point2="11.285714285714,25.4285714285712"
+                    Point3="11.285714285714,29.4285714285712" />
+                  <mssgle:LineSegment
+                    End="11.285714285714,43.3571428571423" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="event handler on error"
+          ParentId="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности convert csv"
+          FontInfo="{assembly:Null}"
+          Size="148,40"
+          Id="9852aa31-4119-4fc5-8340-b928b0de1403"
+          TopLeft="319.714285714286,216.285714285714" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="590,824"
+          Size="590,867"
+          Id="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности convert csv"
+          TopLeft="678,69.9761904761907" />
+        <NodeLayout
+          Size="498,42"
+          Id="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности parsing csv\Задания выражения генерируем  актуальную дату - dwh_execution_from_datetime"
+          TopLeft="24.0238095238099,37.31746031746" />
+        <NodeLayout
+          Size="486,42"
+          Id="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности parsing csv\Задания выражения генерируем  актуальную дату - dwh_execution_to_datetime"
+          TopLeft="22.2500000000002,368.924603174603" />
+        <NodeLayout
+          Size="361,42"
+          Id="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности parsing csv\Задача &quot;Выполнение SQL&quot; parsing csv в staging_area"
+          TopLeft="85.4523809523812,255.31746031746" />
+        <NodeLayout
+          Size="344,42"
+          Id="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности parsing csv\Задача &quot;Выполнение SQL&quot; начало лога parsing csv"
+          TopLeft="64.6071428571432,144.54365079365" />
+        <NodeLayout
+          Size="362,42"
+          Id="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности parsing csv\Задача &quot;Выполнение SQL&quot; окончание лога parsing csv"
+          TopLeft="97.6428571428573,485.031746031745" />
+        <EdgeLayout
+          Id="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности parsing csv.PrecedenceConstraints[Constraint]"
+          TopLeft="273.02380952381,79.31746031746">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-36.4166666666666,65.2261904761904"
+              Start="0,0"
+              End="-36.4166666666666,57.7261904761904">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.6130952380952" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,28.6130952380952"
+                    Point2="0,32.6130952380952"
+                    Point3="-4,32.6130952380952" />
+                  <mssgle:LineSegment
+                    End="-32.4166666666666,32.6130952380952" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-32.4166666666666,32.6130952380952"
+                    Point2="-36.4166666666666,32.6130952380952"
+                    Point3="-36.4166666666666,36.6130952380952" />
+                  <mssgle:LineSegment
+                    End="-36.4166666666666,57.7261904761904" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности parsing csv.PrecedenceConstraints[Constraint 1]"
+          TopLeft="265.25,410.924603174603">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="13.3928571428571,74.1071428571422"
+              Start="0,0"
+              End="13.3928571428571,66.6071428571422">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.0535714285711" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,33.0535714285711"
+                    Point2="0,37.0535714285711"
+                    Point3="4,37.0535714285711" />
+                  <mssgle:LineSegment
+                    End="9.39285714285711,37.0535714285711" />
+                  <mssgle:CubicBezierSegment
+                    Point1="9.39285714285711,37.0535714285711"
+                    Point2="13.3928571428571,37.0535714285711"
+                    Point3="13.3928571428571,41.0535714285711" />
+                  <mssgle:LineSegment
+                    End="13.3928571428571,66.6071428571422" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности parsing csv.PrecedenceConstraints[Constraint 2]"
+          TopLeft="236.607142857143,186.54365079365">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="29.345238095238,68.7738095238097"
+              Start="0,0"
+              End="29.345238095238,61.2738095238097">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.3869047619049" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,30.3869047619049"
+                    Point2="0,34.3869047619049"
+                    Point3="4,34.3869047619049" />
+                  <mssgle:LineSegment
+                    End="25.345238095238,34.3869047619049" />
+                  <mssgle:CubicBezierSegment
+                    Point1="25.345238095238,34.3869047619049"
+                    Point2="29.345238095238,34.3869047619049"
+                    Point3="29.345238095238,38.3869047619049" />
+                  <mssgle:LineSegment
+                    End="29.345238095238,61.2738095238097" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности parsing csv.PrecedenceConstraints[Constraint 3]"
+          TopLeft="265.601190476191,297.31746031746">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,71.607142857143"
+              Start="0,0"
+              End="0,64.107142857143">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,64.107142857143" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="558,670"
+          Size="558,713"
+          Id="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности parsing csv"
+          TopLeft="44.2857142857144,70.285714285714" />
+        <NodeLayout
+          Size="498,42"
+          Id="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности scd2\Задания выражения генерируем  актуальную дату - dwh_execution_from_datetime"
+          TopLeft="17.4285714285716,37.357142857143" />
+        <NodeLayout
+          Size="486,42"
+          Id="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности scd2\Задания выражения генерируем  актуальную дату - dwh_execution_to_datetime"
+          TopLeft="53.8333333333337,404" />
+        <NodeLayout
+          Size="446,42"
+          Id="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности scd2\Задача &quot;Выполнение SQL&quot; scd2 загрузка из incoming_area в staging_area *"
+          TopLeft="35.6785714285716,266.607142857143" />
+        <NodeLayout
+          Size="296,42"
+          Id="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности scd2\Задача &quot;Выполнение SQL&quot; начало лога scd2"
+          TopLeft="97.511904761905,143.333333333333" />
+        <NodeLayout
+          Size="326,42"
+          Id="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности scd2\Задача &quot;Выполнение SQL&quot; окончание лога scd2"
+          TopLeft="145.119047619048,496.857142857143" />
+        <EdgeLayout
+          Id="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности scd2.PrecedenceConstraints[Constraint]"
+          TopLeft="266.428571428572,79.357142857143">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-20.9166666666666,63.97619047619"
+              Start="0,0"
+              End="-20.9166666666666,56.47619047619">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27.988095238095" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,27.988095238095"
+                    Point2="0,31.988095238095"
+                    Point3="-4,31.988095238095" />
+                  <mssgle:LineSegment
+                    End="-16.9166666666666,31.988095238095" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-16.9166666666666,31.988095238095"
+                    Point2="-20.9166666666666,31.988095238095"
+                    Point3="-20.9166666666666,35.988095238095" />
+                  <mssgle:LineSegment
+                    End="-20.9166666666666,56.47619047619" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности scd2.PrecedenceConstraints[Constraint 1]"
+          TopLeft="245.511904761905,185.333333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="13.1666666666666,81.27380952381"
+              Start="0,0"
+              End="13.1666666666666,73.77380952381">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.636904761905" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,36.636904761905"
+                    Point2="0,40.636904761905"
+                    Point3="4,40.636904761905" />
+                  <mssgle:LineSegment
+                    End="9.16666666666663,40.636904761905" />
+                  <mssgle:CubicBezierSegment
+                    Point1="9.16666666666663,40.636904761905"
+                    Point2="13.1666666666666,40.636904761905"
+                    Point3="13.1666666666666,44.636904761905" />
+                  <mssgle:LineSegment
+                    End="13.1666666666666,73.77380952381" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности scd2.PrecedenceConstraints[Constraint 2]"
+          TopLeft="258.678571428572,308.607142857143">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="38.1547619047621,95.3928571428573"
+              Start="0,0"
+              End="38.1547619047621,87.8928571428573">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,43.6964285714287" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,43.6964285714287"
+                    Point2="0,47.6964285714287"
+                    Point3="4,47.6964285714287" />
+                  <mssgle:LineSegment
+                    End="34.1547619047621,47.6964285714287" />
+                  <mssgle:CubicBezierSegment
+                    Point1="34.1547619047621,47.6964285714287"
+                    Point2="38.1547619047621,47.6964285714287"
+                    Point3="38.1547619047621,51.6964285714287" />
+                  <mssgle:LineSegment
+                    End="38.1547619047621,87.8928571428573" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности scd2.PrecedenceConstraints[Constraint 3]"
+          TopLeft="296.833333333334,446">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="11.285714285714,50.8571428571423"
+              Start="0,0"
+              End="11.285714285714,43.3571428571423">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.4285714285712" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,21.4285714285712"
+                    Point2="0,25.4285714285712"
+                    Point3="4,25.4285714285712" />
+                  <mssgle:LineSegment
+                    End="7.28571428571399,25.4285714285712" />
+                  <mssgle:CubicBezierSegment
+                    Point1="7.28571428571399,25.4285714285712"
+                    Point2="11.285714285714,25.4285714285712"
+                    Point3="11.285714285714,29.4285714285712" />
+                  <mssgle:LineSegment
+                    End="11.285714285714,43.3571428571423" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="event handler on error"
+          ParentId="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности scd2"
+          FontInfo="{assembly:Null}"
+          Size="148,40"
+          Id="5372a99e-89f5-42cf-b7fa-6c8e0baa51e9"
+          TopLeft="319.714285714286,216.285714285714" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="573,689"
+          Size="573,732"
+          Id="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности scd2"
+          TopLeft="1328,69.9761904761905" />
+        <EdgeLayout
+          Id="Package\Контейнер последовательности загрузка staging_area.PrecedenceConstraints[Constraint]"
+          TopLeft="602.285714285714,426.785714285714">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="75.7142857142856,76.6904761904767"
+              Start="0,0"
+              End="68.2142857142856,76.6904761904767">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="33.8571428571428,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="33.8571428571428,0"
+                    Point2="37.8571428571428,0"
+                    Point3="37.8571428571428,4" />
+                  <mssgle:LineSegment
+                    End="37.8571428571428,72.6904761904767" />
+                  <mssgle:CubicBezierSegment
+                    Point1="37.8571428571428,72.6904761904767"
+                    Point2="37.8571428571428,76.6904761904767"
+                    Point3="41.8571428571428,76.6904761904767" />
+                  <mssgle:LineSegment
+                    End="68.2142857142856,76.6904761904767" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Контейнер последовательности загрузка staging_area.PrecedenceConstraints[Constraint 1]"
+          TopLeft="1268,503.476190476191">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="60,-67.5000000000001"
+              Start="0,0"
+              End="52.5,-67.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="26,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="26,0"
+                    Point2="30,0"
+                    Point3="30,-4" />
+                  <mssgle:LineSegment
+                    End="30,-63.5000000000001" />
+                  <mssgle:CubicBezierSegment
+                    Point1="30,-63.5000000000001"
+                    Point2="30,-67.5000000000001"
+                    Point3="34,-67.5000000000001" />
+                  <mssgle:LineSegment
+                    End="52.5,-67.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="1906,992"
+          Size="1906,1035"
+          Id="Package\Контейнер последовательности загрузка staging_area"
+          TopLeft="882.773809523806,299.654761904761" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="336.5,193.97619047619">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="191.916666666667,61.4999999999997"
+              Start="0,0"
+              End="191.916666666667,53.9999999999997">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.7215815485996" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.7215815485996"
+                    Point2="0,24.7215815485996"
+                    Point3="4,24.7215815485996" />
+                  <mssgle:LineSegment
+                    End="187.916666666667,24.7215815485996" />
+                  <mssgle:CubicBezierSegment
+                    Point1="187.916666666667,24.7215815485996"
+                    Point2="191.916666666667,24.7215815485996"
+                    Point3="191.916666666667,28.7215815485996" />
+                  <mssgle:LineSegment
+                    End="191.916666666667,53.9999999999997" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="882.773809523806,1073.90476190476">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-101.273809523806,59.595238095239"
+              Start="0,0"
+              End="-93.773809523806,59.595238095239">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-29.9314434093574,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-29.9314434093574,0"
+                    Point2="-33.9314434093574,0"
+                    Point3="-33.9314434093574,4" />
+                  <mssgle:LineSegment
+                    End="-33.9314434093574,55.595238095239" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-33.9314434093574,55.595238095239"
+                    Point2="-33.9314434093574,59.595238095239"
+                    Point3="-37.9314434093574,59.595238095239" />
+                  <mssgle:LineSegment
+                    End="-93.773809523806,59.595238095239" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="177.833333333334,193.97619047619">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="158.083333333333,532.75"
+              Start="0,0"
+              End="158.083333333333,525.25">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,210.153212520593" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,210.153212520593"
+                    Point2="0,214.153212520593"
+                    Point3="4,214.153212520593" />
+                  <mssgle:LineSegment
+                    End="154.083333333333,214.153212520593" />
+                  <mssgle:CubicBezierSegment
+                    Point1="154.083333333333,214.153212520593"
+                    Point2="158.083333333333,214.153212520593"
+                    Point3="158.083333333333,218.153212520593" />
+                  <mssgle:LineSegment
+                    End="158.083333333333,525.25" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="63.8003190104165,219.153212520593,30.4826953125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="882.773809523806,817.154761904761">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-264.857142857139,-69.428571428571"
+              Start="0,0"
+              End="-257.357142857139,-69.428571428571">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-128.42857142857,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-128.42857142857,0"
+                    Point2="-132.42857142857,0"
+                    Point3="-132.42857142857,-4" />
+                  <mssgle:LineSegment
+                    End="-132.42857142857,-65.428571428571" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-132.42857142857,-65.428571428571"
+                    Point2="-132.42857142857,-69.428571428571"
+                    Point3="-136.42857142857,-69.428571428571" />
+                  <mssgle:LineSegment
+                    End="-257.357142857139,-69.428571428571" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-147.66991908482,1,30.4826953125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="780.416666666667,276.47619047619">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="102.357142857139,283.928571428571"
+              Start="0,0"
+              End="94.857142857139,283.928571428571">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="64.0627323206803,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="64.0627323206803,0"
+                    Point2="68.0627323206803,0"
+                    Point3="68.0627323206803,4" />
+                  <mssgle:LineSegment
+                    End="68.0627323206803,279.928571428571" />
+                  <mssgle:CubicBezierSegment
+                    Point1="68.0627323206803,279.928571428571"
+                    Point2="68.0627323206803,283.928571428571"
+                    Point3="72.0627323206803,283.928571428571" />
+                  <mssgle:LineSegment
+                    End="94.857142857139,283.928571428571" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="528.416666666667,297.47619047619">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-99.8333333333334,429.25"
+              Start="0,0"
+              End="-99.8333333333334,421.75">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,252.821428571429" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,252.821428571429"
+                    Point2="0,256.821428571429"
+                    Point3="-4,256.821428571429" />
+                  <mssgle:LineSegment
+                    End="-95.8333333333334,256.821428571429" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-95.8333333333334,256.821428571429"
+                    Point2="-99.8333333333334,256.821428571429"
+                    Point3="-99.8333333333334,260.821428571429" />
+                  <mssgle:LineSegment
+                    End="-99.8333333333334,421.75" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-65.1580143229167,261.821428571429,30.4826953125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <DtsEventHandler
+    design-time-name="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности convert csv\Задача &quot;Выполнение SQL&quot; scd2 загрузка из incoming_area в staging_area *.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="486,42"
+          Id="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности convert csv\Задача &quot;Выполнение SQL&quot; scd2 загрузка из incoming_area в staging_area *.EventHandlers[OnError]\Задания выражения генерируем  актуальную дату - dwh_execution_to_datetime"
+          TopLeft="60,60" />
+        <NodeLayout
+          Size="353,42"
+          Id="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности convert csv\Задача &quot;Выполнение SQL&quot; scd2 загрузка из incoming_area в staging_area *.EventHandlers[OnError]\Задача &quot;Выполнение SQL&quot; окончание лога scd2 - failure"
+          TopLeft="177.166666666666,185.714285714285" />
+        <EdgeLayout
+          Id="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности convert csv\Задача &quot;Выполнение SQL&quot; scd2 загрузка из incoming_area в staging_area *.EventHandlers[OnError].PrecedenceConstraints[Constraint]"
+          TopLeft="303,102">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="50.666666666666,83.714285714285"
+              Start="0,0"
+              End="50.666666666666,76.214285714285">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37.8571428571425" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,37.8571428571425"
+                    Point2="0,41.8571428571425"
+                    Point3="4,41.8571428571425" />
+                  <mssgle:LineSegment
+                    End="46.666666666666,41.8571428571425" />
+                  <mssgle:CubicBezierSegment
+                    Point1="46.666666666666,41.8571428571425"
+                    Point2="50.666666666666,41.8571428571425"
+                    Point3="50.666666666666,45.8571428571425" />
+                  <mssgle:LineSegment
+                    End="50.666666666666,76.214285714285" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+  <DtsEventHandler
+    design-time-name="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности parsing csv\Задача &quot;Выполнение SQL&quot; parsing csv в staging_area.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="486,42"
+          Id="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности parsing csv\Задача &quot;Выполнение SQL&quot; parsing csv в staging_area.EventHandlers[OnError]\Задания выражения генерируем  актуальную дату - dwh_execution_to_datetime"
+          TopLeft="83,108" />
+        <NodeLayout
+          Size="402,42"
+          Id="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности parsing csv\Задача &quot;Выполнение SQL&quot; parsing csv в staging_area.EventHandlers[OnError]\Задача &quot;Выполнение SQL&quot; окончание лога парсинг csv - failure"
+          TopLeft="123,232" />
+        <EdgeLayout
+          Id="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности parsing csv\Задача &quot;Выполнение SQL&quot; parsing csv в staging_area.EventHandlers[OnError].PrecedenceConstraints[Constraint]"
+          TopLeft="325,150">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,82"
+              Start="0,0"
+              End="0,74.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,74.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+  <DtsEventHandler
+    design-time-name="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности scd2\Задача &quot;Выполнение SQL&quot; scd2 загрузка из incoming_area в staging_area *.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="486,42"
+          Id="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности scd2\Задача &quot;Выполнение SQL&quot; scd2 загрузка из incoming_area в staging_area *.EventHandlers[OnError]\Задания выражения генерируем  актуальную дату - dwh_execution_to_datetime"
+          TopLeft="60,60" />
+        <NodeLayout
+          Size="353,42"
+          Id="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности scd2\Задача &quot;Выполнение SQL&quot; scd2 загрузка из incoming_area в staging_area *.EventHandlers[OnError]\Задача &quot;Выполнение SQL&quot; окончание лога scd2 - failure"
+          TopLeft="177.166666666666,185.714285714285" />
+        <EdgeLayout
+          Id="Package\Контейнер последовательности загрузка staging_area\Контейнер последовательности scd2\Задача &quot;Выполнение SQL&quot; scd2 загрузка из incoming_area в staging_area *.EventHandlers[OnError].PrecedenceConstraints[Constraint]"
+          TopLeft="303,102">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="50.666666666666,83.714285714285"
+              Start="0,0"
+              End="50.666666666666,76.214285714285">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37.8571428571425" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,37.8571428571425"
+                    Point2="0,41.8571428571425"
+                    Point3="4,41.8571428571425" />
+                  <mssgle:LineSegment
+                    End="46.666666666666,41.8571428571425" />
+                  <mssgle:CubicBezierSegment
+                    Point1="46.666666666666,41.8571428571425"
+                    Point2="50.666666666666,41.8571428571425"
+                    Point3="50.666666666666,45.8571428571425" />
+                  <mssgle:LineSegment
+                    End="50.666666666666,76.214285714285" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

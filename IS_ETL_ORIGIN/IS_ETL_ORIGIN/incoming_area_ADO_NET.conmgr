@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="incoming_area_ADO_NET"
+  DTS:DTSID="{3534faaa-ec01-4197-8b9b-5fd2b7a79ab4}"
+  DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <DTS:PropertyExpression
+    DTS:Name="ServerName">@[$Project::DWH_ServerName]</DTS:PropertyExpression>
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectionString="Data Source=UKRO-S-DWH04;Initial Catalog=staging_area;Integrated Security=True;Application Name=SSIS-Package-{E57FCE54-4BCA-43FD-BB8C-B2403E43B9AD}UKRO-S-DWH20.incoming_area;" />
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

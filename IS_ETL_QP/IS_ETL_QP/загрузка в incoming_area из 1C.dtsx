@@ -1,0 +1,2544 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/21/2022 8:20:19 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="UKRO-S-DWH20"
+  DTS:CreatorName="REGOP\ebileeva"
+  DTS:DTSID="{074B842D-9CD5-48DC-BA97-5CDCD1A60A99}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:FailParentOnFailure="True"
+  DTS:LastModifiedProductVersion="16.0.5223.0"
+  DTS:LocaleID="1049"
+  DTS:ObjectName="загрузка в incoming_area из 1C"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="1"
+  DTS:SuppressConfigurationWarnings="True"
+  DTS:VersionBuild="702"
+  DTS:VersionGUID="{2357D969-0552-4397-B090-200308DA7100}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[incoming_area_ADO_NET]"
+      DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+      DTS:DTSID="{26026A11-5257-48EF-A19B-FE739BC913BE}"
+      DTS:ObjectName="incoming_area_ADO_NET">
+      <DTS:PropertyExpression
+        DTS:Name="ServerName">@[$Project::DWH_ServerName]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=UKRO-S-DWH04;Initial Catalog=incoming_area;Integrated Security=True;Application Name=SSIS-Package-{26026A11-5257-48EF-A19B-FE739BC913BE}UKRO-S-DWH20.incoming_area;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="3"
+      DTS:DTSID="{6B4802DB-7C6D-44CA-BF66-207AABA13CF2}"
+      DTS:ObjectName="dwh_load_queue_id">
+      <DTS:Property
+        DTS:DataType="3"
+        DTS:Name="ParameterValue">165456</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="3"
+      DTS:DTSID="{8AD7A144-CD17-445D-80B9-9E7D28452633}"
+      DTS:ObjectName="dwh_thread_number">
+      <DTS:Property
+        DTS:DataType="3"
+        DTS:Name="ParameterValue">1</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A2B2A853-5EC2-461C-AE21-B91BC3650972}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="dwh_attempt_number">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{E03DAB2A-02C7-43AC-9DBB-F3E88D44CA80}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="dwh_execution_param_id">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{808324E7-BFF3-4D0D-98AA-D79E24CD036C}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="dwh_instance_id">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{D405A68A-61BB-43CF-89F1-DDF19015DC64}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="dwh_instance_url">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{D677C4BE-1DD5-48C9-958B-715A6949B919}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="dwh_layer_execution_from_datetime">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{3B5A3A7F-18FC-4C1B-9C1E-947434F3AF45}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="dwh_layer_execution_to_datetime">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{5EB245D6-46A4-4395-96FD-2F2CE7C05892}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="dwh_queue_execution_log_id">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{DDA613D7-674E-4204-82B6-47D654FFE5CB}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="dwh_queue_param_json">
+      <DTS:VariableValue
+        DTS:DataType="8">{'report_name':'Catalog_Валюты','method_load':1}</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C583FEBA-0E0B-4C42-AAC8-FD653B2920DE}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="dwh_report_name">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{4A7DF4ED-45B7-4DAB-8F41-DD1902D8A7C7}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="dwh_request_id">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{4D4A8D37-5871-4C10-9A3D-515996B65C69}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="dwh_retrieval_retry_interval_seconds">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{EF8E9D1C-3F4A-4AD1-BF12-EB7791603EB3}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="dwh_retry_count">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{B860B0A6-B2D8-4644-80D6-34203A121067}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="dwh_retry_timeout_seconds">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{FE2E6357-89C8-41D4-84CF-625EEF8632FC}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="json_date_field">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{557C3401-C4AF-429F-AAF9-087C2D9B6B58}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="json_from_datetime">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{963FCCF3-1B87-4F33-8BC4-CF4F9C0FBF1E}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="json_load_queue_id">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{84043625-FE9C-40ED-9C4C-CCCC208624B5}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="json_method_load">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{17420647-EB37-42F7-8E3D-D15261E3F9D8}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="json_subsystem_name">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C8180ABF-3560-4A2F-9F29-001B9D2A14C8}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="json_to_datetime">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:LoggingOptions
+    DTS:FilterKind="0"
+    DTS:LoggingMode="2">
+    <DTS:Property
+      DTS:DataType="8"
+      DTS:Name="EventFilter">1,7,OnError</DTS:Property>
+    <DTS:Property
+      DTS:EventName="OnError"
+      DTS:Name="ColumnFilter">
+      <DTS:Property
+        DTS:Name="Computer">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="Operator">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceName">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="ExecutionID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="MessageText">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="DataBytes">-1</DTS:Property>
+    </DTS:Property>
+    <DTS:Property
+      DTS:EventName="OnWarning"
+      DTS:Name="ColumnFilter">
+      <DTS:Property
+        DTS:Name="Computer">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="Operator">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceName">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="ExecutionID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="MessageText">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="DataBytes">-1</DTS:Property>
+    </DTS:Property>
+  </DTS:LoggingOptions>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Задача &quot;Выполнение SQL&quot; начало обработки задания в таблице очереди"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{EE6B5A8C-54A9-4A1E-B3C2-44C497C3E498}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Задача &quot;Выполнение SQL&quot; начало обработки задания в таблице очереди"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{F395067F-5FFA-4AAB-A7A5-77D1978E5CFA}"
+          SQLTask:SqlStatementSource="exec service_area.p_queue_line_begin ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="$Package::dwh_load_queue_id"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Задача &quot;Выполнение SQL&quot; обновление информации о завершении в таблице очереди - failure"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{C9C427CD-0F0F-4C48-A8E8-87AFF0F686F0}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Задача &quot;Выполнение SQL&quot; обновление информации о завершении в таблице очереди - failure"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{F395067F-5FFA-4AAB-A7A5-77D1978E5CFA}"
+          SQLTask:SqlStatementSource="exec service_area.p_queue_line_finish ?,?, 'failure'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="$Package::dwh_load_queue_id"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="User::dwh_execution_param_id"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Задача &quot;Выполнение SQL&quot; обновление информации о завершении в таблице очереди - success"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{6BF20521-96CA-4E37-96E2-5110283CCBF6}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Задача &quot;Выполнение SQL&quot; обновление информации о завершении в таблице очереди - success"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{F395067F-5FFA-4AAB-A7A5-77D1978E5CFA}"
+          SQLTask:SqlStatementSource="exec service_area.p_queue_line_finish ?,?, 'success'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="$Package::dwh_load_queue_id"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="User::dwh_execution_param_id"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Задача &quot;Выполнение SQL&quot; обновление информациии о начале в таблице очереди"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{C7DF4A8E-850B-4754-A0BD-12CA47DFB53A}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Задача &quot;Выполнение SQL&quot; обновление информациии о начале в таблице очереди"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{F395067F-5FFA-4AAB-A7A5-77D1978E5CFA}"
+          SQLTask:SqlStatementSource="exec service_area.p_1C_queue_get_param ?, ? output, ? output, ? output, ? output, ? output, ? output, ? output, ? output, ? output, ? output, ? output, ? output" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="$Package::dwh_load_queue_id"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="User::dwh_report_name"
+            SQLTask:ParameterDirection="Output"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="2"
+            SQLTask:DtsVariableName="User::dwh_retry_count"
+            SQLTask:ParameterDirection="Output"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="3"
+            SQLTask:DtsVariableName="User::dwh_retry_timeout_seconds"
+            SQLTask:ParameterDirection="Output"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="4"
+            SQLTask:DtsVariableName="User::dwh_retrieval_retry_interval_seconds"
+            SQLTask:ParameterDirection="Output"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="5"
+            SQLTask:DtsVariableName="User::dwh_instance_url"
+            SQLTask:ParameterDirection="Output"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="6"
+            SQLTask:DtsVariableName="User::dwh_execution_param_id"
+            SQLTask:ParameterDirection="Output"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="7"
+            SQLTask:DtsVariableName="User::dwh_queue_param_json"
+            SQLTask:ParameterDirection="Output"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="8"
+            SQLTask:DtsVariableName="User::dwh_instance_id"
+            SQLTask:ParameterDirection="Output"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="9"
+            SQLTask:DtsVariableName="User::json_method_load"
+            SQLTask:ParameterDirection="Output"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="10"
+            SQLTask:DtsVariableName="User::json_date_field"
+            SQLTask:ParameterDirection="Output"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="11"
+            SQLTask:DtsVariableName="User::json_subsystem_name"
+            SQLTask:ParameterDirection="Output"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="12"
+            SQLTask:DtsVariableName="User::json_load_queue_id"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Контейнер последовательности общий процесс загрузки"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{FC681469-DDAE-4050-AF83-0E1455A0F3DA}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:FailParentOnFailure="True"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Контейнер последовательности общий процесс загрузки">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Контейнер последовательности общий процесс загрузки\Задания выражения генерируем JSON для staging"
+          DTS:CreationName="Microsoft.ExpressionTask"
+          DTS:Description="Expression Task"
+          DTS:DTSID="{0DF547D7-DCAC-42B3-A4AD-8C71CE938204}"
+          DTS:ExecutableType="Microsoft.ExpressionTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Задания выражения генерируем JSON для staging"
+          DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExpressionTask
+              Expression="@[User::dwh_queue_param_json] = REPLACE(@[User::dwh_queue_param_json], &quot;}&quot;, &quot;&quot;) +&quot;,\&quot;dwh_load_queue_id\&quot;:&quot;+ (DT_WSTR, 16) @[$Package::dwh_load_queue_id]  +&quot;}&quot;" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Контейнер последовательности общий процесс загрузки\Задача &quot;Выполнение SQL&quot; добавляем задание для загрузки staging_area"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{304BF274-D4AD-4B61-AA73-8B0FA9561935}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:FailParentOnFailure="True"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Задача &quot;Выполнение SQL&quot; добавляем задание для загрузки staging_area"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:LoggingOptions
+            DTS:FilterKind="0"
+            DTS:LoggingMode="2" />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{F395067F-5FFA-4AAB-A7A5-77D1978E5CFA}"
+              SQLTask:SqlStatementSource="exec service_area.p_queue_insert_staging_area ?, ?, ?&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::dwh_execution_param_id"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="User::dwh_queue_param_json"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="2"
+                SQLTask:DtsVariableName="User::dwh_layer_execution_to_datetime"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api"
+          DTS:CreationName="STOCK:SEQUENCE"
+          DTS:Description="Sequence Container"
+          DTS:DTSID="{B3C1AECB-5ADE-4BCB-8AA6-EFA2ED5AA289}"
+          DTS:ExecutableType="STOCK:SEQUENCE"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Контейнер последовательности скачивание файла по api">
+          <DTS:Variables />
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api\Задания выражения генерируем  актуальную дату - dwh_execution_from_datetime"
+              DTS:CreationName="Microsoft.ExpressionTask"
+              DTS:Description="Expression Task"
+              DTS:DTSID="{EBC142B5-B115-4A6C-887E-4EF0CC099D3A}"
+              DTS:ExecutableType="Microsoft.ExpressionTask"
+              DTS:FailParentOnFailure="True"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Задания выражения генерируем  актуальную дату - dwh_execution_from_datetime"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:LoggingOptions
+                DTS:FilterKind="0"
+                DTS:LoggingMode="2" />
+              <DTS:ObjectData>
+                <ExpressionTask
+                  Expression="@[User::dwh_layer_execution_from_datetime] =  &#xA;  (DT_WSTR, 4)YEAR(getdate()) + &quot;-&quot; + &#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)MONTH(getdate()), 2) + &quot;-&quot; + &#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)DAY(getdate()), 2) + &quot; &quot; +&#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)DATEPART(&quot;Hour&quot;, getdate()), 2) + &quot;:&quot; + &#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)DATEPART(&quot;Minute&quot;, getdate()), 2) + &quot;:&quot; + &#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)DATEPART(&quot;Second&quot;, getdate()), 2) +&quot;.&quot; + Right(&quot;000&quot; + (DT_WSTR,3) datepart(&quot;Ms&quot;, getdate()),3)" />
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api\Задания выражения генерируем  актуальную дату - dwh_execution_to_datetime"
+              DTS:CreationName="Microsoft.ExpressionTask"
+              DTS:Description="Expression Task"
+              DTS:DTSID="{BFF2B596-7A4B-4A89-B7FE-2CB183066BD1}"
+              DTS:ExecutableType="Microsoft.ExpressionTask"
+              DTS:FailParentOnFailure="True"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Задания выражения генерируем  актуальную дату - dwh_execution_to_datetime"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:LoggingOptions
+                DTS:FilterKind="0"
+                DTS:LoggingMode="2" />
+              <DTS:ObjectData>
+                <ExpressionTask
+                  Expression="@[User::dwh_layer_execution_to_datetime] =  &#xA;  (DT_WSTR, 4)YEAR(getdate()) + &quot;-&quot; + &#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)MONTH(getdate()), 2) + &quot;-&quot; + &#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)DAY(getdate()), 2) + &quot; &quot; +&#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)DATEPART(&quot;Hour&quot;, getdate()), 2) + &quot;:&quot; + &#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)DATEPART(&quot;Minute&quot;, getdate()), 2) + &quot;:&quot; + &#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)DATEPART(&quot;Second&quot;, getdate()), 2) +&quot;.&quot; + Right(&quot;000&quot; + (DT_WSTR,3) datepart(&quot;Ms&quot;, getdate()),3)" />
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api\Задача &quot;Выполнение SQL&quot; начало лога скачивание файла по api"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{31D0421A-F0CC-45E0-B878-4D0D5413BB34}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:FailParentOnFailure="True"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Задача &quot;Выполнение SQL&quot; начало лога скачивание файла по api"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:LoggingOptions
+                DTS:FilterKind="0"
+                DTS:LoggingMode="2" />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{F395067F-5FFA-4AAB-A7A5-77D1978E5CFA}"
+                  SQLTask:SqlStatementSource="exec service_area.p_queue_exectuion_log_begin &#xA;? , ?, 'incoming_area', ?&#xA;, ?, ?, ?, ?&#xA;, ? output&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="0"
+                    SQLTask:DtsVariableName="$Package::dwh_load_queue_id"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="1"
+                    SQLTask:DtsVariableName="User::dwh_execution_param_id"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="2"
+                    SQLTask:DtsVariableName="User::dwh_layer_execution_from_datetime"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="130"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="3"
+                    SQLTask:DtsVariableName="$Package::dwh_thread_number"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="4"
+                    SQLTask:DtsVariableName="System::ExecutionInstanceGUID"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="72"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="5"
+                    SQLTask:DtsVariableName="System::ServerExecutionID"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="7"
+                    SQLTask:DtsVariableName="User::dwh_queue_execution_log_id"
+                    SQLTask:ParameterDirection="Output"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="6"
+                    SQLTask:DtsVariableName="User::dwh_report_name"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="130"
+                    SQLTask:ParameterSize="-1" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api\Задача &quot;Выполнение SQL&quot; окончание лога скачивание файла по api"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{5FDF84F3-AB37-4D90-B524-E4230F4DE3FA}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:FailParentOnFailure="True"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Задача &quot;Выполнение SQL&quot; окончание лога скачивание файла по api"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:LoggingOptions
+                DTS:FilterKind="0"
+                DTS:LoggingMode="2" />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{F395067F-5FFA-4AAB-A7A5-77D1978E5CFA}"
+                  SQLTask:SqlStatementSource="exec service_area.p_queue_exectuion_log_finish&#xA; ?, 'incoming_area', ?,  'success', ?, null, null&#xA;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="0"
+                    SQLTask:DtsVariableName="$Package::dwh_load_queue_id"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="1"
+                    SQLTask:DtsVariableName="User::dwh_layer_execution_to_datetime"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="130"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="2"
+                    SQLTask:DtsVariableName="User::dwh_queue_execution_log_id"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api\Задача &quot;Выполнение SQL&quot; парсинг JSON параметры"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:Disabled="True"
+              DTS:DTSID="{5E193026-9CE1-49EE-BD75-A6A8841BF228}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Задача &quot;Выполнение SQL&quot; парсинг JSON параметры"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:PropertyExpression
+                DTS:Name="SqlStatementSource">"  SELECT report_name,
+    method_load,
+    date_field,
+    begin_datetime,
+	end_datetime
+FROM OPENJSON('" + replace(@[User::dwh_queue_param_json], "'", "''") + "') WITH (
+    report_name NVARCHAR(256) '$.report_name',
+    method_load int '$.method_load',
+    date_field NVARCHAR(50) '$.date_field',
+    begin_datetime NVARCHAR(50) '$.begin_datetime',
+    end_datetime NVARCHAR(50) '$.end_datetime'
+    )"</DTS:PropertyExpression>
+              <DTS:EventHandlers>
+                <DTS:EventHandler
+                  DTS:refId="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api\Задача &quot;Выполнение SQL&quot; парсинг JSON параметры.EventHandlers[OnError]"
+                  DTS:CreationName="OnError"
+                  DTS:DTSID="{9BF0CD77-F40C-4692-B331-B8F9FD22B711}"
+                  DTS:EventID="0"
+                  DTS:EventName="OnError"
+                  DTS:LocaleID="-1">
+                  <DTS:Variables>
+                    <DTS:Variable
+                      DTS:CreationName=""
+                      DTS:Description="The propagate property of the event"
+                      DTS:DTSID="{4AAFE69E-63E9-4178-ADB3-6F1FFC88D18A}"
+                      DTS:IncludeInDebugDump="6789"
+                      DTS:Namespace="System"
+                      DTS:ObjectName="Propagate">
+                      <DTS:VariableValue
+                        DTS:DataType="11">-1</DTS:VariableValue>
+                    </DTS:Variable>
+                  </DTS:Variables>
+                  <DTS:Executables>
+                    <DTS:Executable
+                      DTS:refId="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api\Задача &quot;Выполнение SQL&quot; парсинг JSON параметры.EventHandlers[OnError]\Задания выражения генерируем  актуальную дату - dwh_execution_to_datetime"
+                      DTS:CreationName="Microsoft.ExpressionTask"
+                      DTS:Description="Expression Task"
+                      DTS:DTSID="{908AA570-28FA-4B44-B855-85D05F016ABB}"
+                      DTS:ExecutableType="Microsoft.ExpressionTask"
+                      DTS:FailParentOnFailure="True"
+                      DTS:LocaleID="-1"
+                      DTS:ObjectName="Задания выражения генерируем  актуальную дату - dwh_execution_to_datetime">
+                      <DTS:Variables />
+                      <DTS:LoggingOptions
+                        DTS:FilterKind="0"
+                        DTS:LoggingMode="2" />
+                      <DTS:ObjectData>
+                        <ExpressionTask
+                          Expression="@[User::dwh_layer_execution_to_datetime] =  &#xA;  (DT_WSTR, 4)YEAR(getdate()) + &quot;-&quot; + &#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)MONTH(getdate()), 2) + &quot;-&quot; + &#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)DAY(getdate()), 2) + &quot; &quot; +&#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)DATEPART(&quot;Hour&quot;, getdate()), 2) + &quot;:&quot; + &#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)DATEPART(&quot;Minute&quot;, getdate()), 2) + &quot;:&quot; + &#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)DATEPART(&quot;Second&quot;, getdate()), 2) +&quot;.&quot; + Right(&quot;000&quot; + (DT_WSTR,3) datepart(&quot;Ms&quot;, getdate()),3)" />
+                      </DTS:ObjectData>
+                    </DTS:Executable>
+                    <DTS:Executable
+                      DTS:refId="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api\Задача &quot;Выполнение SQL&quot; парсинг JSON параметры.EventHandlers[OnError]\Задача &quot;Выполнение SQL&quot; окончание лога скачивание файла по api - failure"
+                      DTS:CreationName="Microsoft.ExecuteSQLTask"
+                      DTS:Description="Execute SQL Task"
+                      DTS:DTSID="{0271E630-E9AA-4CA9-BC97-DBC3379260C9}"
+                      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+                      DTS:FailParentOnFailure="True"
+                      DTS:LocaleID="-1"
+                      DTS:ObjectName="Задача &quot;Выполнение SQL&quot; окончание лога скачивание файла по api - failure">
+                      <DTS:Variables />
+                      <DTS:LoggingOptions
+                        DTS:FilterKind="0"
+                        DTS:LoggingMode="2" />
+                      <DTS:ObjectData>
+                        <SQLTask:SqlTaskData
+                          SQLTask:Connection="{F395067F-5FFA-4AAB-A7A5-77D1978E5CFA}"
+                          SQLTask:SqlStatementSource="exec service_area.p_queue_exectuion_log_finish&#xA; ?, 'incoming_area', ?, 'failure', ?, ?, null&#xA;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                          <SQLTask:ParameterBinding
+                            SQLTask:ParameterName="0"
+                            SQLTask:DtsVariableName="$Package::dwh_load_queue_id"
+                            SQLTask:ParameterDirection="Input"
+                            SQLTask:DataType="3"
+                            SQLTask:ParameterSize="-1" />
+                          <SQLTask:ParameterBinding
+                            SQLTask:ParameterName="1"
+                            SQLTask:DtsVariableName="User::dwh_layer_execution_to_datetime"
+                            SQLTask:ParameterDirection="Input"
+                            SQLTask:DataType="130"
+                            SQLTask:ParameterSize="-1" />
+                          <SQLTask:ParameterBinding
+                            SQLTask:ParameterName="2"
+                            SQLTask:DtsVariableName="User::dwh_queue_execution_log_id"
+                            SQLTask:ParameterDirection="Input"
+                            SQLTask:DataType="3"
+                            SQLTask:ParameterSize="-1" />
+                          <SQLTask:ParameterBinding
+                            SQLTask:ParameterName="3"
+                            SQLTask:DtsVariableName="System::ErrorDescription"
+                            SQLTask:ParameterDirection="Input"
+                            SQLTask:DataType="130"
+                            SQLTask:ParameterSize="-1" />
+                        </SQLTask:SqlTaskData>
+                      </DTS:ObjectData>
+                    </DTS:Executable>
+                  </DTS:Executables>
+                  <DTS:PrecedenceConstraints>
+                    <DTS:PrecedenceConstraint
+                      DTS:refId="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api\Задача &quot;Выполнение SQL&quot; парсинг JSON параметры.EventHandlers[OnError].PrecedenceConstraints[Constraint]"
+                      DTS:CreationName=""
+                      DTS:DTSID="{90B6DA51-C9A7-4A0D-8842-CA6733578CBF}"
+                      DTS:From="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api\Задача &quot;Выполнение SQL&quot; парсинг JSON параметры.EventHandlers[OnError]\Задания выражения генерируем  актуальную дату - dwh_execution_to_datetime"
+                      DTS:LogicalAnd="True"
+                      DTS:ObjectName="Constraint"
+                      DTS:To="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api\Задача &quot;Выполнение SQL&quot; парсинг JSON параметры.EventHandlers[OnError]\Задача &quot;Выполнение SQL&quot; окончание лога скачивание файла по api - failure" />
+                  </DTS:PrecedenceConstraints>
+                </DTS:EventHandler>
+              </DTS:EventHandlers>
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{F395067F-5FFA-4AAB-A7A5-77D1978E5CFA}"
+                  SQLTask:SqlStatementSource="  SELECT report_name,&#xA;    method_load,&#xA;    date_field,&#xA;    begin_datetime,&#xA;&#x9;end_datetime&#xA;FROM OPENJSON('{''report_name'':''Catalog_Валюты'',''method_load'':1}') WITH (&#xA;    report_name NVARCHAR(256) '$.report_name',&#xA;    method_load int '$.method_load',&#xA;    date_field NVARCHAR(50) '$.date_field',&#xA;    begin_datetime NVARCHAR(50) '$.begin_datetime',&#xA;    end_datetime NVARCHAR(50) '$.end_datetime'&#xA;    )"
+                  SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ResultBinding
+                    SQLTask:ResultName="0"
+                    SQLTask:DtsVariableName="User::dwh_report_name" />
+                  <SQLTask:ResultBinding
+                    SQLTask:ResultName="1"
+                    SQLTask:DtsVariableName="User::json_method_load" />
+                  <SQLTask:ResultBinding
+                    SQLTask:ResultName="2"
+                    SQLTask:DtsVariableName="User::json_date_field" />
+                  <SQLTask:ResultBinding
+                    SQLTask:ResultName="3"
+                    SQLTask:DtsVariableName="User::json_from_datetime" />
+                  <SQLTask:ResultBinding
+                    SQLTask:ResultName="4"
+                    SQLTask:DtsVariableName="User::json_to_datetime" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api\Задача &quot;Скрипт&quot; загрузка XML файла из API в icoming_area"
+              DTS:CreationName="Microsoft.ScriptTask"
+              DTS:Description="Script Task"
+              DTS:DTSID="{528C826C-0191-4BDC-8D17-958B0FC22702}"
+              DTS:ExecutableType="Microsoft.ScriptTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Задача &quot;Скрипт&quot; загрузка XML файла из API в icoming_area"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:EventHandlers>
+                <DTS:EventHandler
+                  DTS:refId="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api\Задача &quot;Скрипт&quot; загрузка XML файла из API в icoming_area.EventHandlers[OnError]"
+                  DTS:CreationName="OnError"
+                  DTS:DTSID="{7E819C2B-B37C-4C24-AF6E-C9B428A2FAD3}"
+                  DTS:EventID="7340144"
+                  DTS:EventName="OnError"
+                  DTS:LocaleID="-1">
+                  <DTS:Variables>
+                    <DTS:Variable
+                      DTS:CreationName=""
+                      DTS:Description="The propagate property of the event"
+                      DTS:DTSID="{78109FC6-4451-4710-8003-0AE0B4F9E726}"
+                      DTS:IncludeInDebugDump="6789"
+                      DTS:Namespace="System"
+                      DTS:ObjectName="Propagate">
+                      <DTS:VariableValue
+                        DTS:DataType="11">-1</DTS:VariableValue>
+                    </DTS:Variable>
+                  </DTS:Variables>
+                  <DTS:Executables>
+                    <DTS:Executable
+                      DTS:refId="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api\Задача &quot;Скрипт&quot; загрузка XML файла из API в icoming_area.EventHandlers[OnError]\Задания выражения генерируем  актуальную дату - dwh_execution_to_datetime"
+                      DTS:CreationName="Microsoft.ExpressionTask"
+                      DTS:Description="Expression Task"
+                      DTS:DTSID="{D13C991C-746D-4C27-8B9B-3765E981AFD3}"
+                      DTS:ExecutableType="Microsoft.ExpressionTask"
+                      DTS:FailParentOnFailure="True"
+                      DTS:LocaleID="-1"
+                      DTS:ObjectName="Задания выражения генерируем  актуальную дату - dwh_execution_to_datetime">
+                      <DTS:Variables />
+                      <DTS:LoggingOptions
+                        DTS:FilterKind="0"
+                        DTS:LoggingMode="2" />
+                      <DTS:ObjectData>
+                        <ExpressionTask
+                          Expression="@[User::dwh_layer_execution_to_datetime] =  &#xA;  (DT_WSTR, 4)YEAR(getdate()) + &quot;-&quot; + &#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)MONTH(getdate()), 2) + &quot;-&quot; + &#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)DAY(getdate()), 2) + &quot; &quot; +&#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)DATEPART(&quot;Hour&quot;, getdate()), 2) + &quot;:&quot; + &#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)DATEPART(&quot;Minute&quot;, getdate()), 2) + &quot;:&quot; + &#xA;RIGHT(&quot;0&quot; + (DT_WSTR, 2)DATEPART(&quot;Second&quot;, getdate()), 2) +&quot;.&quot; + Right(&quot;000&quot; + (DT_WSTR,3) datepart(&quot;Ms&quot;, getdate()),3)" />
+                      </DTS:ObjectData>
+                    </DTS:Executable>
+                    <DTS:Executable
+                      DTS:refId="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api\Задача &quot;Скрипт&quot; загрузка XML файла из API в icoming_area.EventHandlers[OnError]\Задача &quot;Выполнение SQL&quot; запись в таблицу событий"
+                      DTS:CreationName="Microsoft.ExecuteSQLTask"
+                      DTS:Description="Execute SQL Task"
+                      DTS:DTSID="{d07c2421-ff8e-4489-b087-cc3929f5e93e}"
+                      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+                      DTS:LocaleID="-1"
+                      DTS:ObjectName="Задача &quot;Выполнение SQL&quot; запись в таблицу событий"
+                      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+                      <DTS:Variables />
+                      <DTS:PropertyExpression
+                        DTS:Name="SqlStatementSource">"EXEC [service_area].[service_area].[p_queue_event_log] 
+		'"+ SUBSTRING((DT_STR,30, 1252) GETDATE(), 1, 19)  +"', 
+		"+ (DT_WSTR, 32) @[$Package::dwh_load_queue_id]  +",
+		"+ (DT_WSTR, 32) @[User::dwh_queue_execution_log_id]  +",
+		'"+ @[System::TaskName]  +"', 
+		'Error', 
+		"+ (DT_WSTR, 32) @[System::ErrorCode] +", 
+		'"+ REPLACE(@[System::ErrorDescription], "'", "''") +"';
+	"</DTS:PropertyExpression>
+                      <DTS:ObjectData>
+                        <SQLTask:SqlTaskData
+                          SQLTask:Connection="{F395067F-5FFA-4AAB-A7A5-77D1978E5CFA}"
+                          SQLTask:SqlStatementSource="EXEC [service_area].[service_area].[p_queue_event_log] &#xA;&#x9;&#x9;'2023-10-05 20:23:42', &#xA;&#x9;&#x9;165456,&#xA;&#x9;&#x9;0,&#xA;&#x9;&#x9;'Задача &quot;Выполнение SQL&quot; запись в таблицу событий', &#xA;&#x9;&#x9;'Error', &#xA;&#x9;&#x9;0, &#xA;&#x9;&#x9;'';&#xA;&#x9;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+                      </DTS:ObjectData>
+                    </DTS:Executable>
+                    <DTS:Executable
+                      DTS:refId="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api\Задача &quot;Скрипт&quot; загрузка XML файла из API в icoming_area.EventHandlers[OnError]\Задача &quot;Выполнение SQL&quot; окончание лога скачивание файла по api - failure"
+                      DTS:CreationName="Microsoft.ExecuteSQLTask"
+                      DTS:Description="Execute SQL Task"
+                      DTS:DTSID="{FA1EA391-64B6-4D99-806F-8E3974D95A5A}"
+                      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+                      DTS:FailParentOnFailure="True"
+                      DTS:LocaleID="-1"
+                      DTS:ObjectName="Задача &quot;Выполнение SQL&quot; окончание лога скачивание файла по api - failure">
+                      <DTS:Variables />
+                      <DTS:LoggingOptions
+                        DTS:FilterKind="0"
+                        DTS:LoggingMode="2" />
+                      <DTS:ObjectData>
+                        <SQLTask:SqlTaskData
+                          SQLTask:Connection="{F395067F-5FFA-4AAB-A7A5-77D1978E5CFA}"
+                          SQLTask:SqlStatementSource="exec service_area.p_queue_exectuion_log_finish&#xA; ?, 'incoming_area', ?, 'failure', ?, ?, null&#xA;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                          <SQLTask:ParameterBinding
+                            SQLTask:ParameterName="0"
+                            SQLTask:DtsVariableName="$Package::dwh_load_queue_id"
+                            SQLTask:ParameterDirection="Input"
+                            SQLTask:DataType="3"
+                            SQLTask:ParameterSize="-1" />
+                          <SQLTask:ParameterBinding
+                            SQLTask:ParameterName="1"
+                            SQLTask:DtsVariableName="User::dwh_layer_execution_to_datetime"
+                            SQLTask:ParameterDirection="Input"
+                            SQLTask:DataType="130"
+                            SQLTask:ParameterSize="-1" />
+                          <SQLTask:ParameterBinding
+                            SQLTask:ParameterName="2"
+                            SQLTask:DtsVariableName="User::dwh_queue_execution_log_id"
+                            SQLTask:ParameterDirection="Input"
+                            SQLTask:DataType="3"
+                            SQLTask:ParameterSize="-1" />
+                          <SQLTask:ParameterBinding
+                            SQLTask:ParameterName="3"
+                            SQLTask:DtsVariableName="System::ErrorDescription"
+                            SQLTask:ParameterDirection="Input"
+                            SQLTask:DataType="130"
+                            SQLTask:ParameterSize="-1" />
+                        </SQLTask:SqlTaskData>
+                      </DTS:ObjectData>
+                    </DTS:Executable>
+                  </DTS:Executables>
+                  <DTS:PrecedenceConstraints>
+                    <DTS:PrecedenceConstraint
+                      DTS:refId="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api\Задача &quot;Скрипт&quot; загрузка XML файла из API в icoming_area.EventHandlers[OnError].PrecedenceConstraints[Constraint]"
+                      DTS:CreationName=""
+                      DTS:DTSID="{BE8650BC-36E6-4B41-A516-4D7A803C0CC6}"
+                      DTS:From="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api\Задача &quot;Скрипт&quot; загрузка XML файла из API в icoming_area.EventHandlers[OnError]\Задания выражения генерируем  актуальную дату - dwh_execution_to_datetime"
+                      DTS:LogicalAnd="True"
+                      DTS:ObjectName="Constraint"
+                      DTS:To="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api\Задача &quot;Скрипт&quot; загрузка XML файла из API в icoming_area.EventHandlers[OnError]\Задача &quot;Выполнение SQL&quot; окончание лога скачивание файла по api - failure" />
+                  </DTS:PrecedenceConstraints>
+                </DTS:EventHandler>
+              </DTS:EventHandlers>
+              <DTS:ObjectData>
+                <ScriptProject
+                  Name="ST_7b33bff69f4643aaa869e7bfdcc7ee6d"
+                  VSTAMajorVersion="16"
+                  VSTAMinorVersion="0"
+                  Language="CSharp"
+                  ReadOnlyVariables="User::dwh_instance_url,User::dwh_report_name,User::dwh_retry_count,User::dwh_retry_timeout_seconds,User::json_date_field,User::json_from_datetime,User::json_method_load,User::json_to_datetime,$Package::dwh_load_queue_id">
+                  <ProjectItem
+                    Name="Properties\Settings.settings"
+                    Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></ProjectItem>
+                  <ProjectItem
+                    Name="Properties\Resources.resx"
+                    Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+</root>]]></ProjectItem>
+                  <ProjectItem
+                    Name="ScriptMain.cs"
+                    Encoding="UTF8"><![CDATA[#region Help:  Introduction to the script task
+/* The Script Task allows you to perform virtually any operation that can be accomplished in
+ * a .Net application within the context of an Integration Services control flow. 
+ * 
+ * Expand the other regions which have "Help" prefixes for examples of specific ways to use
+ * Integration Services features within this script task. */
+#endregion
+
+
+#region Namespaces
+using System;
+using System.Data;
+using Microsoft.SqlServer.Dts.Runtime;
+using System.Windows.Forms;
+using System.Data.SqlClient;
+using System.IO;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Xml;
+#endregion
+
+namespace ST_7b33bff69f4643aaa869e7bfdcc7ee6d
+{
+    /// <summary>
+    /// ScriptMain is the entry point class of the script.  Do not change the name, attributes,
+    /// or parent of this class.
+    /// </summary>
+	[Microsoft.SqlServer.Dts.Tasks.ScriptTask.SSISScriptTaskEntryPointAttribute]
+	public partial class ScriptMain : Microsoft.SqlServer.Dts.Tasks.ScriptTask.VSTARTScriptObjectModelBase
+	{
+        #region Help:  Using Integration Services variables and parameters in a script
+        /* To use a variable in this script, first ensure that the variable has been added to 
+         * either the list contained in the ReadOnlyVariables property or the list contained in 
+         * the ReadWriteVariables property of this script task, according to whether or not your
+         * code needs to write to the variable.  To add the variable, save this script, close this instance of
+         * Visual Studio, and update the ReadOnlyVariables and 
+         * ReadWriteVariables properties in the Script Transformation Editor window.
+         * To use a parameter in this script, follow the same steps. Parameters are always read-only.
+         * 
+         * Example of reading from a variable:
+         *  DateTime startTime = (DateTime) Dts.Variables["System::StartTime"].Value;
+         * 
+         * Example of writing to a variable:
+         *  Dts.Variables["User::myStringVariable"].Value = "new value";
+         * 
+         * Example of reading from a package parameter:
+         *  int batchId = (int) Dts.Variables["$Package::batchId"].Value;
+         *  
+         * Example of reading from a project parameter:
+         *  int batchId = (int) Dts.Variables["$Project::batchId"].Value;
+         * 
+         * Example of reading from a sensitive project parameter:
+         *  int batchId = (int) Dts.Variables["$Project::batchId"].GetSensitiveValue();
+         * */
+
+        #endregion
+
+        #region Help:  Firing Integration Services events from a script
+        /* This script task can fire events for logging purposes.
+         * 
+         * Example of firing an error event:
+         *  Dts.Events.FireError(18, "Process Values", "Bad value", "", 0);
+         * 
+         * Example of firing an information event:
+         *  Dts.Events.FireInformation(3, "Process Values", "Processing has started", "", 0, ref fireAgain)
+         * 
+         * Example of firing a warning event:
+         *  Dts.Events.FireWarning(14, "Process Values", "No values received for input", "", 0);
+         * */
+        #endregion
+
+        #region Help:  Using Integration Services connection managers in a script
+        /* Some types of connection managers can be used in this script task.  See the topic 
+         * "Working with Connection Managers Programatically" for details.
+         * 
+         * Example of using an ADO.Net connection manager:
+         *  object rawConnection = Dts.Connections["Sales DB"].AcquireConnection(Dts.Transaction);
+         *  SqlConnection myADONETConnection = (SqlConnection)rawConnection;
+         *  //Use the connection in some code here, then release the connection
+         *  Dts.Connections["Sales DB"].ReleaseConnection(rawConnection);
+         *
+         * Example of using a File connection manager
+         *  object rawConnection = Dts.Connections["Prices.zip"].AcquireConnection(Dts.Transaction);
+         *  string filePath = (string)rawConnection;
+         *  //Use the connection in some code here, then release the connection
+         *  Dts.Connections["Prices.zip"].ReleaseConnection(rawConnection);
+         * */
+        #endregion
+
+
+		/// <summary>
+        /// This method is called when this script task executes in the control flow.
+        /// Before returning from this method, set the value of Dts.TaskResult to indicate success or failure.
+        /// To open Help, press F1.
+        /// </summary>
+		public void Main()
+		{
+            // ���������� ����������, ����������� � �������
+            string instance_url = (string)Dts.Variables["User::dwh_instance_url"].Value;
+            string report_name = (string)Dts.Variables["User::dwh_report_name"].Value;
+            string api_login = "DWH";
+            string api_pass = "DWH";
+            int retry_count = (int)Dts.Variables["User::dwh_retry_count"].Value;
+            int retry_timeout_seconds = (int)Dts.Variables["User::dwh_retry_timeout_seconds"].Value;
+            int messageNo = 1; 
+            int dwh_method_load = (int)Dts.Variables["User::json_method_load"].Value;
+            string tmp_dwh_date_field = (string)Dts.Variables["User::json_date_field"].Value;
+            string tmp_from_datetime = (string)Dts.Variables["User::json_from_datetime"].Value;
+            string tmp_to_datetime = (string)Dts.Variables["User::json_to_datetime"].Value;
+
+            // ������������ ������� ��� ���������� � API
+            string url_request = string.Empty;
+            string url_request_commit = string.Empty;
+            if (dwh_method_load == 0)
+            {
+                url_request = $"{instance_url}SelectChanges?DataExchangePoint='{report_name}'&MessageNo=";
+                url_request_commit = $"{instance_url}NotifyChangesReceived?DataExchangePoint='{report_name}'&MessageNo=";
+            }
+            else if (dwh_method_load == 1)
+            {
+                url_request = $"{instance_url}{report_name}?$select=**";
+                if (report_name.Contains("_BalanceAndTurnovers") | report_name.Contains("_Turnovers"))
+                {
+                    url_request = $"{instance_url}{report_name.Replace("_BalanceAndTurnovers", "/BalanceAndTurnovers").Replace("_Turnovers", "/Turnovers")}(StartPeriod=datetime'{tmp_from_datetime}', EndPeriod=datetime'{tmp_to_datetime}')";
+                }
+                else if (tmp_dwh_date_field != null & tmp_dwh_date_field != "")
+                {
+                    url_request += $"&$filter=" + tmp_dwh_date_field + " gt datetime'" + tmp_from_datetime + "'and " + tmp_dwh_date_field + " lt datetime'" + tmp_to_datetime + "'";
+                }
+            }
+
+            //dwh_method_load = 0;
+
+            int count_start = 0;
+            string xml_request = string.Empty;
+            string error = string.Empty;
+
+            //
+            var client = new HttpClient(new HttpClientHandler()
+            {
+                UseDefaultCredentials = true
+            });
+            client.BaseAddress = new Uri(instance_url);
+            client.Timeout = TimeSpan.FromSeconds(retry_timeout_seconds);
+            client.MaxResponseContentBufferSize = 2147483646;
+
+
+            if (instance_url.Contains("test1c")) // �������
+            {
+                client.DefaultRequestHeaders.Authorization =
+                    new AuthenticationHeaderValue("Basic",
+                    Convert.ToBase64String(System.Text.ASCIIEncoding.ASCII.GetBytes(
+                        string.Format("{0}:{1}", api_login, api_pass))));
+            }
+
+
+            // �������� ������ �� API, � ��� �� ��������� ������, ��������� � ������� �������
+            while (retry_count > count_start)
+            {
+                try
+                {
+                    /*using (StreamReader reader = new StreamReader("C:\\Framework\\1122\\1122.xml"))
+                    {
+                        xml_request = reader.ReadToEnd();
+                    }
+                    break;*/
+
+                    HttpResponseMessage response = null;
+                    HttpRequestMessage messageRequest = null;
+
+                    if (dwh_method_load == 0)
+                    {
+                        //response = client.PostAsync(url_request, null).Result;
+                        string xml_request_messageNo = string.Empty;
+                        response = client.GetAsync($"{instance_url}{report_name}", HttpCompletionOption.ResponseHeadersRead).Result;
+                        using (var memoryStream = new MemoryStream())
+                        {
+                            response.Content.ReadAsStreamAsync().Result.CopyTo(memoryStream);
+                            xml_request_messageNo = Encoding.UTF8.GetString(memoryStream.ToArray());
+                        }
+
+                        /*using (StreamWriter writer = new StreamWriter("C:\\framework\\log\\" + report_name + "_messageNo.txt", true))
+                        {
+                            writer.WriteLine($"{instance_url}{report_name}");
+                            writer.WriteLine(xml_request_messageNo);
+                        }*/
+                        if (response.IsSuccessStatusCode)
+                        {
+                            XmlDocument doc_messageNo = new XmlDocument();
+                            doc_messageNo.LoadXml(xml_request_messageNo);
+                            XmlNode root_messageNo = doc_messageNo.GetElementsByTagName("d:ReceivedNo")[0];
+                            messageNo = Int32.Parse(root_messageNo.InnerText) + 1;
+                            url_request += messageNo.ToString();
+                            url_request_commit += messageNo.ToString();
+                        }
+                        else
+                        {
+                            error = "Server return status code: " + response.StatusCode.ToString() + "\nServer return content: " + response.Content.ReadAsStringAsync().Result;
+                            count_start += 1;
+                            if (retry_count > count_start)
+                            {
+                                System.Threading.Thread.Sleep(60000);
+                            }
+                            continue;
+                        }
+                            
+
+                        messageRequest = new HttpRequestMessage(HttpMethod.Post, url_request);
+                    }
+                    else if (dwh_method_load == 1)
+                    {
+                        //response = client.GetAsync(url_request, HttpCompletionOption.ResponseHeadersRead).Result;
+                        messageRequest = new HttpRequestMessage(HttpMethod.Get, url_request);
+                    }
+
+                    response = client.SendAsync(messageRequest, HttpCompletionOption.ResponseHeadersRead).Result;
+
+
+                    /*using (StreamWriter writer = new StreamWriter("C:\\framework\\log\\" + report_name + ".txt", true))
+                    {
+                        writer.WriteLine(url_request);
+                        writer.WriteLine(response.ToString());
+                    }*/
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        using (var memoryStream = new MemoryStream())
+                        {
+                            response.Content.ReadAsStreamAsync().Result.CopyTo(memoryStream);
+                            xml_request = Encoding.UTF8.GetString(memoryStream.ToArray());
+                        }
+
+                        /*using (StreamWriter writer = new StreamWriter("C:\\Framework\\Load_Staging_area_TAv2\\" + report_name + "_res.txt", true))
+                        {
+                            writer.WriteLine(xml_request);
+
+                        }*/
+                    }
+                    else
+                    {
+
+                        error = "Server return status code: " + response.StatusCode.ToString() + "\nServer return content: " + response.Content.ReadAsStringAsync().Result;     
+                        count_start += 1;
+                        if (retry_count > count_start)
+                        {
+                            System.Threading.Thread.Sleep(60000);
+                        }
+                        continue;
+                    }
+                    break;
+
+                }
+                catch (Exception e)
+                {
+
+                    if (e.InnerException is TimeoutException | e.InnerException is TaskCanceledException)
+                    {
+                        error = "The waiting timeout has passed!";
+                    }
+                    else
+                    {
+                        error = "Script return: " + e.Message;// + " (" + e.InnerException.Message + ")";
+                    }
+                    count_start += 1;
+                    if (retry_count > count_start)
+                    {
+                        System.Threading.Thread.Sleep(60000);
+                    }
+                }
+            }
+
+
+            // ����� �������� ���������, ��� XML �� ���������� � ���������� ��� ������
+            if (xml_request == string.Empty)
+            {
+                client.Dispose();
+                Dts.Events.FireError(0, "error", error, null, 0);
+                return;
+            }
+            //������ ����������� ������ � [incoming_area].[1C_data_xml]
+            string constr = Dts.Connections["incoming_area_ADO_NET"].ConnectionString;
+            using (SqlConnection conn = new System.Data.SqlClient.SqlConnection(constr))
+            {
+                conn.Open();
+                int dwh_load_queue_id = (int)Dts.Variables["$Package::dwh_load_queue_id"].Value;
+                string q = "INSERT INTO [incoming_area].[data_string] ([dwh_load_queue_id],[dwh_data_string], [dwh_instance_id], [dwh_data_format]) VALUES (" + dwh_load_queue_id.ToString() + ", @xml, -1, 'XML');";
+
+                using (SqlCommand cmd = new SqlCommand(q, conn))
+                {
+                    cmd.Parameters.Add(
+                       new SqlParameter("@xml", SqlDbType.NText)
+                       {
+                           Value = xml_request
+                       });
+                    cmd.ExecuteNonQuery();
+                }
+                conn.Close();
+            }
+            if (dwh_method_load == 0)
+            {
+                try
+                {
+                     var temp_response = client.PostAsync(@url_request_commit, null).Result;
+                    client.Dispose();
+                }
+                catch (Exception e)
+                {
+
+                    if (e.InnerException is TimeoutException | e.InnerException is TaskCanceledException)
+                    {
+                        error = "The waiting timeout has passed!";
+                    }
+                    else
+                    {
+                        error = "Script return: " + e.Message;// + " (" + e.InnerException.Message + ")";
+                    }
+                    client.Dispose();
+                    Dts.Events.FireError(0, "error", error, null, 0);
+                    return;
+                }
+            }
+
+            Dts.TaskResult = (int)ScriptResults.Success;
+		}
+
+        #region ScriptResults declaration
+        /// <summary>
+        /// This enum provides a convenient shorthand within the scope of this class for setting the
+        /// result of the script.
+        /// 
+        /// This code was generated automatically.
+        /// </summary>
+        enum ScriptResults
+        {
+            Success = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Success,
+            Failure = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Failure
+        };
+        #endregion
+
+	}
+}]]></ProjectItem>
+                  <ProjectItem
+                    Name="ST_7b33bff69f4643aaa869e7bfdcc7ee6d.csproj"
+                    Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectTypeGuids>{30D016F9-3734-4E33-A861-5E7D899E18F3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B6D22E51-7235-4C09-8D44-245B57EEEC8C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ST_7b33bff69f4643aaa869e7bfdcc7ee6d</RootNamespace>
+    <AssemblyName>ST_7b33bff69f4643aaa869e7bfdcc7ee6d</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>true</ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>
+    <TargetFrameworkProfile></TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>.\bin\Debug\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>.\bin\Release\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.SqlServer.ManagedDTS, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.ScriptTask, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="ScriptMain.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <!-- Include the build rules for a C# project.-->
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{30D016F9-3734-4E33-A861-5E7D899E18F3}">
+        <ProjectProperties HostName="VSTAHostName" HostPackage="{B3A685AA-7EAF-4BC6-9940-57959FA5AC07}" ApplicationType="usd" Language="cs" TemplatesPath="" />
+        <Host Name="ScriptTask" />
+        <ProjectClient>
+          <HostIdentifier>SSIS_ST160</HostIdentifier>
+        </ProjectClient>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>]]></ProjectItem>
+                  <ProjectItem
+                    Name="Project"
+                    Encoding="UTF16LE"><![CDATA[<?xml version="1.0" encoding="UTF-16" standalone="yes"?>
+<c:Project xmlns:c="http://schemas.microsoft.com/codeprojectml/2010/08/main" xmlns:msb="http://schemas.microsoft.com/developer/msbuild/2003" runtimeVersion="4.0" schemaVersion="1.0">
+  <msb:PropertyGroup>
+    <msb:CodeName>ST_7b33bff69f4643aaa869e7bfdcc7ee6d</msb:CodeName>
+    <msb:Language>msBuild</msb:Language>
+    <msb:DisplayName>ST_7b33bff69f4643aaa869e7bfdcc7ee6d</msb:DisplayName>
+    <msb:ProjectId>{C9F957E7-6E86-448E-A2AD-D7BCC7A6EEA7}</msb:ProjectId>
+  </msb:PropertyGroup>
+  <msb:ItemGroup>
+    <msb:Project Include="ST_7b33bff69f4643aaa869e7bfdcc7ee6d.csproj" />
+    <msb:File Include="Properties\Settings.settings" />
+    <msb:File Include="Properties\AssemblyInfo.cs" />
+    <msb:File Include="Properties\Resources.resx" />
+    <msb:File Include="Properties\Resources.Designer.cs" />
+    <msb:File Include="Properties\Settings.Designer.cs" />
+    <msb:File Include="ScriptMain.cs" />
+  </msb:ItemGroup>
+</c:Project>]]></ProjectItem>
+                  <ProjectItem
+                    Name="Properties\Settings.Designer.cs"
+                    Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_7b33bff69f4643aaa869e7bfdcc7ee6d.Properties.Settings.get_Default():ST_7b33bff69f4643aaa869e7bfdcc7ee6d.Properties.Sett" +
+    "ings")]
+
+namespace ST_7b33bff69f4643aaa869e7bfdcc7ee6d.Properties {
+    
+    
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+        
+        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+        private static Settings defaultInstance = new Settings();
+        
+        public static Settings Default {
+            get {
+                return defaultInstance;
+            }
+        }
+    }
+}]]></ProjectItem>
+                  <ProjectItem
+                    Name="Properties\AssemblyInfo.cs"
+                    Encoding="UTF8"><![CDATA[using System.Reflection;
+using System.Runtime.CompilerServices;
+
+//
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+//
+[assembly: AssemblyTitle("ST_7b33bff69f4643aaa869e7bfdcc7ee6d")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("ST_7b33bff69f4643aaa869e7bfdcc7ee6d")]
+[assembly: AssemblyCopyright("Copyright @  2023")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+//
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
+
+[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
+                  <ProjectItem
+                    Name="Properties\Resources.Designer.cs"
+                    Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_7b33bff69f4643aaa869e7bfdcc7ee6d.Properties.Resources.get_ResourceManager():System.Resources.Resou" +
+    "rceManager")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_7b33bff69f4643aaa869e7bfdcc7ee6d.Properties.Resources.get_Culture():System.Globalization.CultureIn" +
+    "fo")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_7b33bff69f4643aaa869e7bfdcc7ee6d.Properties.Resources.set_Culture(System.Globalization.CultureInfo" +
+    "):Void")]
+
+namespace ST_7b33bff69f4643aaa869e7bfdcc7ee6d.Properties {
+    
+    
+    /// <summary>
+    ///   A strongly-typed resource class, for looking up localized strings, etc.
+    /// </summary>
+    // This class was auto-generated by the StronglyTypedResourceBuilder
+    // class via a tool like ResGen or Visual Studio.
+    // To add or remove a member, edit your .ResX file then rerun ResGen
+    // with the /str option, or rebuild your VS project.
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    internal class Resources {
+        
+        private static global::System.Resources.ResourceManager resourceMan;
+        
+        private static global::System.Globalization.CultureInfo resourceCulture;
+        
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        internal Resources() {
+        }
+        
+        /// <summary>
+        ///   Returns the cached ResourceManager instance used by this class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Resources.ResourceManager ResourceManager {
+            get {
+                if ((resourceMan == null)) {
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ST_7b33bff69f4643aaa869e7bfdcc7ee6d.Properties.Resources", typeof(Resources).Assembly);
+                    resourceMan = temp;
+                }
+                return resourceMan;
+            }
+        }
+        
+        /// <summary>
+        ///   Overrides the current thread's CurrentUICulture property for all
+        ///   resource lookups using this strongly typed resource class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Globalization.CultureInfo Culture {
+            get {
+                return resourceCulture;
+            }
+            set {
+                resourceCulture = value;
+            }
+        }
+    }
+}]]></ProjectItem>
+                  <BinaryItem
+                    Name="ST_7b33bff69f4643aaa869e7bfdcc7ee6d.dll">TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAgAAAAA4fug4AtAnNIbgBTM0hVGhpcyBwcm9ncmFtIGNhbm5vdCBiZSBydW4gaW4gRE9TIG1v
+ZGUuDQ0KJAAAAAAAAABQRQAATAEDABm++mQAAAAAAAAAAOAAIiALATAAACYAAAAIAAAAAAAAJkQA
+AAAgAAAAYAAAAAAAEAAgAAAAAgAABAAAAAAAAAAGAAAAAAAAAACgAAAAAgAAAAAAAAMAYIUAABAA
+ABAAAAAAEAAAEAAAAAAAABAAAAAAAAAAAAAAANRDAABPAAAAAGAAAHgEAAAAAAAAAAAAAAAAAAAA
+AAAAAIAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAIAAACAAAAAAAAAAAAAAACCAAAEgAAAAAAAAAAAAAAC50ZXh0AAAALCQAAAAgAAAAJgAAAAIA
+AAAAAAAAAAAAAAAAACAAAGAucnNyYwAAAHgEAAAAYAAAAAYAAAAoAAAAAAAAAAAAAAAAAABAAABA
+LnJlbG9jAAAMAAAAAIAAAAACAAAALgAAAAAAAAAAAAAAAAAAQAAAQgAAAAAAAAAAAAAAAAAAAAAI
+RAAAAAAAAEgAAAACAAUA3CcAAEAbAAABAAAAAAAAABxDAAC4AAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAABswBgCEBgAAAQAAEQIoEAAACm8RAAAKcgEAAHBvEgAACm8T
+AAAKdCMAAAEKAigQAAAKbxEAAApyLwAAcG8SAAAKbxMAAAp0IwAAAQtyWwAAcAxyWwAAcA0CKBAA
+AApvEQAACnJjAABwbxIAAApvEwAACqUkAAABEwQCKBAAAApvEQAACnKPAABwbxIAAApvEwAACqUk
+AAABEwUXEwYCKBAAAApvEQAACnLPAABwbxIAAApvEwAACqUkAAABEwcCKBAAAApvEQAACnL9AABw
+bxIAAApvEwAACnQjAAABEwgCKBAAAApvEQAACnIpAQBwbxIAAApvEwAACnQjAAABEwkCKBAAAApv
+EQAACnJbAQBwbxIAAApvEwAACnQjAAABEwp+FAAAChMLfhQAAAoTDBEHLSsGcokBAHAHcs0BAHAo
+FQAAChMLBnLnAQBwB3LNAQBwKBUAAAoTDDjqAAAAEQcXQOIAAAAGB3I7AgBwKBYAAAoTCwdyUwIA
+cG8XAAAKB3J9AgBwbxcAAApgLFcdjSMAAAElFgaiJRcHclMCAHBykwIAcG8YAAAKcn0CAHByvQIA
+cG8YAAAKoiUYctMCAHCiJRkRCaIlGnIBAwBwoiUbEQqiJRxyLwMAcKIoGQAAChMLK2QRCBT+AxEI
+cjUDAHAoGgAACl8sUB8KjSMAAAElFhELoiUXcjcDAHCiJRgRCKIlGXJLAwBwoiUaEQmiJRtyZwMA
+cKIlHBEIoiUdcnMDAHCiJR4RCqIlHwlyjwMAcKIoGQAAChMLFhMNfhQAAAoTDn4UAAAKEw9zGwAA
+CiUXbxwAAApzHQAAChMQERAGcx4AAApvHwAAChEQEQVsKCAAAApvIQAAChEQIP7//39qbyIAAAoG
+cpMDAHBvFwAACjlwAgAAERBvIwAACnKhAwBwKCQAAApyrQMAcAgJKCUAAApvJgAACignAAAKcygA
+AApvKQAACjg6AgAAABQTERQTEhEHOhYBAAB+FAAAChMTERAGBygqAAAKF28rAAAKbywAAAoTEXMt
+AAAKExQREW8uAAAKby8AAApvMAAAChEUbzEAAAooMgAAChEUbzMAAApvNAAAChMT3gwRFCwHERRv
+NQAACtwREW82AAAKLE1zNwAACiURE284AAAKcr0DAHBvOQAAChZvOgAACm87AAAKKDwAAAoXWBMG
+EQsSBig9AAAKKCoAAAoTCxEMEgYoPQAACigqAAAKEwwrU3LXAwBwERFvPgAAChMVEhX+FhMAAAFv
+PwAACnIPBABwERFvLgAACm9AAAAKb0EAAAooFQAAChMPEQ0XWBMNEQQRDTEKIGDqAAAoQgAACt0m
+AQAAKEMAAAoRC3NEAAAKExIrExEHFzMOKEUAAAoRC3NEAAAKExIREBESF29GAAAKbywAAAoTERER
+bzYAAAosQHMtAAAKExYREW8uAAAKby8AAApvMAAAChEWbzEAAAooMgAAChEWbzMAAApvNAAAChMO
+3lwRFiwHERZvNQAACtxy1wMAcBERbz4AAAoTFRIV/hYTAAABbz8AAApyDwQAcBERby4AAApvQAAA
+Cm9BAAAKKBUAAAoTDxENF1gTDREEEQ0xCiBg6gAAKEIAAAreWd5gExcRF29HAAAKdTcAAAEU/gMR
+F29HAAAKdTgAAAEU/gNgLAlyQQQAcBMPKxNygQQAcBEXb0gAAAooKgAAChMPEQ0XWBMNEQQRDTEK
+IGDqAAAoQgAACt4AEQQRDT29/f//EQ5+FAAACihJAAAKLCMREG9KAAAKAigQAAAKb0sAAAoWcqEE
+AHARDxQWb0wAAAomKgIoEAAACm9NAAAKcq0EAHBvTgAACm9PAAAKc1AAAAoTGBEYb1EAAAoCKBAA
+AApvEQAACnLZBABwbxIAAApvEwAACqUkAAABExlyEQUAcBIZKD0AAApyFAYAcCgWAAAKERhzUgAA
+ChMaERpvUwAACnI8BgBwHwtzVAAACiURDm9VAAAKb1YAAAomERpvVwAACibeDBEaLAcRGm81AAAK
+3BEYb1gAAAreDBEYLAcRGG81AAAK3BEHLXwREBEMFG9ZAAAKbywAAAomERBvSgAACt5jExsRG29H
+AAAKdTcAAAEU/gMRG29HAAAKdTgAAAEU/gNgLAlyQQQAcBMPKxNygQQAcBEbb0gAAAooKgAAChMP
+ERBvSgAACgIoEAAACm9LAAAKFnKhBABwEQ8UFm9MAAAKJt4MAigQAAAKFm9aAAAKKkGUAAACAAAA
+AQMAAC0AAAAuAwAADAAAAAAAAAACAAAAJwQAAC0AAABUBAAADAAAAAAAAAAAAAAA0AIAAOIBAACy
+BAAAVwAAABQAAAECAAAAqwUAACsAAADWBQAADAAAAAAAAAACAAAAZAUAAIcAAADrBQAADAAAAAAA
+AAAAAAAA+wUAABkAAAAUBgAAYwAAABQAAAEeAihbAAAKKh4CKFwAAAoqrn4BAAAELR5yRgYAcNAD
+AAACKF0AAApvXgAACnNfAAAKgAEAAAR+AQAABCoafgIAAAQqHgKAAgAABCoafgMAAAQqHgIoYAAA
+CioucwgAAAaAAwAABCoAAEJTSkIBAAEAAAAAAAwAAAB2NC4wLjMwMzE5AAAAAAUAbAAAAJAGAAAj
+fgAA/AYAAHgKAAAjU3RyaW5ncwAAAAB0EQAAuAYAACNVUwAsGAAAEAAAACNHVUlEAAAAPBgAAAQD
+AAAjQmxvYgAAAAAAAAACAAABVx2iCQkDAAAA+gEzABYAAAEAAABFAAAABQAAAAYAAAAJAAAAAQAA
+AGAAAAACAAAAEAAAAAEAAAACAAAAAwAAAAQAAAADAAAAAQAAAAcAAAABAAAAAQAAAAAAZgUBAAAA
+AAAGAHoDtAcGAAkEtAcGAMYClQcPACgIAAAGAPMCJAYGAF0DJAYGAD4DJAYGAPADJAYGAJoDJAYG
+ALMDJAYGAAoDJAYGACUDoQQKAM4DFQUKADECFQUOAMEJ4wYOAGIB4wYOAHYB4wYGAKEFKgASACcB
+egkGAK0GtwUWAFoGqwkWAOoAqwkGAL4FtwUGAKkClQcGAGsJtwUGAPcG1AcGANEG/QUSAHkCUAUS
+ANoCUAUSAE0C6AUGAI4CtAcKAD4FFQUaAGoI1wEaAIkB1wEGAOsEtwUGAAgAtwUOAD8H4wYOACwH
+4wYSAPIEtwUGAM8FtwUOAOgI0AgGAJgEGQoGAPAJtwUOADsE0AgGAAEAhggOAGgG4wYOAOQJ4wYG
+AKcFKgAGAJIBtwUeAMwJjgUeAPgJjgUeAE4BjgUGANUAhwQOAPUA4wYGAKYGtwUGAH0GhggOABkH
+4wYKAFEHFQUaAMQI1wEaAAcH1wEWAE0GtwYWADYGqwkWAHEHqwkWAPcBWwAWAGUHtwYWAOAAtwYG
+APwBtwUGAJ4BtwUGAD8KJAYAAAAAFwAAAAAAAQABAAEAEADdBbEAOQABAAEAAAAQANsHNwhlAAEA
+AwAAARAAfQg3CHkAAwAHAAMBAABECQAAXQAEAAoAEQDDBQcCEQAhAgsCEQAIAQ8CBgZTABMCVoAk
+CRYCVoABAhYCUCAAAAAAhgDjBQYAAQB0JwAAAACGGIgHBgABAHwnAAAAAIMYiAcGAAEAhCcAAAAA
+kwjzBhoCAQCwJwAAAACTCAkCHwIBALcnAAAAAJMIFQIkAgEAvycAAAAAlgiFCSoCAgDGJwAAAACG
+GIgHBgACAM4nAAAAAJEYjgcvAgIAAAABAFUECQCIBwEAEQCIBwYAGQCIBwoAKQCIBxAAMQCIBxAA
+OQCIBxAAQQCIBxAASQCIBxAAUQCIBxAAWQCIBxAAYQCIBxAAaQCIBwYAwQCIBwYA6QCIBxUA+QCI
+BwYAcQA8CUQAAQFmCEoACQGuBVAAEQEnBFcAGQFyClsAGQFdCV4AGQFdCWYAGQG3CG0AGQEAAXIA
+GQFdCXgAGQFkCn4AKQGIBwYAKQGdCIQAeQCIB4kAOQGIBxAAeQAsCZAAQQGoB5cAeQANCp4AeQBb
+BKUAeQD7CKoAUQEgALAAGQFkCbYAUQF0CL0AWQG7BMMAYQGIB8kASQESBs8AGQFdCdYAeQCeANwA
+DACRCfIAkQCIBwYAgQDYCfcAeQGMAP0AFACRCfIAgQHKBhEBUQEOALAAkQAzChgBUQHoBB0BiQFr
+AgYAgQA2ASMBkQGIBwYAkQGZBRAAkQHCAScBmQF8BC4BoQElCjUBIQFzAjkBIQHfBDUBgQAYAT4B
+yQDfBDUBeQF6AEMBHACRCfIAqQHdBlMBsQEEClgBiQCIB14BsQFyCVgBeQBwAGYBoQCTBnUBoQBW
+ATUBGQFYCn4AyQFrAgYAAQFSCXoB0QF+B4ABAQHACIkB2QGuBY8B4QHKBDUBqQCIBxAA6QHYBQYA
+sQCIB5YBsQAVCZ0B+QGIB6MBCQIxBKsB8QHcALABEQJICrkB6QFlAgYAeQCnAL0BAQGcCQEAcQCI
+BwYAyQCIBwYAGQKwAcsBGQI7CtQB0QCIB9oB8QCIBwYACAAUAP0BCAAYAAICKQBzAGoCLgALAEIC
+LgATAEsCLgAbAGoCLgAjAHMCLgArAJwCLgAzAJwCLgA7AJwCLgBDAHMCLgBLAKICLgBTAJwCLgBb
+ALkCQwBjAAICSQBzAGoCYQB7AAICYwBrAAICGwADAAEABAADAAAA9wYzAgAAKQI4AgAAiQk9AgIA
+BAADAAIABQAFAAEABgAFAAIABwAHAOoACAFMAQSAAAABAAAAyyEkQgAAAAAAALEAAAAEAAAAAAAA
+AAAAAADiAWcAAAAAABAAAAAAAAAAAAAAAOsB9gQAAAAABAAAAAAAAAAAAAAA9AHjBgAAAAAEAAAA
+AAAAAAAAAADiAbcFAAAAAAQAAAAAAAAAAAAAAOIBWwAAAAAAEAAAAAAAAAAAAAAA6wE0AAAAAAAE
+AAAAAAAAAAAAAADiAY4FAAAAAAAAAAABAAAA5QcAAAUAAgAAAABUYXNrYDEASW50MzIAZ2V0X1VU
+RjgAPE1vZHVsZT4AZ2V0X0FTQ0lJAFN5c3RlbS5JTwBNaWNyb3NvZnQuU3FsU2VydmVyLk1hbmFn
+ZWREVFMAdmFsdWVfXwBTeXN0ZW0uRGF0YQBtc2NvcmxpYgBTZW5kQXN5bmMAUmVhZEFzU3RyaW5n
+QXN5bmMAUmVhZEFzU3RyZWFtQXN5bmMAR2V0QXN5bmMAUG9zdEFzeW5jAFNUXzdiMzNiZmY2OWY0
+NjQzYWFhODY5ZTdiZmRjYzdlZTZkAFRocmVhZABBZGQARGJDb21tYW5kAFNxbENvbW1hbmQASHR0
+cE1ldGhvZABSZXBsYWNlAGRlZmF1bHRJbnN0YW5jZQBnZXRfU3RhdHVzQ29kZQBIdHRwU3RhdHVz
+Q29kZQBnZXRfSXNTdWNjZXNzU3RhdHVzQ29kZQBYbWxOb2RlAGdldF9NZXNzYWdlAEh0dHBSZXNw
+b25zZU1lc3NhZ2UASHR0cFJlcXVlc3RNZXNzYWdlAFZhcmlhYmxlAElEaXNwb3NhYmxlAFJ1bnRp
+bWVUeXBlSGFuZGxlAEdldFR5cGVGcm9tSGFuZGxlAEdldEVsZW1lbnRzQnlUYWdOYW1lAE1pY3Jv
+c29mdC5TcWxTZXJ2ZXIuRHRzLlJ1bnRpbWUAU3FsRGJUeXBlAEZhaWx1cmUAZ2V0X0N1bHR1cmUA
+c2V0X0N1bHR1cmUAcmVzb3VyY2VDdWx0dXJlAFZTVEFSVFNjcmlwdE9iamVjdE1vZGVsQmFzZQBB
+cHBsaWNhdGlvblNldHRpbmdzQmFzZQBDbG9zZQBEaXNwb3NlAFBhcnNlAEVkaXRvckJyb3dzYWJs
+ZVN0YXRlAENvbXBpbGVyR2VuZXJhdGVkQXR0cmlidXRlAERlYnVnZ2VyTm9uVXNlckNvZGVBdHRy
+aWJ1dGUARGVidWdnYWJsZUF0dHJpYnV0ZQBFZGl0b3JCcm93c2FibGVBdHRyaWJ1dGUAQXNzZW1i
+bHlUaXRsZUF0dHJpYnV0ZQBBc3NlbWJseVRyYWRlbWFya0F0dHJpYnV0ZQBUYXJnZXRGcmFtZXdv
+cmtBdHRyaWJ1dGUAQXNzZW1ibHlDb25maWd1cmF0aW9uQXR0cmlidXRlAEFzc2VtYmx5RGVzY3Jp
+cHRpb25BdHRyaWJ1dGUAQ29tcGlsYXRpb25SZWxheGF0aW9uc0F0dHJpYnV0ZQBBc3NlbWJseVBy
+b2R1Y3RBdHRyaWJ1dGUAQXNzZW1ibHlDb3B5cmlnaHRBdHRyaWJ1dGUAU1NJU1NjcmlwdFRhc2tF
+bnRyeVBvaW50QXR0cmlidXRlAEFzc2VtYmx5Q29tcGFueUF0dHJpYnV0ZQBSdW50aW1lQ29tcGF0
+aWJpbGl0eUF0dHJpYnV0ZQBnZXRfVmFsdWUAc2V0X1ZhbHVlAEF1dGhlbnRpY2F0aW9uSGVhZGVy
+VmFsdWUAdmFsdWUAc2V0X01heFJlc3BvbnNlQ29udGVudEJ1ZmZlclNpemUAZ2V0X0l0ZW1PZgBT
+eXN0ZW0uVGhyZWFkaW5nAEVuY29kaW5nAFN5c3RlbS5SdW50aW1lLlZlcnNpb25pbmcAVG9CYXNl
+NjRTdHJpbmcAZ2V0X0Nvbm5lY3Rpb25TdHJpbmcAVG9TdHJpbmcAR2V0U3RyaW5nAFVyaQBNaWNy
+b3NvZnQuU3FsU2VydmVyLlNjcmlwdFRhc2sATWljcm9zb2Z0LlNxbFNlcnZlci5EdHMuVGFza3Mu
+U2NyaXB0VGFzawBTY3JpcHRPYmplY3RNb2RlbABTeXN0ZW0uQ29tcG9uZW50TW9kZWwAU1RfN2Iz
+M2JmZjY5ZjQ2NDNhYWE4NjllN2JmZGNjN2VlNmQuZGxsAFN5c3RlbS5YbWwATG9hZFhtbABNZW1v
+cnlTdHJlYW0AZ2V0X0l0ZW0AU3lzdGVtAEVudW0AcmVzb3VyY2VNYW4AVGltZVNwYW4AT3BlbgBT
+Y3JpcHRNYWluAFN5c3RlbS5Db25maWd1cmF0aW9uAFN5c3RlbS5HbG9iYWxpemF0aW9uAHNldF9B
+dXRob3JpemF0aW9uAFN5c3RlbS5SZWZsZWN0aW9uAFNxbFBhcmFtZXRlckNvbGxlY3Rpb24ARGJD
+b25uZWN0aW9uAFNxbENvbm5lY3Rpb24ASHR0cENvbXBsZXRpb25PcHRpb24AVGFza0NhbmNlbGVk
+RXhjZXB0aW9uAGdldF9Jbm5lckV4Y2VwdGlvbgBUaW1lb3V0RXhjZXB0aW9uAFN5c3RlbS5EYXRh
+LkNvbW1vbgBDb3B5VG8AQ3VsdHVyZUluZm8AU2xlZXAAU3lzdGVtLk5ldC5IdHRwAGdldF9SZXNv
+dXJjZU1hbmFnZXIAQ29ubmVjdGlvbk1hbmFnZXIASHR0cE1lc3NhZ2VJbnZva2VyAEh0dHBNZXNz
+YWdlSGFuZGxlcgBIdHRwQ2xpZW50SGFuZGxlcgBFdmVudHNPYmplY3RXcmFwcGVyAERiUGFyYW1l
+dGVyAFNxbFBhcmFtZXRlcgBGaXJlRXJyb3IALmN0b3IALmNjdG9yAFN5c3RlbS5EaWFnbm9zdGlj
+cwBGcm9tU2Vjb25kcwBTeXN0ZW0uUnVudGltZS5Db21waWxlclNlcnZpY2VzAFN5c3RlbS5SZXNv
+dXJjZXMAU1RfN2IzM2JmZjY5ZjQ2NDNhYWE4NjllN2JmZGNjN2VlNmQuUHJvcGVydGllcy5SZXNv
+dXJjZXMucmVzb3VyY2VzAERlYnVnZ2luZ01vZGVzAFNUXzdiMzNiZmY2OWY0NjQzYWFhODY5ZTdi
+ZmRjYzdlZTZkLlByb3BlcnRpZXMAZ2V0X1ZhcmlhYmxlcwBHZXRCeXRlcwBTZXR0aW5ncwBTeXN0
+ZW0uVGhyZWFkaW5nLlRhc2tzAHNldF9Vc2VEZWZhdWx0Q3JlZGVudGlhbHMAQ29udGFpbnMAZ2V0
+X0Nvbm5lY3Rpb25zAFN5c3RlbS5OZXQuSHR0cC5IZWFkZXJzAEh0dHBSZXF1ZXN0SGVhZGVycwBn
+ZXRfRGVmYXVsdFJlcXVlc3RIZWFkZXJzAGdldF9QYXJhbWV0ZXJzAFN1Y2Nlc3MAc2V0X0Jhc2VB
+ZGRyZXNzAGdldF9EdHMAU2NyaXB0UmVzdWx0cwBnZXRfRXZlbnRzAENvbmNhdABGb3JtYXQAT2Jq
+ZWN0AGdldF9HZXQAU3lzdGVtLk5ldABnZXRfRGVmYXVsdABnZXRfUmVzdWx0AHNldF9UYXNrUmVz
+dWx0AFN5c3RlbS5EYXRhLlNxbENsaWVudABIdHRwQ2xpZW50AFhtbERvY3VtZW50AGdldF9Db250
+ZW50AEh0dHBDb250ZW50AENvbnZlcnQAWG1sTm9kZUxpc3QAZ2V0X1Bvc3QAc2V0X1RpbWVvdXQA
+U3lzdGVtLlRleHQAZ2V0X0lubmVyVGV4dABUb0FycmF5AGdldF9Bc3NlbWJseQBFeGVjdXRlTm9u
+UXVlcnkAb3BfRXF1YWxpdHkAb3BfSW5lcXVhbGl0eQBFbXB0eQAALVUAcwBlAHIAOgA6AGQAdwBo
+AF8AaQBuAHMAdABhAG4AYwBlAF8AdQByAGwAACtVAHMAZQByADoAOgBkAHcAaABfAHIAZQBwAG8A
+cgB0AF8AbgBhAG0AZQAAB0QAVwBIAAArVQBzAGUAcgA6ADoAZAB3AGgAXwByAGUAdAByAHkAXwBj
+AG8AdQBuAHQAAD9VAHMAZQByADoAOgBkAHcAaABfAHIAZQB0AHIAeQBfAHQAaQBtAGUAbwB1AHQA
+XwBzAGUAYwBvAG4AZABzAAAtVQBzAGUAcgA6ADoAagBzAG8AbgBfAG0AZQB0AGgAbwBkAF8AbABv
+AGEAZAAAK1UAcwBlAHIAOgA6AGoAcwBvAG4AXwBkAGEAdABlAF8AZgBpAGUAbABkAAAxVQBzAGUA
+cgA6ADoAagBzAG8AbgBfAGYAcgBvAG0AXwBkAGEAdABlAHQAaQBtAGUAAC1VAHMAZQByADoAOgBq
+AHMAbwBuAF8AdABvAF8AZABhAHQAZQB0AGkAbQBlAABDUwBlAGwAZQBjAHQAQwBoAGEAbgBnAGUA
+cwA/AEQAYQB0AGEARQB4AGMAaABhAG4AZwBlAFAAbwBpAG4AdAA9ACcAARknACYATQBlAHMAcwBh
+AGcAZQBOAG8APQABU04AbwB0AGkAZgB5AEMAaABhAG4AZwBlAHMAUgBlAGMAZQBpAHYAZQBkAD8A
+RABhAHQAYQBFAHgAYwBoAGEAbgBnAGUAUABvAGkAbgB0AD0AJwABFz8AJABzAGUAbABlAGMAdAA9
+ACoAKgAAKV8AQgBhAGwAYQBuAGMAZQBBAG4AZABUAHUAcgBuAG8AdgBlAHIAcwAAFV8AVAB1AHIA
+bgBvAHYAZQByAHMAACkvAEIAYQBsAGEAbgBjAGUAQQBuAGQAVAB1AHIAbgBvAHYAZQByAHMAABUv
+AFQAdQByAG4AbwB2AGUAcgBzAAAtKABTAHQAYQByAHQAUABlAHIAaQBvAGQAPQBkAGEAdABlAHQA
+aQBtAGUAJwABLScALAAgAEUAbgBkAFAAZQByAGkAbwBkAD0AZABhAHQAZQB0AGkAbQBlACcAAQUn
+ACkAAQEAEyYAJABmAGkAbAB0AGUAcgA9AAAbIABnAHQAIABkAGEAdABlAHQAaQBtAGUAJwABCycA
+YQBuAGQAIAABGyAAbAB0ACAAZABhAHQAZQB0AGkAbQBlACcAAQMnAAENdABlAHMAdAAxAGMAAAtC
+AGEAcwBpAGMAAA97ADAAfQA6AHsAMQB9AAAZZAA6AFIAZQBjAGUAaQB2AGUAZABOAG8AADdTAGUA
+cgB2AGUAcgAgAHIAZQB0AHUAcgBuACAAcwB0AGEAdAB1AHMAIABjAG8AZABlADoAIAAAMQoAUwBl
+AHIAdgBlAHIAIAByAGUAdAB1AHIAbgAgAGMAbwBuAHQAZQBuAHQAOgAgAAA/VABoAGUAIAB3AGEA
+aQB0AGkAbgBnACAAdABpAG0AZQBvAHUAdAAgAGgAYQBzACAAcABhAHMAcwBlAGQAIQAAH1MAYwBy
+AGkAcAB0ACAAcgBlAHQAdQByAG4AOgAgAAALZQByAHIAbwByAAAraQBuAGMAbwBtAGkAbgBnAF8A
+YQByAGUAYQBfAEEARABPAF8ATgBFAFQAADckAFAAYQBjAGsAYQBnAGUAOgA6AGQAdwBoAF8AbABv
+AGEAZABfAHEAdQBlAHUAZQBfAGkAZAAAgQFJAE4AUwBFAFIAVAAgAEkATgBUAE8AIABbAGkAbgBj
+AG8AbQBpAG4AZwBfAGEAcgBlAGEAXQAuAFsAZABhAHQAYQBfAHMAdAByAGkAbgBnAF0AIAAoAFsA
+ZAB3AGgAXwBsAG8AYQBkAF8AcQB1AGUAdQBlAF8AaQBkAF0ALABbAGQAdwBoAF8AZABhAHQAYQBf
+AHMAdAByAGkAbgBnAF0ALAAgAFsAZAB3AGgAXwBpAG4AcwB0AGEAbgBjAGUAXwBpAGQAXQAsACAA
+WwBkAHcAaABfAGQAYQB0AGEAXwBmAG8AcgBtAGEAdABdACkAIABWAEEATABVAEUAUwAgACgAACcs
+ACAAQAB4AG0AbAAsACAALQAxACwAIAAnAFgATQBMACcAKQA7AAEJQAB4AG0AbAAAcVMAVABfADcA
+YgAzADMAYgBmAGYANgA5AGYANAA2ADQAMwBhAGEAYQA4ADYAOQBlADcAYgBmAGQAYwBjADcAZQBl
+ADYAZAAuAFAAcgBvAHAAZQByAHQAaQBlAHMALgBSAGUAcwBvAHUAcgBjAGUAcwAAQplQSUra40W2
+KkkACyXa+wAEIAEBCAMgAAEFIAEBEREEIAEBDgUgAQERcSgHHA4ODg4ICAgIDg4ODg4IDg4SPRJB
+EkUOEkkRTRJJElESVQgSWRJRBSAAEoCBBSAAEoCFBiABEoCJHAMgABwCBg4HAAQODg4ODgYAAw4O
+Dg4EIAECDgUgAg4ODgUAAQ4dDgUAAgIODgQgAQECBiABARKAmQYgAQESgJ0GAAERgKENBiABARGA
+oQQgAQEKBSAAEoClBQAAEoCpBgADDg4cHAUgAR0FDgUAAQ4dBQUgAgEODgYgAQESgLEFAAIODg4N
+IAIVEoC1ARJBDhGAuQcVEoC1ARJBBCAAEwAFIAASgL0KIAAVEoC1ARKAwQgVEoC1ARKAwQYgAQES
+gMEEIAAdBQUgAQ4dBQMgAAIGIAESgM0OBiABEoDRCAMgAA4EAAEIDgQgABFNCCAAFRKAtQEOBhUS
+gLUBDgQAAQEIBQAAEoDZByACARKA2Q4OIAIVEoC1ARJBEkURgLkEIAASUQUgABKA6QggBQIIDg4O
+CAUgABKA7QYgARKA8RwGIAIBDhJVBSAAEoD5ByACAQ4RgQEEIAEBHAggARKA/RKA/QMgAAgNIAIV
+EoC1ARJBDhKAvQgAARKBDRGBEQUgABKBFQcgAgEOEoEVCLd6XFYZNOCJCImEXc2AgMyRCLA/X38R
+1Qo6BAAAAAAEAQAAAAMGEmkDBhJtAwYSEAIGCAMGERQEAAASaQQAABJtBQABARJtBAAAEhADAAAB
+BAgAEmkECAASbQQIABIQCAEACAAAAAAAHgEAAQBUAhZXcmFwTm9uRXhjZXB0aW9uVGhyb3dzAQgB
+AAIAAAAAACgBACNTVF83YjMzYmZmNjlmNDY0M2FhYTg2OWU3YmZkY2M3ZWU2ZAAABQEAAAAAFgEA
+EUNvcHlyaWdodCBAICAyMDIzAABJAQAaLk5FVEZyYW1ld29yayxWZXJzaW9uPXY0LjcBAFQOFEZy
+YW1ld29ya0Rpc3BsYXlOYW1lEi5ORVQgRnJhbWV3b3JrIDQuNwC0AAAAzsrvvgEAAACRAAAAbFN5
+c3RlbS5SZXNvdXJjZXMuUmVzb3VyY2VSZWFkZXIsIG1zY29ybGliLCBWZXJzaW9uPTQuMC4wLjAs
+IEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjc3YTVjNTYxOTM0ZTA4OSNTeXN0ZW0u
+UmVzb3VyY2VzLlJ1bnRpbWVSZXNvdXJjZVNldAIAAAAAAAAAAAAAAFBBRFBBRFC0AAAA/EMAAAAA
+AAAAAAAAFkQAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAhEAAAAAAAAAAAAAAAAX0NvckRsbE1h
+aW4AbXNjb3JlZS5kbGwAAAAAAP8lACAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAQAAAA
+GAAAgAAAAAAAAAAAAAAAAAAAAQABAAAAMAAAgAAAAAAAAAAAAAAAAAAAAQAAAAAASAAAAFhgAAAa
+BAAAAAAAAAAAAAAaBDQAAABWAFMAXwBWAEUAUgBTAEkATwBOAF8ASQBOAEYATwAAAAAAvQTv/gAA
+AQAAAAEAJELLIQAAAQAkQsshPwAAAAAAAAAEAAAAAgAAAAAAAAAAAAAAAAAAAEQAAAABAFYAYQBy
+AEYAaQBsAGUASQBuAGYAbwAAAAAAJAAEAAAAVAByAGEAbgBzAGwAYQB0AGkAbwBuAAAAAAAAALAE
+egMAAAEAUwB0AHIAaQBuAGcARgBpAGwAZQBJAG4AZgBvAAAAVgMAAAEAMAAwADAAMAAwADQAYgAw
+AAAAGgABAAEAQwBvAG0AbQBlAG4AdABzAAAAAAAAACIAAQABAEMAbwBtAHAAYQBuAHkATgBhAG0A
+ZQAAAAAAAAAAAHAAJAABAEYAaQBsAGUARABlAHMAYwByAGkAcAB0AGkAbwBuAAAAAABTAFQAXwA3
+AGIAMwAzAGIAZgBmADYAOQBmADQANgA0ADMAYQBhAGEAOAA2ADkAZQA3AGIAZgBkAGMAYwA3AGUA
+ZQA2AGQAAAA+AA8AAQBGAGkAbABlAFYAZQByAHMAaQBvAG4AAAAAADEALgAwAC4AOAA2ADUAMQAu
+ADEANgA5ADMAMgAAAAAAcAAoAAEASQBuAHQAZQByAG4AYQBsAE4AYQBtAGUAAABTAFQAXwA3AGIA
+MwAzAGIAZgBmADYAOQBmADQANgA0ADMAYQBhAGEAOAA2ADkAZQA3AGIAZgBkAGMAYwA3AGUAZQA2
+AGQALgBkAGwAbAAAAEgAEgABAEwAZQBnAGEAbABDAG8AcAB5AHIAaQBnAGgAdAAAAEMAbwBwAHkA
+cgBpAGcAaAB0ACAAQAAgACAAMgAwADIAMwAAACoAAQABAEwAZQBnAGEAbABUAHIAYQBkAGUAbQBh
+AHIAawBzAAAAAAAAAAAAeAAoAAEATwByAGkAZwBpAG4AYQBsAEYAaQBsAGUAbgBhAG0AZQAAAFMA
+VABfADcAYgAzADMAYgBmAGYANgA5AGYANAA2ADQAMwBhAGEAYQA4ADYAOQBlADcAYgBmAGQAYwBj
+ADcAZQBlADYAZAAuAGQAbABsAAAAaAAkAAEAUAByAG8AZAB1AGMAdABOAGEAbQBlAAAAAABTAFQA
+XwA3AGIAMwAzAGIAZgBmADYAOQBmADQANgA0ADMAYQBhAGEAOAA2ADkAZQA3AGIAZgBkAGMAYwA3
+AGUAZQA2AGQAAABCAA8AAQBQAHIAbwBkAHUAYwB0AFYAZQByAHMAaQBvAG4AAAAxAC4AMAAuADgA
+NgA1ADEALgAxADYAOQAzADIAAAAAAEYADwABAEEAcwBzAGUAbQBiAGwAeQAgAFYAZQByAHMAaQBv
+AG4AAAAxAC4AMAAuADgANgA1ADEALgAxADYAOQAzADIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAMAAAAKDQAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
+                </ScriptProject>
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+          <DTS:PrecedenceConstraints>
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api.PrecedenceConstraints[Constraint]"
+              DTS:CreationName=""
+              DTS:DTSID="{71687B53-DBAF-4515-B551-4BC9FF464590}"
+              DTS:From="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api\Задания выражения генерируем  актуальную дату - dwh_execution_from_datetime"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint"
+              DTS:To="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api\Задача &quot;Выполнение SQL&quot; начало лога скачивание файла по api" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api.PrecedenceConstraints[Constraint 1]"
+              DTS:CreationName=""
+              DTS:DTSID="{AF932608-81E6-4031-B7BF-689FC38E770F}"
+              DTS:From="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api\Задача &quot;Выполнение SQL&quot; начало лога скачивание файла по api"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 1"
+              DTS:To="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api\Задача &quot;Выполнение SQL&quot; парсинг JSON параметры" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api.PrecedenceConstraints[Constraint 2]"
+              DTS:CreationName=""
+              DTS:DTSID="{09D2EF75-2A57-4374-ABC2-98A4179C7AE6}"
+              DTS:From="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api\Задача &quot;Скрипт&quot; загрузка XML файла из API в icoming_area"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 2"
+              DTS:To="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api\Задания выражения генерируем  актуальную дату - dwh_execution_to_datetime" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api.PrecedenceConstraints[Constraint 3]"
+              DTS:CreationName=""
+              DTS:DTSID="{EEF79CBC-AC71-41DA-8879-FB8D936077A3}"
+              DTS:From="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api\Задания выражения генерируем  актуальную дату - dwh_execution_to_datetime"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 3"
+              DTS:To="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api\Задача &quot;Выполнение SQL&quot; окончание лога скачивание файла по api" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api.PrecedenceConstraints[Constraint 4]"
+              DTS:CreationName=""
+              DTS:DTSID="{F48FCA9B-3ECE-4A38-8D8F-E47DF2E09731}"
+              DTS:From="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api\Задача &quot;Выполнение SQL&quot; парсинг JSON параметры"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 4"
+              DTS:To="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api\Задача &quot;Скрипт&quot; загрузка XML файла из API в icoming_area" />
+          </DTS:PrecedenceConstraints>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Контейнер последовательности общий процесс загрузки.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{EF4AE799-91ED-4CC9-8ECC-3D9C3DD686A2}"
+          DTS:From="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Контейнер последовательности общий процесс загрузки\Задания выражения генерируем JSON для staging" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Контейнер последовательности общий процесс загрузки.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{50597FE2-BD04-481C-99A4-4C48F394A95F}"
+          DTS:From="Package\Контейнер последовательности общий процесс загрузки\Задания выражения генерируем JSON для staging"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Контейнер последовательности общий процесс загрузки\Задача &quot;Выполнение SQL&quot; добавляем задание для загрузки staging_area" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{08CAC6FB-15B9-478F-81D9-AE26173EAA8B}"
+      DTS:From="Package\Задача &quot;Выполнение SQL&quot; обновление информациии о начале в таблице очереди"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Контейнер последовательности общий процесс загрузки" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{6F659ED7-11E7-44AA-83D5-2A54DA7E46C2}"
+      DTS:From="Package\Задача &quot;Выполнение SQL&quot; обновление информациии о начале в таблице очереди"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Задача &quot;Выполнение SQL&quot; обновление информации о завершении в таблице очереди - failure"
+      DTS:Value="1" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{C1253512-BCF3-4EC0-BB9B-11B8DAB68E13}"
+      DTS:From="Package\Контейнер последовательности общий процесс загрузки"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Задача &quot;Выполнение SQL&quot; обновление информации о завершении в таблице очереди - success" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{7488CFAB-4416-468A-B829-AD143A9F0EB8}"
+      DTS:From="Package\Задача &quot;Выполнение SQL&quot; начало обработки задания в таблице очереди"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Задача &quot;Выполнение SQL&quot; обновление информациии о начале в таблице очереди" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{F9FB4ECB-7040-48FA-9CBA-F41EE1CDE614}"
+      DTS:From="Package\Задача &quot;Выполнение SQL&quot; начало обработки задания в таблице очереди"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\Задача &quot;Выполнение SQL&quot; обновление информации о завершении в таблице очереди - failure"
+      DTS:Value="1" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 6]"
+      DTS:CreationName=""
+      DTS:DTSID="{5741326B-BFA5-44AB-873B-7B7D9F520A17}"
+      DTS:From="Package\Контейнер последовательности общий процесс загрузки"
+      DTS:ObjectName="Constraint 6"
+      DTS:To="Package\Задача &quot;Выполнение SQL&quot; обновление информации о завершении в таблице очереди - failure"
+      DTS:Value="1" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="484,42"
+          Id="Package\Задача &quot;Выполнение SQL&quot; начало обработки задания в таблице очереди"
+          TopLeft="255.416666666668,169.25" />
+        <NodeLayout
+          Size="564,42"
+          Id="Package\Задача &quot;Выполнение SQL&quot; обновление информации о завершении в таблице очереди - failure"
+          TopLeft="340.940476190478,629.202380952378" />
+        <NodeLayout
+          Size="375,42"
+          Id="Package\Задача &quot;Выполнение SQL&quot; обновление информации о завершении в таблице очереди - success"
+          TopLeft="370.869047619053,858.86904761904" />
+        <NodeLayout
+          Size="484,42"
+          Id="Package\Задача &quot;Выполнение SQL&quot; обновление информациии о начале в таблице очереди"
+          TopLeft="450.845238095239,284.888888888889" />
+        <NodeLayout
+          Size="326,42"
+          Id="Package\Контейнер последовательности общий процесс загрузки\Задания выражения генерируем JSON для staging"
+          TopLeft="186,699" />
+        <NodeLayout
+          Size="458,42"
+          Id="Package\Контейнер последовательности общий процесс загрузки\Задача &quot;Выполнение SQL&quot; добавляем задание для загрузки staging_area"
+          TopLeft="123.333333333333,785.333333333333" />
+        <NodeLayout
+          Size="484,42"
+          Id="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api\Задания выражения генерируем  актуальную дату - dwh_execution_from_datetime"
+          TopLeft="44.68253968254,25.8412698412699" />
+        <NodeLayout
+          Size="472,42"
+          Id="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api\Задания выражения генерируем  актуальную дату - dwh_execution_to_datetime"
+          TopLeft="51.1428571428573,390.571428571429" />
+        <NodeLayout
+          Size="398,42"
+          Id="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api\Задача &quot;Выполнение SQL&quot; начало лога скачивание файла по api"
+          TopLeft="87.68253968254,115.84126984127" />
+        <NodeLayout
+          Size="415,42"
+          Id="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api\Задача &quot;Выполнение SQL&quot; окончание лога скачивание файла по api"
+          TopLeft="84,497" />
+        <NodeLayout
+          Size="336,42"
+          Id="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api\Задача &quot;Выполнение SQL&quot; парсинг JSON параметры"
+          TopLeft="121,205" />
+        <NodeLayout
+          Size="372,42"
+          Id="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api\Задача &quot;Скрипт&quot; загрузка XML файла из API в icoming_area"
+          TopLeft="99,298" />
+        <EdgeLayout
+          Id="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api.PrecedenceConstraints[Constraint]"
+          TopLeft="286.68253968254,67.8412698412699">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,48.0000000000001"
+              Start="0,0"
+              End="0,40.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,40.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api.PrecedenceConstraints[Constraint 1]"
+          TopLeft="287.84126984127,157.84126984127">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,47.15873015873"
+              Start="0,0"
+              End="0,39.65873015873">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,39.65873015873" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api.PrecedenceConstraints[Constraint 2]"
+          TopLeft="286.071428571429,340">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,50.571428571429"
+              Start="0,0"
+              End="0,43.071428571429">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,43.071428571429" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api.PrecedenceConstraints[Constraint 3]"
+          TopLeft="289.321428571429,432.571428571429">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,64.428571428571"
+              Start="0,0"
+              End="0,56.928571428571">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,56.928571428571" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api.PrecedenceConstraints[Constraint 4]"
+          TopLeft="287,247">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,51"
+              Start="0,0"
+              End="0,43.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,43.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="558,594"
+          Size="558,637"
+          Id="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api"
+          TopLeft="66.9523809523812,19.857142857142" />
+        <EdgeLayout
+          Id="Package\Контейнер последовательности общий процесс загрузки.PrecedenceConstraints[Constraint]"
+          TopLeft="347.476190476191,656.857142857142">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,42.142857142858"
+              Start="0,0"
+              End="0,34.642857142858">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.642857142858" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Контейнер последовательности общий процесс загрузки.PrecedenceConstraints[Constraint 1]"
+          TopLeft="350.666666666667,741">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,44.333333333333"
+              Start="0,0"
+              End="0,36.833333333333">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.833333333333" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="697,1111"
+          Size="697,1154"
+          Id="Package\Контейнер последовательности общий процесс загрузки"
+          TopLeft="1091.08333333333,17.142857142858" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="934.845238095239,306.765873015874">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="156.238095238091,0"
+              Start="0,0"
+              End="148.738095238091,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="148.738095238091,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="692.845238095239,326.888888888889">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="22.7619047619056,302.313492063489"
+              Start="0,0"
+              End="22.7619047619056,294.813492063489">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,176.87497474237" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,176.87497474237"
+                    Point2="0,180.87497474237"
+                    Point3="4,180.87497474237" />
+                  <mssgle:LineSegment
+                    End="18.7619047619056,180.87497474237" />
+                  <mssgle:CubicBezierSegment
+                    Point1="18.7619047619056,180.87497474237"
+                    Point2="22.7619047619056,180.87497474237"
+                    Point3="22.7619047619056,184.87497474237" />
+                  <mssgle:LineSegment
+                    End="22.7619047619056,294.813492063489" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-3.8603952752972,185.87497474237,30.4826953125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="1091.08333333333,880.255952380949">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-345.214285714277,0"
+              Start="0,0"
+              End="-337.714285714277,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-337.714285714277,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="576.750000000001,211.25">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="116.095238095238,73.638888888889"
+              Start="0,0"
+              End="116.095238095238,66.138888888889">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.60113490756" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,25.60113490756"
+                    Point2="0,29.60113490756"
+                    Point3="4,29.60113490756" />
+                  <mssgle:LineSegment
+                    End="112.095238095238,29.60113490756" />
+                  <mssgle:CubicBezierSegment
+                    Point1="112.095238095238,29.60113490756"
+                    Point2="116.095238095238,29.60113490756"
+                    Point3="116.095238095238,33.60113490756" />
+                  <mssgle:LineSegment
+                    End="116.095238095238,66.138888888889" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="418.083333333335,211.25">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="112.190476190477,417.952380952378"
+              Start="0,0"
+              End="112.190476190477,410.452380952378">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,205.097744798244" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,205.097744798244"
+                    Point2="0,209.097744798244"
+                    Point3="4,209.097744798244" />
+                  <mssgle:LineSegment
+                    End="108.190476190477,209.097744798244" />
+                  <mssgle:CubicBezierSegment
+                    Point1="108.190476190477,209.097744798244"
+                    Point2="112.190476190477,209.097744798244"
+                    Point3="112.190476190477,213.097744798244" />
+                  <mssgle:LineSegment
+                    End="112.190476190477,410.452380952378" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="40.8538904389885,214.097744798244,30.4826953125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 6]"
+          TopLeft="1091.08333333333,594.142857142858">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-186.142857142852,56.05952380952"
+              Start="0,0"
+              End="-178.642857142852,56.05952380952">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-89.0714285714261,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-89.0714285714261,0"
+                    Point2="-93.0714285714261,0"
+                    Point3="-93.0714285714261,4" />
+                  <mssgle:LineSegment
+                    End="-93.0714285714261,52.05952380952" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-93.0714285714261,52.05952380952"
+                    Point2="-93.0714285714261,56.05952380952"
+                    Point3="-97.0714285714261,56.05952380952" />
+                  <mssgle:LineSegment
+                    End="-178.642857142852,56.05952380952" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-108.312776227676,-15.7490234375,30.4826953125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <DtsEventHandler
+    design-time-name="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api\Задача &quot;Выполнение SQL&quot; парсинг JSON параметры.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="472,42"
+          Id="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api\Задача &quot;Выполнение SQL&quot; парсинг JSON параметры.EventHandlers[OnError]\Задания выражения генерируем  актуальную дату - dwh_execution_to_datetime"
+          TopLeft="60,60" />
+        <NodeLayout
+          Size="471,42"
+          Id="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api\Задача &quot;Выполнение SQL&quot; парсинг JSON параметры.EventHandlers[OnError]\Задача &quot;Выполнение SQL&quot; окончание лога скачивание файла по api - failure"
+          TopLeft="97.968253968254,154.857142857143" />
+        <EdgeLayout
+          Id="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api\Задача &quot;Выполнение SQL&quot; парсинг JSON параметры.EventHandlers[OnError].PrecedenceConstraints[Constraint]"
+          TopLeft="296,102">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="37.468253968254,52.857142857143"
+              Start="0,0"
+              End="37.468253968254,45.357142857143">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.4285714285715" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,22.4285714285715"
+                    Point2="0,26.4285714285715"
+                    Point3="4,26.4285714285715" />
+                  <mssgle:LineSegment
+                    End="33.468253968254,26.4285714285715" />
+                  <mssgle:CubicBezierSegment
+                    Point1="33.468253968254,26.4285714285715"
+                    Point2="37.468253968254,26.4285714285715"
+                    Point3="37.468253968254,30.4285714285715" />
+                  <mssgle:LineSegment
+                    End="37.468253968254,45.357142857143" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+  <DtsEventHandler
+    design-time-name="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api\Задача &quot;Скрипт&quot; загрузка XML файла из API в icoming_area.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="472,42"
+          Id="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api\Задача &quot;Скрипт&quot; загрузка XML файла из API в icoming_area.EventHandlers[OnError]\Задания выражения генерируем  актуальную дату - dwh_execution_to_datetime"
+          TopLeft="60,73.142857142857" />
+        <NodeLayout
+          Size="471,42"
+          Id="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api\Задача &quot;Скрипт&quot; загрузка XML файла из API в icoming_area.EventHandlers[OnError]\Задача &quot;Выполнение SQL&quot; окончание лога скачивание файла по api - failure"
+          TopLeft="97.968253968254,168" />
+        <EdgeLayout
+          Id="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api\Задача &quot;Скрипт&quot; загрузка XML файла из API в icoming_area.EventHandlers[OnError].PrecedenceConstraints[Constraint]"
+          TopLeft="296,115.142857142857">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="37.468253968254,52.857142857143"
+              Start="0,0"
+              End="37.468253968254,45.357142857143">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.4285714285715" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,22.4285714285715"
+                    Point2="0,26.4285714285715"
+                    Point3="4,26.4285714285715" />
+                  <mssgle:LineSegment
+                    End="33.468253968254,26.4285714285715" />
+                  <mssgle:CubicBezierSegment
+                    Point1="33.468253968254,26.4285714285715"
+                    Point2="37.468253968254,26.4285714285715"
+                    Point3="37.468253968254,30.4285714285715" />
+                  <mssgle:LineSegment
+                    End="37.468253968254,45.357142857143" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="340,42"
+          Id="Package\Контейнер последовательности общий процесс загрузки\Контейнер последовательности скачивание файла по api\Задача &quot;Скрипт&quot; загрузка XML файла из API в icoming_area.EventHandlers[OnError]\Задача &quot;Выполнение SQL&quot; запись в таблицу событий"
+          TopLeft="165,253" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

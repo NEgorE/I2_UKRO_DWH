@@ -1,0 +1,1238 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="1/10/2023 12:02:55 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="NB2927"
+  DTS:CreatorName="INSIDE\Ekaterina.Bileeva"
+  DTS:DTSID="{8124C21B-0490-4773-839A-A39926ADBB7B}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5223.0"
+  DTS:LocaleID="1049"
+  DTS:ObjectName="мастер обработка queue"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="1"
+  DTS:VersionBuild="161"
+  DTS:VersionGUID="{7CF7FAE3-92B9-476C-92E7-4D04B2D4603B}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="3"
+      DTS:DTSID="{92A309CE-4004-4BF0-B7CF-9032DF40EDBB}"
+      DTS:ObjectName="dwh_master_execution_id">
+      <DTS:Property
+        DTS:DataType="3"
+        DTS:Name="ParameterValue">0</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="3"
+      DTS:DTSID="{766956D0-EC1C-4B8C-8385-E6F455019FD6}"
+      DTS:ObjectName="dwh_thread_number">
+      <DTS:Property
+        DTS:DataType="3"
+        DTS:Name="ParameterValue">111</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{0C2C5861-3298-426B-9E96-0B921319B8BE}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="cnt">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{96453CDE-DE28-43C1-B38E-CF41DD9449F9}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="dwh_duration_seconds">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{9F9D7368-7F46-4861-961F-E2224565338D}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="dwh_layer_name">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{CE88CAEF-D6F7-4D50-AE36-3CA44463FC3C}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="dwh_load_queue_id">
+      <DTS:VariableValue
+        DTS:DataType="3">134278</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{AF9F3287-A182-4BBF-8971-9D5C02D4F339}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="dwh_queue_task_count">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A43926F3-FB5F-4DEE-ADF2-8CA21F96F1E1}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="dwh_source_system_name">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:LoggingOptions
+    DTS:FilterKind="0"
+    DTS:LoggingMode="2" />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Задача &quot;Выполнение SQL&quot; проверка что queue не пустая"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{a9455b23-de39-439c-adab-618fb68938c0}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Задача &quot;Выполнение SQL&quot; проверка что queue не пустая"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{F395067F-5FFA-4AAB-A7A5-77D1978E5CFA}"
+          SQLTask:SqlStatementSource="exec service_area.p_queue_get_task_count ? output" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::dwh_queue_task_count"
+            SQLTask:ParameterDirection="Output"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая"
+      DTS:AssignExpression="@cnt = @dwh_queue_task_count"
+      DTS:CreationName="STOCK:FORLOOP"
+      DTS:Description="For Loop Container"
+      DTS:DTSID="{C4837397-BA68-4843-81B0-0BF9578673F7}"
+      DTS:EvalExpression="@cnt &gt; 0 &amp;&amp;  @dwh_duration_seconds  &lt; @dwh_package_execution_timeout_seconds"
+      DTS:ExecutableType="STOCK:FORLOOP"
+      DTS:InitExpression="@cnt = @dwh_queue_task_count"
+      DTS:LocaleID="-1"
+      DTS:MaxConcurrent="1"
+      DTS:MaxErrorCount="0"
+      DTS:ObjectName="Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Задания выражения продолжительность работы пакета"
+          DTS:CreationName="Microsoft.ExpressionTask"
+          DTS:Description="Expression Task"
+          DTS:DTSID="{54619F6B-AD74-49BA-819B-806D3ACAF7FF}"
+          DTS:ExecutableType="Microsoft.ExpressionTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Задания выражения продолжительность работы пакета"
+          DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:LoggingOptions
+            DTS:FilterKind="0"
+            DTS:LoggingMode="2" />
+          <DTS:ObjectData>
+            <ExpressionTask
+              Expression="@[User::dwh_duration_seconds]  =  DATEDIFF( &quot;ss&quot;, @[System::StartTime] , GETDATE()   )" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Задача &quot;Выполнение SQL&quot; проверка что queue не пустая"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:Disabled="True"
+          DTS:DTSID="{2931C172-B96B-4D49-B48E-F73105DE84D1}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Задача &quot;Выполнение SQL&quot; проверка что queue не пустая"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:LoggingOptions
+            DTS:FilterKind="0"
+            DTS:LoggingMode="2" />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{F395067F-5FFA-4AAB-A7A5-77D1978E5CFA}"
+              SQLTask:SqlStatementSource="exec service_area.p_queue_get_task_count ? output" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::dwh_queue_task_count"
+                SQLTask:ParameterDirection="Output"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета"
+          DTS:CreationName="STOCK:SEQUENCE"
+          DTS:Description="Sequence Container"
+          DTS:DTSID="{9FB26119-1259-44CD-9F8A-6F0BA13505FB}"
+          DTS:ExecutableType="STOCK:SEQUENCE"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Контейнер последовательности  запуск нужного пакета">
+          <DTS:Variables />
+          <DTS:LoggingOptions
+            DTS:FilterKind="0"
+            DTS:LoggingMode="2" />
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета\Задача &quot;Выполнение SQL&quot; выбор задания для загрузки"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{463E95AC-7D69-44FD-A5B6-6B5FE84371A3}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Задача &quot;Выполнение SQL&quot; выбор задания для загрузки"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:LoggingOptions
+                DTS:FilterKind="0"
+                DTS:LoggingMode="2" />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{F395067F-5FFA-4AAB-A7A5-77D1978E5CFA}"
+                  SQLTask:SqlStatementSource="exec service_area.p_queue_get_line ?, ?, ?, ? output, ? output, ? output" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="0"
+                    SQLTask:DtsVariableName="$Package::dwh_thread_number"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="1"
+                    SQLTask:DtsVariableName="System::ExecutionInstanceGUID"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="72"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="2"
+                    SQLTask:DtsVariableName="$Package::dwh_master_execution_id"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="3"
+                    SQLTask:DtsVariableName="User::dwh_load_queue_id"
+                    SQLTask:ParameterDirection="Output"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="4"
+                    SQLTask:DtsVariableName="User::dwh_source_system_name"
+                    SQLTask:ParameterDirection="Output"
+                    SQLTask:DataType="130"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="5"
+                    SQLTask:DtsVariableName="User::dwh_layer_name"
+                    SQLTask:ParameterDirection="Output"
+                    SQLTask:DataType="130"
+                    SQLTask:ParameterSize="-1" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета\Задача &quot;Выполнение SQL&quot; задержка n секунд"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:Disabled="True"
+              DTS:DTSID="{8170f35f-cd5c-412f-8586-28001018bc47}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Задача &quot;Выполнение SQL&quot; задержка n секунд"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:LoggingOptions
+                DTS:FilterKind="0"
+                DTS:LoggingMode="2" />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{F395067F-5FFA-4AAB-A7A5-77D1978E5CFA}"
+                  SQLTask:SqlStatementSource="declare @cnt int &#xA;SELECT  @cnt = FLOOR(RAND()*(15-5)+5);&#xA;if @cnt &gt;=10&#xA;WAITFOR DELAY '00:00:10'; &#xA;else&#xA;waitfor delay '00:00:05';" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета\Контейнер последовательности загрузка data_mart"
+              DTS:CreationName="STOCK:SEQUENCE"
+              DTS:Description="Sequence Container"
+              DTS:DTSID="{A9F005D8-FD91-46F2-BA27-F52A42AEB31C}"
+              DTS:ExecutableType="STOCK:SEQUENCE"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Контейнер последовательности загрузка data_mart">
+              <DTS:Variables />
+              <DTS:Executables>
+                <DTS:Executable
+                  DTS:refId="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета\Контейнер последовательности загрузка data_mart\Задача &quot;Выполнение пакета&quot; загрузка в data_mart"
+                  DTS:CreationName="Microsoft.ExecutePackageTask"
+                  DTS:Description="Задача &quot;Выполнение пакета&quot;"
+                  DTS:Disabled="True"
+                  DTS:DTSID="{31c81699-25fe-4a28-90f5-b28c121edbbb}"
+                  DTS:ExecutableType="Microsoft.ExecutePackageTask"
+                  DTS:LocaleID="-1"
+                  DTS:ObjectName="Задача &quot;Выполнение пакета&quot; загрузка в data_mart"
+                  DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+                  <DTS:Variables />
+                  <DTS:LoggingOptions
+                    DTS:FilterKind="0"
+                    DTS:LoggingMode="2" />
+                  <DTS:ObjectData>
+                    <ExecutePackageTask>
+                      <UseProjectReference>True</UseProjectReference>
+                      <PackageName>загрузка в data_vault.dtsx</PackageName>
+                      <ParameterAssignment>
+                        <ParameterName>dwh_load_queue_id</ParameterName>
+                        <BindedVariableOrParameterName>User::dwh_load_queue_id</BindedVariableOrParameterName>
+                      </ParameterAssignment>
+                      <ParameterAssignment>
+                        <ParameterName>dwh_thread_number</ParameterName>
+                        <BindedVariableOrParameterName>$Package::dwh_thread_number</BindedVariableOrParameterName>
+                      </ParameterAssignment>
+                    </ExecutePackageTask>
+                  </DTS:ObjectData>
+                </DTS:Executable>
+              </DTS:Executables>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета\Контейнер последовательности загрузка data_vault"
+              DTS:CreationName="STOCK:SEQUENCE"
+              DTS:Description="Sequence Container"
+              DTS:DTSID="{E31E155C-D8E9-4629-968D-7FD9D450F53D}"
+              DTS:ExecutableType="STOCK:SEQUENCE"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Контейнер последовательности загрузка data_vault">
+              <DTS:Variables />
+              <DTS:Executables>
+                <DTS:Executable
+                  DTS:refId="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета\Контейнер последовательности загрузка data_vault\Задача &quot;Выполнение пакета&quot; загрузка в data_vault"
+                  DTS:CreationName="Microsoft.ExecutePackageTask"
+                  DTS:Description="Задача &quot;Выполнение пакета&quot;"
+                  DTS:Disabled="True"
+                  DTS:DTSID="{aa6ed525-c43b-4df7-a899-e13aa2cc378b}"
+                  DTS:ExecutableType="Microsoft.ExecutePackageTask"
+                  DTS:LocaleID="-1"
+                  DTS:ObjectName="Задача &quot;Выполнение пакета&quot; загрузка в data_vault"
+                  DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+                  <DTS:Variables />
+                  <DTS:LoggingOptions
+                    DTS:FilterKind="0"
+                    DTS:LoggingMode="2" />
+                  <DTS:ObjectData>
+                    <ExecutePackageTask>
+                      <UseProjectReference>True</UseProjectReference>
+                      <PackageName>загрузка в data_vault.dtsx</PackageName>
+                      <ParameterAssignment>
+                        <ParameterName>dwh_load_queue_id</ParameterName>
+                        <BindedVariableOrParameterName>User::dwh_load_queue_id</BindedVariableOrParameterName>
+                      </ParameterAssignment>
+                      <ParameterAssignment>
+                        <ParameterName>dwh_thread_number</ParameterName>
+                        <BindedVariableOrParameterName>$Package::dwh_thread_number</BindedVariableOrParameterName>
+                      </ParameterAssignment>
+                    </ExecutePackageTask>
+                  </DTS:ObjectData>
+                </DTS:Executable>
+              </DTS:Executables>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета\Контейнер последовательности загрузка incoming_area"
+              DTS:CreationName="STOCK:SEQUENCE"
+              DTS:Description="Sequence Container"
+              DTS:DTSID="{90E7810C-65F3-4351-A35C-3D19A1E7F314}"
+              DTS:ExecutableType="STOCK:SEQUENCE"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Контейнер последовательности загрузка incoming_area">
+              <DTS:Variables />
+              <DTS:Executables>
+                <DTS:Executable
+                  DTS:refId="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета\Контейнер последовательности загрузка incoming_area\Задания выражения выбор задания в зависимости от источника"
+                  DTS:CreationName="Microsoft.ExpressionTask"
+                  DTS:Description="Expression Task"
+                  DTS:DTSID="{18117A6D-CE17-4C05-BCA2-533B4FDDB1ED}"
+                  DTS:ExecutableType="Microsoft.ExpressionTask"
+                  DTS:LocaleID="-1"
+                  DTS:ObjectName="Задания выражения выбор задания в зависимости от источника"
+                  DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+                  DTS:ThreadHint="1">
+                  <DTS:Variables />
+                  <DTS:ObjectData>
+                    <ExpressionTask
+                      Expression="1==1" />
+                  </DTS:ObjectData>
+                </DTS:Executable>
+                <DTS:Executable
+                  DTS:refId="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета\Контейнер последовательности загрузка incoming_area\Задача &quot;Выполнение пакета&quot; 1C загрузка в staging_area"
+                  DTS:CreationName="Microsoft.ExecutePackageTask"
+                  DTS:Description="Задача &quot;Выполнение пакета&quot;"
+                  DTS:DTSID="{a6808880-23dc-4e27-93eb-95b85161f8c8}"
+                  DTS:ExecutableType="Microsoft.ExecutePackageTask"
+                  DTS:LocaleID="-1"
+                  DTS:ObjectName="Задача &quot;Выполнение пакета&quot; 1C загрузка в staging_area"
+                  DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+                  <DTS:Variables />
+                  <DTS:LoggingOptions
+                    DTS:FilterKind="0"
+                    DTS:LoggingMode="2" />
+                  <DTS:ObjectData>
+                    <ExecutePackageTask>
+                      <UseProjectReference>True</UseProjectReference>
+                      <PackageName>загрузка в incoming_area из 1C.dtsx</PackageName>
+                      <ParameterAssignment>
+                        <ParameterName>dwh_load_queue_id</ParameterName>
+                        <BindedVariableOrParameterName>User::dwh_load_queue_id</BindedVariableOrParameterName>
+                      </ParameterAssignment>
+                      <ParameterAssignment>
+                        <ParameterName>dwh_thread_number</ParameterName>
+                        <BindedVariableOrParameterName>$Package::dwh_thread_number</BindedVariableOrParameterName>
+                      </ParameterAssignment>
+                    </ExecutePackageTask>
+                  </DTS:ObjectData>
+                </DTS:Executable>
+                <DTS:Executable
+                  DTS:refId="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета\Контейнер последовательности загрузка incoming_area\Задача &quot;Выполнение пакета&quot; wm загрузка в incoming_area"
+                  DTS:CreationName="Microsoft.ExecutePackageTask"
+                  DTS:Description="Задача &quot;Выполнение пакета&quot;"
+                  DTS:DTSID="{0719f789-fe2b-419d-9c49-4eea32a58f7b}"
+                  DTS:ExecutableType="Microsoft.ExecutePackageTask"
+                  DTS:LocaleID="-1"
+                  DTS:ObjectName="Задача &quot;Выполнение пакета&quot; wm загрузка в incoming_area"
+                  DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+                  <DTS:Variables />
+                  <DTS:LoggingOptions
+                    DTS:FilterKind="0"
+                    DTS:LoggingMode="2" />
+                  <DTS:ObjectData>
+                    <ExecutePackageTask>
+                      <UseProjectReference>True</UseProjectReference>
+                      <PackageName>загрузка в incoming_area из wm.dtsx</PackageName>
+                      <ParameterAssignment>
+                        <ParameterName>dwh_load_queue_id</ParameterName>
+                        <BindedVariableOrParameterName>User::dwh_load_queue_id</BindedVariableOrParameterName>
+                      </ParameterAssignment>
+                      <ParameterAssignment>
+                        <ParameterName>dwh_thread_number</ParameterName>
+                        <BindedVariableOrParameterName>$Package::dwh_thread_number</BindedVariableOrParameterName>
+                      </ParameterAssignment>
+                    </ExecutePackageTask>
+                  </DTS:ObjectData>
+                </DTS:Executable>
+              </DTS:Executables>
+              <DTS:PrecedenceConstraints>
+                <DTS:PrecedenceConstraint
+                  DTS:refId="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета\Контейнер последовательности загрузка incoming_area.PrecedenceConstraints[Constraint]"
+                  DTS:CreationName=""
+                  DTS:DTSID="{6C07279F-65D9-4E45-9DD9-BFF1BB2DD696}"
+                  DTS:EvalOp="3"
+                  DTS:Expression="@[User::dwh_source_system_name] == &quot;wm&quot;"
+                  DTS:From="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета\Контейнер последовательности загрузка incoming_area\Задания выражения выбор задания в зависимости от источника"
+                  DTS:LogicalAnd="True"
+                  DTS:ObjectName="Constraint"
+                  DTS:To="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета\Контейнер последовательности загрузка incoming_area\Задача &quot;Выполнение пакета&quot; wm загрузка в incoming_area" />
+                <DTS:PrecedenceConstraint
+                  DTS:refId="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета\Контейнер последовательности загрузка incoming_area.PrecedenceConstraints[Constraint 1]"
+                  DTS:CreationName=""
+                  DTS:DTSID="{AF39A8AE-5403-4C8B-834C-C07B201CD781}"
+                  DTS:EvalOp="3"
+                  DTS:Expression="@[User::dwh_source_system_name] == &quot;1C&quot;"
+                  DTS:From="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета\Контейнер последовательности загрузка incoming_area\Задания выражения выбор задания в зависимости от источника"
+                  DTS:LogicalAnd="True"
+                  DTS:ObjectName="Constraint 1"
+                  DTS:To="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета\Контейнер последовательности загрузка incoming_area\Задача &quot;Выполнение пакета&quot; 1C загрузка в staging_area" />
+              </DTS:PrecedenceConstraints>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета\Контейнер последовательности загрузка staging_area"
+              DTS:CreationName="STOCK:SEQUENCE"
+              DTS:Description="Sequence Container"
+              DTS:DTSID="{5833FC68-743C-443A-826F-DD8DD414BA8A}"
+              DTS:ExecutableType="STOCK:SEQUENCE"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Контейнер последовательности загрузка staging_area">
+              <DTS:Variables />
+              <DTS:Executables>
+                <DTS:Executable
+                  DTS:refId="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета\Контейнер последовательности загрузка staging_area\Задания выражения выбор задания в зависимости от источника"
+                  DTS:CreationName="Microsoft.ExpressionTask"
+                  DTS:Description="Expression Task"
+                  DTS:DTSID="{d9ab344e-5b1c-4c5b-aa06-ed91f2d80caa}"
+                  DTS:ExecutableType="Microsoft.ExpressionTask"
+                  DTS:LocaleID="-1"
+                  DTS:ObjectName="Задания выражения выбор задания в зависимости от источника"
+                  DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+                  DTS:ThreadHint="2">
+                  <DTS:Variables />
+                  <DTS:ObjectData>
+                    <ExpressionTask
+                      Expression="1==1" />
+                  </DTS:ObjectData>
+                </DTS:Executable>
+                <DTS:Executable
+                  DTS:refId="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета\Контейнер последовательности загрузка staging_area\Задача &quot;Выполнение пакета&quot; 1C загрузка в staging_area"
+                  DTS:CreationName="Microsoft.ExecutePackageTask"
+                  DTS:Description="Задача &quot;Выполнение пакета&quot;"
+                  DTS:DTSID="{7af75e63-ca5a-4882-87c4-3ede685f1885}"
+                  DTS:ExecutableType="Microsoft.ExecutePackageTask"
+                  DTS:LocaleID="-1"
+                  DTS:ObjectName="Задача &quot;Выполнение пакета&quot; 1C загрузка в staging_area"
+                  DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+                  <DTS:Variables />
+                  <DTS:LoggingOptions
+                    DTS:FilterKind="0"
+                    DTS:LoggingMode="2" />
+                  <DTS:ObjectData>
+                    <ExecutePackageTask>
+                      <UseProjectReference>True</UseProjectReference>
+                      <PackageName>загрузка в staging_area из 1C.dtsx</PackageName>
+                      <ParameterAssignment>
+                        <ParameterName>dwh_load_queue_id</ParameterName>
+                        <BindedVariableOrParameterName>User::dwh_load_queue_id</BindedVariableOrParameterName>
+                      </ParameterAssignment>
+                      <ParameterAssignment>
+                        <ParameterName>dwh_thread_number</ParameterName>
+                        <BindedVariableOrParameterName>$Package::dwh_thread_number</BindedVariableOrParameterName>
+                      </ParameterAssignment>
+                    </ExecutePackageTask>
+                  </DTS:ObjectData>
+                </DTS:Executable>
+                <DTS:Executable
+                  DTS:refId="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета\Контейнер последовательности загрузка staging_area\Задача &quot;Выполнение пакета&quot; wm загрузка в staging_area"
+                  DTS:CreationName="Microsoft.ExecutePackageTask"
+                  DTS:Description="Задача &quot;Выполнение пакета&quot;"
+                  DTS:DTSID="{2f22cde4-3fe3-485a-8c8d-d8e8ed03cc4f}"
+                  DTS:ExecutableType="Microsoft.ExecutePackageTask"
+                  DTS:LocaleID="-1"
+                  DTS:ObjectName="Задача &quot;Выполнение пакета&quot; wm загрузка в staging_area"
+                  DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+                  <DTS:Variables />
+                  <DTS:LoggingOptions
+                    DTS:FilterKind="0"
+                    DTS:LoggingMode="2" />
+                  <DTS:ObjectData>
+                    <ExecutePackageTask>
+                      <UseProjectReference>True</UseProjectReference>
+                      <PackageName>загрузка в staging_area из wm.dtsx</PackageName>
+                      <ParameterAssignment>
+                        <ParameterName>dwh_load_queue_id</ParameterName>
+                        <BindedVariableOrParameterName>User::dwh_load_queue_id</BindedVariableOrParameterName>
+                      </ParameterAssignment>
+                      <ParameterAssignment>
+                        <ParameterName>dwh_thread_number</ParameterName>
+                        <BindedVariableOrParameterName>$Package::dwh_thread_number</BindedVariableOrParameterName>
+                      </ParameterAssignment>
+                    </ExecutePackageTask>
+                  </DTS:ObjectData>
+                </DTS:Executable>
+              </DTS:Executables>
+              <DTS:PrecedenceConstraints>
+                <DTS:PrecedenceConstraint
+                  DTS:refId="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета\Контейнер последовательности загрузка staging_area.PrecedenceConstraints[Constraint]"
+                  DTS:CreationName=""
+                  DTS:DTSID="{03CA9025-E5DD-4815-AD38-1A15EE3F74CB}"
+                  DTS:EvalOp="3"
+                  DTS:Expression="@[User::dwh_source_system_name] == &quot;wm&quot;"
+                  DTS:From="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета\Контейнер последовательности загрузка staging_area\Задания выражения выбор задания в зависимости от источника"
+                  DTS:LogicalAnd="True"
+                  DTS:ObjectName="Constraint"
+                  DTS:To="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета\Контейнер последовательности загрузка staging_area\Задача &quot;Выполнение пакета&quot; wm загрузка в staging_area" />
+                <DTS:PrecedenceConstraint
+                  DTS:refId="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета\Контейнер последовательности загрузка staging_area.PrecedenceConstraints[Constraint 1]"
+                  DTS:CreationName=""
+                  DTS:DTSID="{70EE39AF-0806-43EF-9A55-180EDB6D7726}"
+                  DTS:EvalOp="3"
+                  DTS:Expression="@[User::dwh_source_system_name] == &quot;1C&quot;"
+                  DTS:From="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета\Контейнер последовательности загрузка staging_area\Задания выражения выбор задания в зависимости от источника"
+                  DTS:LogicalAnd="True"
+                  DTS:ObjectName="Constraint 1"
+                  DTS:To="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета\Контейнер последовательности загрузка staging_area\Задача &quot;Выполнение пакета&quot; 1C загрузка в staging_area" />
+              </DTS:PrecedenceConstraints>
+            </DTS:Executable>
+          </DTS:Executables>
+          <DTS:PrecedenceConstraints>
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета.PrecedenceConstraints[Constraint]"
+              DTS:CreationName=""
+              DTS:DTSID="{AC1216E6-2382-4173-A069-9D6BF93777EB}"
+              DTS:EvalOp="3"
+              DTS:Expression="@[User::dwh_load_queue_id] == 0"
+              DTS:From="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета\Задача &quot;Выполнение SQL&quot; выбор задания для загрузки"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint"
+              DTS:To="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета\Задача &quot;Выполнение SQL&quot; задержка n секунд" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета.PrecedenceConstraints[Constraint 1]"
+              DTS:CreationName=""
+              DTS:DTSID="{69C0C939-4AF2-4E59-BBED-2FD8BFA0207A}"
+              DTS:EvalOp="3"
+              DTS:Expression="@[User::dwh_load_queue_id] &gt; 0 &amp;&amp; @[User::dwh_layer_name]  == &quot;incoming_area&quot;"
+              DTS:From="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета\Задача &quot;Выполнение SQL&quot; выбор задания для загрузки"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 1"
+              DTS:To="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета\Контейнер последовательности загрузка incoming_area" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета.PrecedenceConstraints[Constraint 2]"
+              DTS:CreationName=""
+              DTS:DTSID="{7D3EBB95-7293-4C1B-A7EF-8C78BE8C31F3}"
+              DTS:EvalOp="3"
+              DTS:Expression="@[User::dwh_load_queue_id] &gt; 0 &amp;&amp; @[User::dwh_layer_name]  == &quot;staging_area&quot;"
+              DTS:From="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета\Задача &quot;Выполнение SQL&quot; выбор задания для загрузки"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 2"
+              DTS:To="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета\Контейнер последовательности загрузка staging_area" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета.PrecedenceConstraints[Constraint 3]"
+              DTS:CreationName=""
+              DTS:DTSID="{A630D472-3866-4384-A61D-9CC3F3163E0C}"
+              DTS:EvalOp="3"
+              DTS:Expression="@[User::dwh_load_queue_id] &gt; 0 &amp;&amp; @[User::dwh_layer_name]  == &quot;data_vault&quot;"
+              DTS:From="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета\Задача &quot;Выполнение SQL&quot; выбор задания для загрузки"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 3"
+              DTS:To="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета\Контейнер последовательности загрузка data_vault" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета.PrecedenceConstraints[Constraint 5]"
+              DTS:CreationName=""
+              DTS:DTSID="{32B74903-987D-42EB-B90A-B744731A2A38}"
+              DTS:EvalOp="3"
+              DTS:Expression="@[User::dwh_load_queue_id] &gt; 0 &amp;&amp; @[User::dwh_layer_name]  == &quot;data_mart&quot;"
+              DTS:From="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета\Задача &quot;Выполнение SQL&quot; выбор задания для загрузки"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 5"
+              DTS:To="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета\Контейнер последовательности загрузка data_mart" />
+          </DTS:PrecedenceConstraints>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{B66593C2-D0B4-45BD-ACCE-51401E3E8522}"
+          DTS:From="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Задача &quot;Выполнение SQL&quot; проверка что queue не пустая" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{C7CD51D0-4D75-44CA-B97C-7383E1225529}"
+          DTS:From="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Задания выражения продолжительность работы пакета" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{363C436B-F195-42EE-9EC0-44EDF5859F94}"
+          DTS:From="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Задача &quot;Выполнение SQL&quot; проверка что queue не пустая"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Задания выражения продолжительность работы пакета" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{832A3148-6556-466D-9133-037D71B83D4B}"
+      DTS:From="Package\Задача &quot;Выполнение SQL&quot; проверка что queue не пустая"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="64" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="373,42"
+          Id="Package\Задача &quot;Выполнение SQL&quot; проверка что queue не пустая"
+          TopLeft="69.357142857143,33.3809523809523" />
+        <NodeLayout
+          Size="355,42"
+          Id="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Задания выражения продолжительность работы пакета"
+          TopLeft="1030.71428571428,934.571428571429" />
+        <NodeLayout
+          Size="360,42"
+          Id="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Задача &quot;Выполнение SQL&quot; проверка что queue не пустая"
+          TopLeft="370.214285714285,861.25" />
+        <NodeLayout
+          Size="351,42"
+          Id="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета\Задача &quot;Выполнение SQL&quot; выбор задания для загрузки"
+          TopLeft="28.3571428571428,24.892857142857" />
+        <NodeLayout
+          Size="304,42"
+          Id="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета\Задача &quot;Выполнение SQL&quot; задержка n секунд"
+          TopLeft="1178,95.2857142857143" />
+        <NodeLayout
+          Size="328,42"
+          Id="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета\Контейнер последовательности загрузка data_mart\Задача &quot;Выполнение пакета&quot; загрузка в data_mart"
+          TopLeft="28.5714285714284,41.4285714285714" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="433,201"
+          Size="433,244"
+          Id="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета\Контейнер последовательности загрузка data_mart"
+          TopLeft="1374.85714285714,339.857142857143" />
+        <NodeLayout
+          Size="381,42"
+          Id="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета\Контейнер последовательности загрузка data_vault\Задача &quot;Выполнение пакета&quot; загрузка в data_vault"
+          TopLeft="20.0000000000002,55.2857142857141" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="421,202"
+          Size="421,245"
+          Id="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета\Контейнер последовательности загрузка data_vault"
+          TopLeft="929.142857142858,337" />
+        <NodeLayout
+          Size="397,42"
+          Id="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета\Контейнер последовательности загрузка incoming_area\Задания выражения выбор задания в зависимости от источника"
+          TopLeft="13.7142857142857,19.5714285714286" />
+        <NodeLayout
+          Size="369,42"
+          Id="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета\Контейнер последовательности загрузка incoming_area\Задача &quot;Выполнение пакета&quot; 1C загрузка в staging_area"
+          TopLeft="44.4285714285716,234.285714285714" />
+        <NodeLayout
+          Size="369,42"
+          Id="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета\Контейнер последовательности загрузка incoming_area\Задача &quot;Выполнение пакета&quot; wm загрузка в incoming_area"
+          TopLeft="11.5714285714287,163.714285714286" />
+        <EdgeLayout
+          Id="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета\Контейнер последовательности загрузка incoming_area.PrecedenceConstraints[Constraint]"
+          TopLeft="147.380952380952,61.5714285714286">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="48.6904761904763,102.142857142857"
+              Start="0,0"
+              End="48.6904761904763,94.6428571428572">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37.1031467278332" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,37.1031467278332"
+                    Point2="0,41.1031467278332"
+                    Point3="4,41.1031467278332" />
+                  <mssgle:LineSegment
+                    End="44.6904761904763,41.1031467278332" />
+                  <mssgle:CubicBezierSegment
+                    Point1="44.6904761904763,41.1031467278332"
+                    Point2="48.6904761904763,41.1031467278332"
+                    Point3="48.6904761904763,45.1031467278332" />
+                  <mssgle:LineSegment
+                    End="48.6904761904763,94.6428571428572" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="16.3452380952382,46.1031467278332,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета\Контейнер последовательности загрузка incoming_area.PrecedenceConstraints[Constraint 1]"
+          TopLeft="277.047619047619,61.5714285714286">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-48.1190476190474,172.714285714286"
+              Start="0,0"
+              End="-48.1190476190474,165.214285714286">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,65.5016844670633" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,65.5016844670633"
+                    Point2="0,69.5016844670633"
+                    Point3="-4,69.5016844670633" />
+                  <mssgle:LineSegment
+                    End="-44.1190476190474,69.5016844670633" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-44.1190476190474,69.5016844670633"
+                    Point2="-48.1190476190474,69.5016844670633"
+                    Point3="-48.1190476190474,73.5016844670633" />
+                  <mssgle:LineSegment
+                    End="-48.1190476190474,165.214285714286" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-32.0595238095237,74.5016844670633,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="422,333"
+          Size="422,376"
+          Id="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета\Контейнер последовательности загрузка incoming_area"
+          TopLeft="23.8571428571427,344.857142857142" />
+        <NodeLayout
+          Size="397,42"
+          Id="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета\Контейнер последовательности загрузка staging_area\Задания выражения выбор задания в зависимости от источника"
+          TopLeft="18.5714285714284,26.4285714285712" />
+        <NodeLayout
+          Size="356,42"
+          Id="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета\Контейнер последовательности загрузка staging_area\Задача &quot;Выполнение пакета&quot; 1C загрузка в staging_area"
+          TopLeft="46.8571428571429,237" />
+        <NodeLayout
+          Size="361,42"
+          Id="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета\Контейнер последовательности загрузка staging_area\Задача &quot;Выполнение пакета&quot; wm загрузка в staging_area"
+          TopLeft="54.2857142857142,168.714285714285" />
+        <EdgeLayout
+          Id="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета\Контейнер последовательности загрузка staging_area.PrecedenceConstraints[Constraint]"
+          TopLeft="281.904761904762,68.4285714285712">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-47.1190476190475,100.285714285714"
+              Start="0,0"
+              End="-47.1190476190475,92.7857142857142">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.3558167873271" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,36.3558167873271"
+                    Point2="0,40.3558167873271"
+                    Point3="-4,40.3558167873271" />
+                  <mssgle:LineSegment
+                    End="-43.1190476190475,40.3558167873271" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-43.1190476190475,40.3558167873271"
+                    Point2="-47.1190476190475,40.3558167873271"
+                    Point3="-47.1190476190475,44.3558167873271" />
+                  <mssgle:LineSegment
+                    End="-47.1190476190475,92.7857142857142" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-31.5595238095237,45.3558167873271,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета\Контейнер последовательности загрузка staging_area.PrecedenceConstraints[Constraint 1]"
+          TopLeft="152.238095238095,68.4285714285712">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="72.6190476190478,168.571428571429"
+              Start="0,0"
+              End="72.6190476190478,161.071428571429">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,63.8345638305499" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,63.8345638305499"
+                    Point2="0,67.8345638305499"
+                    Point3="4,67.8345638305499" />
+                  <mssgle:LineSegment
+                    End="68.6190476190478,67.8345638305499" />
+                  <mssgle:CubicBezierSegment
+                    Point1="68.6190476190478,67.8345638305499"
+                    Point2="72.6190476190478,67.8345638305499"
+                    Point3="72.6190476190478,71.8345638305499" />
+                  <mssgle:LineSegment
+                    End="72.6190476190478,161.071428571429" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="28.3095238095239,72.8345638305499,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="430,339"
+          Size="430,382"
+          Id="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета\Контейнер последовательности загрузка staging_area"
+          TopLeft="478.714285714286,335.857142857143" />
+        <EdgeLayout
+          Id="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета.PrecedenceConstraints[Constraint]"
+          TopLeft="261.023809523809,66.892857142857">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="1068.97619047619,28.3928571428573"
+              Start="0,0"
+              End="1068.97619047619,20.8928571428573">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,7.43444615509285" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,7.43444615509285"
+                    Point2="0,11.4344461550928"
+                    Point3="4,11.4344461550928" />
+                  <mssgle:LineSegment
+                    End="1064.97619047619,11.4344461550928" />
+                  <mssgle:CubicBezierSegment
+                    Point1="1064.97619047619,11.4344461550928"
+                    Point2="1068.97619047619,11.4344461550928"
+                    Point3="1068.97619047619,15.4344461550928" />
+                  <mssgle:LineSegment
+                    End="1068.97619047619,20.8928571428573" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="526.488095238095,16.4344461550929,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета.PrecedenceConstraints[Constraint 1]"
+          TopLeft="89.5238095238095,66.892857142857">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="145.333333333333,277.964285714285"
+              Start="0,0"
+              End="145.333333333333,270.464285714285">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,67.8400653923539" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,67.8400653923539"
+                    Point2="0,71.8400653923539"
+                    Point3="4,71.8400653923539" />
+                  <mssgle:LineSegment
+                    End="141.333333333333,71.8400653923539" />
+                  <mssgle:CubicBezierSegment
+                    Point1="141.333333333333,71.8400653923539"
+                    Point2="145.333333333333,71.8400653923539"
+                    Point3="145.333333333333,75.8400653923539" />
+                  <mssgle:LineSegment
+                    End="145.333333333333,270.464285714285" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="64.6666666666666,76.8400653923539,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета.PrecedenceConstraints[Constraint 2]"
+          TopLeft="146.690476190476,66.892857142857">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="547.02380952381,268.964285714286"
+              Start="0,0"
+              End="547.02380952381,261.464285714286">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,104.318005023904" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,104.318005023904"
+                    Point2="0,108.318005023904"
+                    Point3="4,108.318005023904" />
+                  <mssgle:LineSegment
+                    End="543.02380952381,108.318005023904" />
+                  <mssgle:CubicBezierSegment
+                    Point1="543.02380952381,108.318005023904"
+                    Point2="547.02380952381,108.318005023904"
+                    Point3="547.02380952381,112.318005023904" />
+                  <mssgle:LineSegment
+                    End="547.02380952381,261.464285714286" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="265.511904761905,113.318005023904,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета.PrecedenceConstraints[Constraint 3]"
+          TopLeft="203.857142857143,66.892857142857">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="935.785714285715,270.107142857143"
+              Start="0,0"
+              End="935.785714285715,262.607142857143">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,131.053571428572" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,131.053571428572"
+                    Point2="0,135.053571428572"
+                    Point3="4,135.053571428572" />
+                  <mssgle:LineSegment
+                    End="931.785714285715,135.053571428572" />
+                  <mssgle:CubicBezierSegment
+                    Point1="931.785714285715,135.053571428572"
+                    Point2="935.785714285715,135.053571428572"
+                    Point3="935.785714285715,139.053571428572" />
+                  <mssgle:LineSegment
+                    End="935.785714285715,262.607142857143" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="459.892857142858,140.053571428572,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета.PrecedenceConstraints[Constraint 5]"
+          TopLeft="318.190476190476,66.892857142857">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="1273.16666666666,272.964285714286"
+              Start="0,0"
+              End="1273.16666666666,265.464285714286">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,66.5478118712274" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,66.5478118712274"
+                    Point2="0,70.5478118712274"
+                    Point3="4,70.5478118712274" />
+                  <mssgle:LineSegment
+                    End="1269.16666666666,70.5478118712274" />
+                  <mssgle:CubicBezierSegment
+                    Point1="1269.16666666666,70.5478118712274"
+                    Point2="1273.16666666666,70.5478118712274"
+                    Point3="1273.16666666666,74.5478118712274" />
+                  <mssgle:LineSegment
+                    End="1273.16666666666,265.464285714286" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="628.583333333332,75.5478118712274,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="1836,776"
+          Size="1836,819"
+          Id="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая\Контейнер последовательности  запуск нужного пакета"
+          TopLeft="56.7142857142856,31.5714285714287" />
+        <EdgeLayout
+          Id="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая.PrecedenceConstraints[Constraint]"
+          TopLeft="670.047619047619,850.571428571429">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="60.1666666666662,31.6785714285713"
+              Start="0,0"
+              End="52.6666666666662,31.6785714285713">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27.6785714285713" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,27.6785714285713"
+                    Point2="0,31.6785714285713"
+                    Point3="4,31.6785714285713" />
+                  <mssgle:LineSegment
+                    End="52.6666666666662,31.6785714285713" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая.PrecedenceConstraints[Constraint 1]"
+          TopLeft="1279.38095238095,850.571428571429">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-13.3333333333387,84.0000000000003"
+              Start="0,0"
+              End="-13.3333333333387,76.5000000000003">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37.8104065764249" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,37.8104065764249"
+                    Point2="0,41.8104065764249"
+                    Point3="-4,41.8104065764249" />
+                  <mssgle:LineSegment
+                    End="-9.33333333333871,41.8104065764249" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-9.33333333333871,41.8104065764249"
+                    Point2="-13.3333333333387,41.8104065764249"
+                    Point3="-13.3333333333387,45.8104065764249" />
+                  <mssgle:LineSegment
+                    End="-13.3333333333387,76.5000000000003" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая.PrecedenceConstraints[Constraint 2]"
+          TopLeft="550.214285714285,903.25">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="600.166666666664,31.3214285714294"
+              Start="0,0"
+              End="600.166666666664,23.8214285714294">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,14.7085369762043" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,14.7085369762043"
+                    Point2="0,18.7085369762043"
+                    Point3="4,18.7085369762043" />
+                  <mssgle:LineSegment
+                    End="596.166666666664,18.7085369762043" />
+                  <mssgle:CubicBezierSegment
+                    Point1="596.166666666664,18.7085369762043"
+                    Point2="600.166666666664,18.7085369762043"
+                    Point3="600.166666666664,22.7085369762043" />
+                  <mssgle:LineSegment
+                    End="600.166666666664,23.8214285714294" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="1946,1032"
+          Size="1946,1075"
+          Id="Package\Контейнер &quot;цикл по каждому элементу&quot; проход по циклу пока очередь не пустая"
+          TopLeft="73.821428571428,128.916666666667" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="255.857142857143,75.3809523809523">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="790.964285714285,53.5357142857147"
+              Start="0,0"
+              End="790.964285714285,46.0357142857147">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.7678571428573" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,22.7678571428573"
+                    Point2="0,26.7678571428573"
+                    Point3="4,26.7678571428573" />
+                  <mssgle:LineSegment
+                    End="786.964285714285,26.7678571428573" />
+                  <mssgle:CubicBezierSegment
+                    Point1="786.964285714285,26.7678571428573"
+                    Point2="790.964285714285,26.7678571428573"
+                    Point3="790.964285714285,30.7678571428573" />
+                  <mssgle:LineSegment
+                    End="790.964285714285,46.0357142857147" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="если очередь пустая - завершаем пакет&#xA;если очередь не пустая, но нет подходящей задачи - ждем 5 секунд&#xA;если в очереди нашли строку, запускаем ее обработку "
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="405,72"
+          Id="da8c9d7a-7594-4c35-b467-424ca41298ad"
+          TopLeft="878.095238095239,30.0476190476192" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
