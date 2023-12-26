@@ -7,17 +7,8 @@ db_str = 'sqlite:///src/db/sqlite3.db'
 DB_engine = sqlA.create_engine(db_str)
 DB_Base = declarative_base()
 DB_metadata = sqlA.MetaData()
-#class Task(DB_Base):
-#    __tablename__ = 'tasks'
-#    id = sqlA.Column(sqlA.Integer(), primary_key=True)
-#    created_dt = sqlA.Column(sqlA.DateTime(), default=datetime.datetime.now())
-#    user_id = sqlA.Column(sqlA.Integer(), nullable=False)
-#    date = sqlA.Column(sqlA.Date(), nullable=False)
-#    time = sqlA.Column(sqlA.Time(), nullable=False)
-#    text = sqlA.Column(sqlA.String(100), nullable=False)
-#    status = sqlA.Column(sqlA.String(4), nullable=False)
 class User(DB_Base):
-    __tablename__ = 'users'
+    __tablename__ = 'user'
     id = sqlA.Column(sqlA.Integer(), primary_key=True, autoincrement=True)
     created_dt = sqlA.Column(sqlA.DateTime(), default=datetime.datetime.now())
     tg_id = sqlA.Column(sqlA.Integer(), nullable=False)
@@ -25,12 +16,17 @@ class User(DB_Base):
     last_name = sqlA.Column(sqlA.String(20), nullable=False)
     first_name = sqlA.Column(sqlA.String(120), nullable=False)
     language_code = sqlA.Column(sqlA.String(3), nullable=False)
-#class Sched_item(DB_Base):
-#    __tablename__ = 'scheduler'
-#    id = sqlA.Column(sqlA.Integer(), primary_key=True, autoincrement=True)
-#    created_dt = sqlA.Column(sqlA.DateTime(), default=datetime.datetime.now())
-#    task_id = sqlA.Column(sqlA.Integer(), nullable=False)
-#    time = sqlA.Column(sqlA.Time(), nullable=False)
+class Vehicle(DB_Base):
+    __tablename__ = 'vehicle'
+    id = sqlA.Column(sqlA.Integer(), primary_key=True)
+    created_dt = sqlA.Column(sqlA.DateTime(), default=datetime.datetime.now())
+    delete_dt = sqlA.Column(sqlA.DateTime(), nullable=True)
+    user_id = sqlA.Column(sqlA.Integer(), nullable=False)
+    brand = sqlA.Column(sqlA.String(36), nullable=False)
+    model = sqlA.Column(sqlA.String(36), nullable=True)
+    fuel_type = sqlA.Column(sqlA.String(16), nullable=True)
+    VIN = sqlA.Column(sqlA.String(17), nullable=True)
+    production_dt = sqlA.Column(sqlA.DateTime(), nullable=True)
 
 
 def db_init():
